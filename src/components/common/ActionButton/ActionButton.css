@@ -1,0 +1,74 @@
+.action-button {
+    border: 1px solid transparent;
+    border-radius: 50%;
+    background: white;
+    mix-blend-mode: screen;
+    outline: none;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.action-button:hover {
+    background: rgba(255, 255, 255, 0.8);
+}
+
+.action-button:active {
+    background: rgba(255, 255, 255, 0.6);
+}
+
+.action-button.action-button_light {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.action-button.action-button_transparent {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid white;
+}
+
+.action-button.action-button_light:hover,
+.action-button.action-button_transparent:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.action-button.action-button_light:active,
+.action-button.action-button_transparent:active {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.action-button:disabled {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+.action-button.action-button_light:disabled {
+    background: rgba(255, 255, 255, 0.1);
+    opacity: 0.4;
+}
+
+.action-button.action-button_transparent:disabled {
+    background: transparent;
+}
+
+.action-button.action-button_none {
+    background: transparent;
+    opacity: 0.6;
+}
+
+.action-button.action-button_none:hover {
+    opacity: 0.8;
+}
+
+.action-button.action-button_none:active {
+    opacity: 1;
+}
+
+.action-button.action-button_none:disabled {
+    opacity: 0.4;
+}
+
+.action-button__icon {
+    display: block;
+    width: 60%;
+    height: 60%;
+    margin: 20%;
+}

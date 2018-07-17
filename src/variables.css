@@ -1,0 +1,43 @@
+:root {
+    --main-color: white;
+    --main-background-color: rgba(255, 255, 255, 0.1);
+
+    --text-color: white;
+    --text-color-secondary: rgba(255, 255, 255, 0.5);
+    --text-font: Helvetica, Arial, sans-serif;
+
+    --text-size: 18px;
+    --text-line-height: 22px;
+    --text-weight: normal;
+
+    --text-size-control: 18px;
+    --text-line-height-control: 22px;
+    --text-weight-control: normal;
+
+    --text-size-title: 18px;
+    --text-line-height-title: 22px;
+    --text-weight-title: bold;
+
+    --text-size-cell: 20px;
+    --text-line-height-cell: 24px;
+    --text-weight-cell: normal;
+
+    --text-size-caption: 20px;
+    --text-line-height-caption: 24px;
+    --text-weight-caption: bold;
+
+    --text-size-subheader: 24px;
+    --text-line-height-subheader: 28px;
+    --text-weight-subheader: bold;
+    --text-size-subheader-secondary: 20px;
+    --text-weight-subheader-secondary: normal;
+
+    --text-size-header: 32px;
+    --text-line-height-header: 38px;
+    --text-weight-header: bold;
+
+    --tag-color-0: rgba(247, 57, 217, 0.1);
+    --tag-color-1: rgba(57, 133, 247, 0.1);
+    --tag-color-2: rgba(247, 183, 57, 0.1);
+    --tag-color-3: rgba(57, 247, 99, 0.1);
+}

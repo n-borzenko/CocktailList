@@ -1,0 +1,41 @@
+@import "../../../variables.css";
+
+.input {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 30px;
+    width: 100%;
+    border-radius: 15px;
+    border: 1px solid white;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 1px;
+}
+
+.input:hover,
+.input_focused {
+    border-width: 2px;
+    padding: 0;
+}
+
+.input__field {
+    width: 100%;
+    color: white;
+    caret-color: white;
+    font-size: var(--text-size-control);
+    line-height: var(--text-line-height-control);
+    font-weight: var(--text-weight-control);
+    z-index: 10;
+    padding-left: 8px;
+}
+
+.input__field::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.input__remove {
+    flex: 0 0 30px;
+    height: 30px;
+    display: inline-block;
+    z-index: 10;
+}

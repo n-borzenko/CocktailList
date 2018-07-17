@@ -1,0 +1,19 @@
+.mode {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.mode__header {
+    width: 100%;
+    margin-bottom: 16px;
+}
+
+.mode__selector {
+    width: 100%;
+    margin-bottom: 16px;
+}
+
+.mode__criteria {
+    width: 100%;
+}

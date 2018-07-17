@@ -1,0 +1,13 @@
+@import "../../../variables.css";
+
+.text {
+    font-size: var(--text-size);
+    line-height: var(--text-line-height);
+    font-weight: var(--text-weight);
+}
+
+.text_truncated {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
