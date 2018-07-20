@@ -1,48 +1,67 @@
 import React, { Component } from "react";
 import ActionButton from "../ActionButton";
-import classNames from "classnames";
 import "./Input.css";
 
 class Input extends Component {
     constructor(props) {
         super(props);
+        this.containerRef = React.createRef();
         this.inputRef = React.createRef();
-        this.state = { focused: false };
+        this.state = { empty: true };
     }
 
     clearInput = () => {
         this.inputRef.current.value = "";
         this.inputRef.current.focus();
+        this.setState({ empty: true });
     };
 
     onFocus = () => {
-        this.setState({ focused: true });
+        this.containerRef.current.classList.add("input_focused");
     };
 
     onBlur = () => {
-        this.setState({ focused: false });
+        this.containerRef.current.classList.remove("input_focused");
     };
 
-    render() {
-        const className = classNames("input", {
-            input_focused: this.state.focused,
-        });
+    onChange = () => {
+        if (this.state.empty && this.inputRef.current.value) {
+            this.setState({ empty: false });
+        } else if (!this.state.empty && !this.inputRef.current.value) {
+            this.setState({ empty: true });
+        }
+    };
+
+    renderRemoveButton() {
+        if (this.state.empty) {
+            return null;
+        }
         return (
-            <span className={className}>
+            <span className="input__remove">
+                <ActionButton
+                    type={ActionButton.types.remove}
+                    style={ActionButton.styles.none}
+                    onClick={this.clearInput}
+                />
+            </span>
+        );
+    }
+
+    render() {
+        return (
+            <span
+                className="input"
+                ref={this.containerRef}
+                onFocus={this.onFocus}
+                onBlur={this.onBlur}
+            >
                 <input
-                    onFocus={this.onFocus}
-                    onBlur={this.onBlur}
+                    onChange={this.onChange}
                     className="input__field"
                     placeholder="fghjkl;jhbvb"
                     ref={this.inputRef}
                 />
-                <span className="input__remove">
-                    <ActionButton
-                        type={ActionButton.types.remove}
-                        style={ActionButton.styles.none}
-                        onClick={this.clearInput}
-                    />
-                </span>
+                {this.renderRemoveButton()}
             </span>
         );
     }
