@@ -1,15 +1,13 @@
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import "./Header.css";
 
-class Header extends Component {
-    static propTypes = {
-        children: PropTypes.node.isRequired,
-    };
-
-    render() {
-        return <span className="header">{this.props.children}</span>;
-    }
+function Header({ children }) {
+    return <span className="header">{children}</span>;
 }
+
+Header.propTypes = {
+    children: PropTypes.node.isRequired,
+};
 
 export default Header;

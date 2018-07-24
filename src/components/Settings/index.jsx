@@ -13,17 +13,6 @@ class Settings extends Component {
                 <div className="settings__item">
                     <Filters />
                 </div>
-                {/* <div className="settings__item">
-                    <Tag type={1}>fdsf</Tag>
-                    <Tag type={0}>fghjkl</Tag>
-                    <Tag type={2}>
-                        fghjksdfbvsdfb dsbsdbdsl sdfbvsdfbdsbsdbdsl
-                    </Tag>
-                    <Tag>fghjkdfbdsbl</Tag>
-                    <Tag type={3}>f</Tag>
-                    <Tag type={2}>fghj2314l</Tag>
-                    <Tag>324tvdsrg234g</Tag>
-                </div> */}
             </div>
         );
     }

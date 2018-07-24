@@ -11,7 +11,7 @@ class Tag extends Component {
     };
 
     render() {
-        let className = classNames("tag", {
+        const className = classNames("tag", {
             [`tag_${this.props.type}`]: this.props.type !== undefined,
         });
         return (

@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Subheader from "../common/Subheader";
-import "./MenuItem.css";
 
 class MenuItem extends Component {
     static propTypes = {
@@ -16,7 +15,7 @@ class MenuItem extends Component {
 
     render() {
         return (
-            <div className="menu-item" onClick={this.props.onClick}>
+            <div onClick={this.props.onClick}>
                 <Subheader light={!this.props.selected}>
                     {this.props.children}
                 </Subheader>

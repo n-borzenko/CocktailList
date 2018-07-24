@@ -3,12 +3,9 @@ import ActionButton from "../ActionButton";
 import "./Input.css";
 
 class Input extends Component {
-    constructor(props) {
-        super(props);
-        this.containerRef = React.createRef();
-        this.inputRef = React.createRef();
-        this.state = { empty: true };
-    }
+    containerRef = React.createRef();
+    inputRef = React.createRef();
+    state = { empty: true };
 
     clearInput = () => {
         this.inputRef.current.value = "";

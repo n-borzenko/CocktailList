@@ -30,26 +30,25 @@ class ButtonGroup extends Component {
     };
 
     renderValues = () => {
-        if (this.props.values && this.props.values.length > 0) {
-            return this.props.values.map((item, index) => {
-                let className = classNames("button-group__item", {
-                    "button-group__item_selected":
-                        this.state.selected === index,
-                });
-                return (
-                    <button
-                        className={className}
-                        key={item}
-                        disabled={this.props.disabled}
-                        style={{ left: `-${index}px` }}
-                        onClick={e => this.selectItem(index, e)}
-                    >
-                        {item}
-                    </button>
-                );
-            });
+        if (!this.props.values || this.props.values.length === 0) {
+            return null;
         }
-        return null;
+        return this.props.values.map((item, index) => {
+            const className = classNames("button-group__item", {
+                "button-group__item_selected": this.state.selected === index,
+            });
+            return (
+                <button
+                    className={className}
+                    key={item}
+                    disabled={this.props.disabled}
+                    style={{ left: `-${index}px` }}
+                    onClick={e => this.selectItem(index, e)}
+                >
+                    {item}
+                </button>
+            );
+        });
     };
 
     render() {

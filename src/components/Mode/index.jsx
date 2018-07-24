@@ -6,13 +6,10 @@ import SearchField from "../common/SearchField";
 import "./Mode.css";
 
 class Mode extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            modes: ["By query", "By first letter"],
-            selectedMode: 0,
-        };
-    }
+    state = {
+        modes: ["By query", "By first letter"],
+        selectedMode: 0,
+    };
 
     changeMode = index => {
         this.setState({ selectedMode: index });

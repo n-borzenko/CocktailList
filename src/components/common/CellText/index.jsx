@@ -1,15 +1,13 @@
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import "./CellText.css";
 
-class CellText extends Component {
-    static propTypes = {
-        children: PropTypes.node.isRequired,
-    };
-
-    render() {
-        return <span className="cell-text">{this.props.children}</span>;
-    }
+function CellText({ children }) {
+    return <span className="cell-text">{children}</span>;
 }
+
+CellText.propTypes = {
+    children: PropTypes.node.isRequired,
+};
 
 export default CellText;

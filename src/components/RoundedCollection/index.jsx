@@ -4,27 +4,23 @@ import classNames from "classnames";
 import "./RoundedCollection.css";
 
 class RoundedCollection extends Component {
-    constructor() {
-        super();
-
-        let letters = [...Array(26)].map((_, index) =>
-            String.fromCharCode(index + "A".charCodeAt(0))
-        );
-        let numbers = [...Array(10)].map((_, index) => index + "");
-
-        this.state = { items: [...letters, ...numbers], selected: 0 };
-    }
+    state = {
+        items: [
+            ...[...Array(26)].map((_, index) =>
+                String.fromCharCode(index + "A".charCodeAt(0))
+            ),
+            ...[...Array(10)].map((_, index) => index.toString()),
+        ],
+        selected: 0,
+    };
 
     selectItem = index => {
         this.setState({ selected: index });
-        // if (this.props.onSelect) {
-        //     this.props.onSelect(index);
-        // }
     };
 
     renderItems() {
         return this.state.items.map((item, index) => {
-            let className = classNames("rounded-collection__item", {
+            const className = classNames("rounded-collection__item", {
                 "rounded-collection__item_selected":
                     this.state.selected === index,
             });

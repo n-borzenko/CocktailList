@@ -17,7 +17,7 @@ class Button extends Component {
     };
 
     render() {
-        let className = classNames("button", {
+        const className = classNames("button", {
             button_stretched: this.props.stretched,
         });
         return (
