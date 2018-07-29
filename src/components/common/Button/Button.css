@@ -1,0 +1,34 @@
+@import "../../../variables.css";
+
+.button {
+    border: none;
+    padding: 0 10px;
+    height: 30px;
+    border-radius: 15px;
+    background: white;
+    color: black;
+    mix-blend-mode: screen;
+    outline: none;
+    font-size: var(--text-size-control);
+    line-height: var(--text-line-height-control);
+    font-weight: var(--text-weight-control);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.button_stretched {
+    width: 100%;
+}
+
+.button:hover {
+    background: rgba(255, 255, 255, 0.8);
+}
+
+.button:active {
+    background: rgba(255, 255, 255, 0.6);
+}
+
+.button:disabled {
+    background: rgba(255, 255, 255, 0.4);
+}

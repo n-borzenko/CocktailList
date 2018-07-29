@@ -1,0 +1,7 @@
+@import "../../../variables.css";
+
+.title {
+    font-size: var(--text-size-title);
+    line-height: var(--text-size-title);
+    font-weight: var(--text-weight-title);
+}

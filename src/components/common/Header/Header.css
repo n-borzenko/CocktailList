@@ -1,0 +1,7 @@
+@import "../../../variables.css";
+
+.header {
+    font-size: var(--text-size-header);
+    line-height: var(--text-line-height-header);
+    font-weight: var(--text-weight-header);
+}

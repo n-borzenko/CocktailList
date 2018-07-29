@@ -1,0 +1,13 @@
+@import "../../../variables.css";
+
+.subheader {
+    font-size: var(--text-size-subheader);
+    line-height: var(--text-line-height-subheader);
+    font-weight: var(--text-weight-subheader);
+}
+
+.subheader_light {
+    color: var(--text-color-secondary);
+    font-weight: var(--text-size-subheader-secondary);
+    font-size: var(--text-size-subheader-secondary);
+}

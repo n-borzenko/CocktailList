@@ -1,0 +1,28 @@
+@import "../../variables.css";
+
+.tag {
+    border: 1px solid var(--main-color);
+    height: 30px;
+    border-radius: 15px;
+    background: var(--main-background-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 10px 0 10px;
+}
+
+.tag_0 {
+    background: var(--tag-color-0);
+}
+
+.tag_1 {
+    background: var(--tag-color-1);
+}
+
+.tag_2 {
+    background: var(--tag-color-2);
+}
+
+.tag_3 {
+    background: var(--tag-color-3);
+}

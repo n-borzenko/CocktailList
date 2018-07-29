@@ -1,0 +1,56 @@
+.button-group {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.button-group:disabled {
+    background: black;
+    color: white;
+    border: 1px solid white;
+}
+
+.button-group__item {
+    flex: 1 1;
+    padding: 0 10px;
+    height: 30px;
+    mix-blend-mode: screen;
+    outline: none;
+    font-size: var(--text-size-control);
+    line-height: var(--text-line-height-control);
+    font-weight: var(--text-weight-control);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    position: relative;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px solid white;
+}
+
+.button-group__item:first-child {
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
+
+.button-group__item:last-child {
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+.button-group__item:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.button-group__item:active:not(:disabled) {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.button-group__item_selected,
+.button-group__item.button-group__item_selected:active,
+.button-group__item.button-group__item_selected:hover {
+    background: white;
+    color: black;
+}

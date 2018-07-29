@@ -1,0 +1,44 @@
+@import "./variables.css";
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    background: black;
+}
+
+html,
+body {
+    min-width: 320px;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+
+    color: var(--text-color);
+    font-family: var(--text-font);
+    font-size: var(--text-size);
+    font-weight: var(--text-weight);
+}
+
+button {
+    cursor: pointer;
+    -webkit-appearance: none;
+    margin: 0;
+    outline: 0;
+}
+
+input {
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    vertical-align: middle;
+    -webkit-appearance: none;
+    border-radius: 0;
+    background: none;
+    border: 0;
+    cursor: pointer;
+    font: inherit;
+}
