@@ -19,11 +19,12 @@ class SearchContextProvider extends Component {
 
     startSearch = (text, startImmediately = true) => {
         clearTimeout(this.timer);
+        let value = text ? text : null;
         if (startImmediately) {
             this.implementSearch(text);
         } else {
             this.timer = setTimeout(
-                _ => this.implementSearch(text),
+                () => this.implementSearch(text),
                 SEARCH_DELAY
             );
         }

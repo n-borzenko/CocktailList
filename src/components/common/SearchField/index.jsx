@@ -7,13 +7,14 @@ import "./SearchField.css";
 class SearchField extends Component {
     static propTypes = {
         onSearch: PropTypes.func.isRequired,
+        placeholder: PropTypes.string,
     };
 
     state = {
         text: null,
     };
 
-    startSearch = _ => {
+    startSearch = () => {
         this.props.onSearch(this.state.text);
     };
 
@@ -26,7 +27,10 @@ class SearchField extends Component {
         return (
             <div className="search-field">
                 <div className="search-field__input">
-                    <Input onChange={this.valueChanged} />
+                    <Input
+                        onChange={this.valueChanged}
+                        placeholder={this.props.placeholder}
+                    />
                 </div>
                 <div className="search-field__action">
                     <ActionButton

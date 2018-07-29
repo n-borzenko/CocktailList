@@ -22,9 +22,12 @@ class Mode extends Component {
         }
         return (
             <SearchContext.Consumer>
-                {searchData => {
-                    return <SearchField onSearch={searchData.updateText} />;
-                }}
+                {searchData => (
+                    <SearchField
+                        onSearch={searchData.updateText}
+                        placeholder="Coctail name"
+                    />
+                )}
             </SearchContext.Consumer>
         );
     }

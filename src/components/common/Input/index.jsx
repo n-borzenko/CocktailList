@@ -6,17 +6,17 @@ import "./Input.css";
 class Input extends Component {
     static propTypes = {
         onChange: PropTypes.func.isRequired,
+        placeholder: PropTypes.string,
     };
 
     containerRef = React.createRef();
     inputRef = React.createRef();
-    state = { empty: true };
+    state = { value: "" };
 
     clearInput = () => {
-        this.inputRef.current.value = null;
-        this.props.onChange(null);
+        this.props.onChange("");
         this.inputRef.current.focus();
-        this.setState({ empty: true });
+        this.setState({ value: "" });
     };
 
     onFocus = () => {
@@ -30,15 +30,11 @@ class Input extends Component {
     onChange = e => {
         let value = e.target.value;
         this.props.onChange(value);
-        if (this.state.empty && value) {
-            this.setState({ empty: false });
-        } else if (!this.state.empty && !value) {
-            this.setState({ empty: true });
-        }
+        this.setState({ value: value });
     };
 
     renderRemoveButton() {
-        if (this.state.empty) {
+        if (!this.state.value) {
             return null;
         }
         return (
@@ -61,9 +57,10 @@ class Input extends Component {
                 onBlur={this.onBlur}
             >
                 <input
+                    value={this.state.value}
                     onChange={this.onChange}
                     className="input__field"
-                    placeholder="fghjkl;jhbvb"
+                    placeholder={this.props.placeholder}
                     ref={this.inputRef}
                 />
                 {this.renderRemoveButton()}

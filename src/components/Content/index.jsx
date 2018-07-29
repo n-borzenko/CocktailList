@@ -7,22 +7,19 @@ class Content extends Component {
         return (
             <div className="content">
                 <SearchContext.Consumer>
-                    {searchData => {
-                        return (
-                            <span>
-                                Search results for request: {searchData.text}
-                                <br />
-                                {searchData.results
-                                    ? searchData.results.map(item => (
-                                          <span key={item.id}>
-                                              {`${item.id}: ${item.name}`}
-                                              <br />
-                                          </span>
-                                      ))
-                                    : null}
-                            </span>
-                        );
-                    }}
+                    {searchData => (
+                        <span>
+                            Search results for request: {searchData.text}
+                            <br />
+                            {searchData.results &&
+                                searchData.results.map(item => (
+                                    <span key={item.id}>
+                                        {`${item.id}: ${item.name}`}
+                                        <br />
+                                    </span>
+                                ))}
+                        </span>
+                    )}
                 </SearchContext.Consumer>
             </div>
         );
