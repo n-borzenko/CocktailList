@@ -2,8 +2,10 @@
     display: flex;
     justify-content: space-between;
     flex-direction: column;
+    width: 100%;
 }
 
 .menu__item {
     margin: 10px 0;
+    width: 100%;
 }

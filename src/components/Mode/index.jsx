@@ -28,13 +28,13 @@ class Mode extends Component {
                 <div className="mode__header">
                     <Subheader>Mode</Subheader>
                 </div>
-                <div className="mode__selector">
+                {/* <div className="mode__selector">
                     <ButtonGroup
                         values={this.state.modes}
                         selected={this.state.selectedMode}
                         onSelect={this.changeMode}
                     />
-                </div>
+                </div> */}
                 <div className="mode__criteria">
                     {this.renderSearchCriteria()}
                 </div>

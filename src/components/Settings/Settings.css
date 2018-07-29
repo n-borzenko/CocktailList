@@ -14,6 +14,6 @@
     margin: 0 0 16px 0;
 }
 
-.settings__item:last-child {
+.settings__item:last-child:not(:first-child) {
     margin: 16px 0 0 0;
 }
