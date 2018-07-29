@@ -1,14 +1,20 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import ActionButton from "../ActionButton";
 import "./Input.css";
 
 class Input extends Component {
+    static propTypes = {
+        onChange: PropTypes.func.isRequired,
+    };
+
     containerRef = React.createRef();
     inputRef = React.createRef();
     state = { empty: true };
 
     clearInput = () => {
-        this.inputRef.current.value = "";
+        this.inputRef.current.value = null;
+        this.props.onChange(null);
         this.inputRef.current.focus();
         this.setState({ empty: true });
     };
@@ -21,10 +27,12 @@ class Input extends Component {
         this.containerRef.current.classList.remove("input_focused");
     };
 
-    onChange = () => {
-        if (this.state.empty && this.inputRef.current.value) {
+    onChange = e => {
+        let value = e.target.value;
+        this.props.onChange(value);
+        if (this.state.empty && value) {
             this.setState({ empty: false });
-        } else if (!this.state.empty && !this.inputRef.current.value) {
+        } else if (!this.state.empty && !value) {
             this.setState({ empty: true });
         }
     };

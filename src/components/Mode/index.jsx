@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import SearchContext from "../context/SearchContext";
 import Subheader from "../common/Subheader";
 import ButtonGroup from "../common/ButtonGroup";
 import RoundedCollection from "../RoundedCollection";
@@ -19,7 +20,13 @@ class Mode extends Component {
         if (this.state.selectedMode === 1) {
             return <RoundedCollection />;
         }
-        return <SearchField />;
+        return (
+            <SearchContext.Consumer>
+                {searchData => {
+                    return <SearchField onSearch={searchData.updateText} />;
+                }}
+            </SearchContext.Consumer>
+        );
     }
 
     render() {
