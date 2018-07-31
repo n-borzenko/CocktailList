@@ -1,16 +1,22 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import ActionButton from "../ActionButton";
 import "./Input.css";
 
 class Input extends Component {
+    static propTypes = {
+        onChange: PropTypes.func.isRequired,
+        placeholder: PropTypes.string,
+    };
+
     containerRef = React.createRef();
     inputRef = React.createRef();
-    state = { empty: true };
+    state = { value: "" };
 
     clearInput = () => {
-        this.inputRef.current.value = "";
+        this.props.onChange("");
         this.inputRef.current.focus();
-        this.setState({ empty: true });
+        this.setState({ value: "" });
     };
 
     onFocus = () => {
@@ -21,16 +27,14 @@ class Input extends Component {
         this.containerRef.current.classList.remove("input_focused");
     };
 
-    onChange = () => {
-        if (this.state.empty && this.inputRef.current.value) {
-            this.setState({ empty: false });
-        } else if (!this.state.empty && !this.inputRef.current.value) {
-            this.setState({ empty: true });
-        }
+    onChange = e => {
+        let value = e.target.value;
+        this.props.onChange(value);
+        this.setState({ value: value });
     };
 
     renderRemoveButton() {
-        if (this.state.empty) {
+        if (!this.state.value) {
             return null;
         }
         return (
@@ -53,9 +57,10 @@ class Input extends Component {
                 onBlur={this.onBlur}
             >
                 <input
+                    value={this.state.value}
                     onChange={this.onChange}
                     className="input__field"
-                    placeholder="fghjkl;jhbvb"
+                    placeholder={this.props.placeholder}
                     ref={this.inputRef}
                 />
                 {this.renderRemoveButton()}

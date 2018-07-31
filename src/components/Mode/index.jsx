@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import SearchContext from "../context/SearchContext";
 import Subheader from "../common/Subheader";
 import ButtonGroup from "../common/ButtonGroup";
 import RoundedCollection from "../RoundedCollection";
@@ -19,7 +20,16 @@ class Mode extends Component {
         if (this.state.selectedMode === 1) {
             return <RoundedCollection />;
         }
-        return <SearchField />;
+        return (
+            <SearchContext.Consumer>
+                {searchData => (
+                    <SearchField
+                        onSearch={searchData.updateText}
+                        placeholder="Coctail name"
+                    />
+                )}
+            </SearchContext.Consumer>
+        );
     }
 
     render() {
@@ -28,13 +38,13 @@ class Mode extends Component {
                 <div className="mode__header">
                     <Subheader>Mode</Subheader>
                 </div>
-                <div className="mode__selector">
+                {/* <div className="mode__selector">
                     <ButtonGroup
                         values={this.state.modes}
                         selected={this.state.selectedMode}
                         onSelect={this.changeMode}
                     />
-                </div>
+                </div> */}
                 <div className="mode__criteria">
                     {this.renderSearchCriteria()}
                 </div>
