@@ -10,7 +10,7 @@ const initialState = {
     selected: 0,
 };
 
-export var menu = (state = initialState, action) => {
+export default (state = initialState, action) => {
     switch (action.type) {
         case types.SELECT_MENU_ITEM:
             return {

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import SearchContext from "../context/SearchContext";
+import { connect } from "react-redux";
+import { startSearch } from "../../actions/search";
 import Subheader from "../common/Subheader";
 import ButtonGroup from "../common/ButtonGroup";
 import RoundedCollection from "../RoundedCollection";
@@ -21,14 +22,10 @@ class Mode extends Component {
             return <RoundedCollection />;
         }
         return (
-            <SearchContext.Consumer>
-                {searchData => (
-                    <SearchField
-                        onSearch={searchData.updateText}
-                        placeholder="Cocktail name"
-                    />
-                )}
-            </SearchContext.Consumer>
+            <SearchField
+                onSearch={this.props.startSearch}
+                placeholder="Cocktail name"
+            />
         );
     }
 
@@ -53,4 +50,7 @@ class Mode extends Component {
     }
 }
 
-export default Mode;
+export default connect(
+    null,
+    { startSearch }
+)(Mode);
