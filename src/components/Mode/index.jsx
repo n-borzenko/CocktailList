@@ -27,6 +27,7 @@ class Mode extends Component {
             <SearchField
                 onSearch={this.props.startSearch}
                 placeholder="Cocktail name"
+                useDelay
             />
         );
     }
