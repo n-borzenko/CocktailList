@@ -1,7 +1,9 @@
 import React, { Component } from "react";
+
 import Subheader from "../common/Subheader";
 import Button from "../common/Button";
 import Tag from "../Tag";
+
 import "./Filters.css";
 
 class Filters extends Component {

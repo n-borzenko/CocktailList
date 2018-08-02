@@ -1,7 +1,0 @@
-@import "../../../variables.css";
-
-.control-text {
-    font-size: var(--text-size-control);
-    line-height: var(--text-line-height-control);
-    font-weight: var(--text-weight-control);
-}

@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+
 import { selectMenuItem } from "../../actions/menu";
 import SelectableButton from "../common/SelectableButton";
+
 import "./Menu.css";
 
 class Menu extends Component {

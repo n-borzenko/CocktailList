@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+
 import Mode from "../Mode";
 import Filters from "../Filters";
+
 import "./Settings.css";
 
 class Settings extends Component {

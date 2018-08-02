@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+
 import ActionButton from "../ActionButton";
+
 import "./Input.css";
 
 class Input extends Component {

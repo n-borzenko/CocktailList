@@ -1,6 +1,8 @@
 import React, { Component } from "react";
-import ActionButton from "../common/ActionButton";
 import classNames from "classnames";
+
+import ActionButton from "../common/ActionButton";
+
 import "./RoundedCollection.css";
 
 class RoundedCollection extends Component {

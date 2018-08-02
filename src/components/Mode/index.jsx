@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+
 import { startSearch } from "../../actions/search";
 import Subheader from "../common/Subheader";
 import ButtonGroup from "../common/ButtonGroup";
 import RoundedCollection from "../RoundedCollection";
 import SearchField from "../common/SearchField";
+
 import "./Mode.css";
 
 class Mode extends Component {
