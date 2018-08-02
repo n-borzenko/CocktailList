@@ -8,7 +8,7 @@ class Logo extends Component {
         return (
             <div className="logo">
                 <div className="logo__title">
-                    <Header>CoctailList</Header>
+                    <Header>CocktailList</Header>
                 </div>
                 <div className="logo__icon">
                     <Icon type={Icon.types.logo} />

@@ -25,7 +25,7 @@ class Mode extends Component {
                 {searchData => (
                     <SearchField
                         onSearch={searchData.updateText}
-                        placeholder="Coctail name"
+                        placeholder="Cocktail name"
                     />
                 )}
             </SearchContext.Consumer>
