@@ -15,6 +15,10 @@ class Mode extends Component {
         selectedMode: 0,
     };
 
+    componentDidMount() {
+        this.props.startSearch("");
+    }
+
     changeMode = index => {
         this.setState({ selectedMode: index });
     };

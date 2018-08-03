@@ -1,5 +1,5 @@
-const START_SEARCH = "START_SEARCH";
+const SEARCH_COMPLETED = "SEARCH_COMPLETED";
 
 export default {
-    START_SEARCH,
+    SEARCH_COMPLETED,
 };

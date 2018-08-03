@@ -12,8 +12,8 @@ class Content extends Component {
                     <br />
                     {this.props.results &&
                         this.props.results.map(item => (
-                            <span key={item.id}>
-                                {`${item.id}: ${item.name}`}
+                            <span key={item.idDrink}>
+                                {`${item.idDrink}: ${item.strDrink}`}
                                 <br />
                             </span>
                         ))}
