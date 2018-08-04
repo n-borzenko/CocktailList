@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 
 import LeftBar from "../LeftBar";
 import Content from "../Content";
+import LoadingBar from "../common/LoadingBar";
 
 import "./App.css";
 
@@ -17,6 +18,9 @@ class App extends Component {
             <div className="app">
                 {this.renderBackground(this.props.menuItem)}
 
+                <div className="app__loading-bar">
+                    <LoadingBar />
+                </div>
                 <div className="app__left">
                     <LeftBar />
                 </div>

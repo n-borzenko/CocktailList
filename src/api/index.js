@@ -1,11 +1,9 @@
-import axios from "axios";
-
+import loader from "../loader";
 import api from "./constants";
 
-export const searchRequest = (text, onSuccess, onError) => {
+export const searchRequest = text => {
     const query = `${api.ENDPOINT}${api.APIKEY}${api.Methods.SEARCH}${text}`;
-    axios
-        .get(query)
-        .then(onSuccess)
-        .catch(onError);
+    return new Promise((resolve, reject) => {
+        loader.get(query).then(data => resolve(data), error => reject(error));
+    });
 };
