@@ -1,9 +1,13 @@
 import React, { Component } from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { connect } from "react-redux";
 
-import LeftBar from "../LeftBar";
-import Content from "../Content";
 import LoadingBar from "../common/LoadingBar";
+import LeftBar from "../LeftBar";
+import SearchContent from "../SearchContent";
+import FavoritesContent from "../FavoritesContent";
+import RandomContent from "../RandomContent";
+import IngridientsContent from "../IngridientsContent";
 
 import "./App.css";
 
@@ -15,19 +19,32 @@ class App extends Component {
 
     render() {
         return (
-            <div className="app">
-                {this.renderBackground(this.props.menuItem)}
+            <Router>
+                <div className="app">
+                    {this.renderBackground(this.props.menuItem)}
 
-                <div className="app__loading-bar">
-                    <LoadingBar />
+                    <div className="app__loading-bar">
+                        <LoadingBar />
+                    </div>
+                    <div className="app__left">
+                        <LeftBar />
+                    </div>
+                    <div className="app__right">
+                        <Switch>
+                            <Route exact path="/" component={SearchContent} />
+                            <Route
+                                path="/favorites"
+                                component={FavoritesContent}
+                            />
+                            <Route path="/random" component={RandomContent} />
+                            <Route
+                                path="/ingridients"
+                                component={IngridientsContent}
+                            />
+                        </Switch>
+                    </div>
                 </div>
-                <div className="app__left">
-                    <LeftBar />
-                </div>
-                <div className="app__right">
-                    <Content />
-                </div>
-            </div>
+            </Router>
         );
     }
 }

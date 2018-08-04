@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 import { selectMenuItem } from "../../actions/menu";
 import SelectableButton from "../common/SelectableButton";
@@ -12,12 +13,20 @@ class Menu extends Component {
             <div className="menu">
                 {this.props.items.map((item, index) => (
                     <div className="menu__item" key={index}>
-                        <SelectableButton
+                        {/* <SelectableButton
                             selected={this.props.selected === index}
                             onClick={() => this.props.selectMenuItem(index)}
                         >
                             {item}
-                        </SelectableButton>
+                        </SelectableButton> */}
+                        <Link
+                            className="menu__link"
+                            to={`/${
+                                item === "Search" ? "" : item.toLowerCase()
+                            }`}
+                        >
+                            {item}
+                        </Link>
                     </div>
                 ))}
             </div>
