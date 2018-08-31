@@ -44,4 +44,5 @@
     height: 3px;
     position: fixed;
     top: 0;
+    pointer-events: none;
 }

@@ -16,7 +16,7 @@ class Mode extends Component {
     };
 
     componentDidMount() {
-        this.props.startSearch("");
+        this.props.startSearch();
     }
 
     changeMode = index => {
@@ -31,7 +31,6 @@ class Mode extends Component {
             <SearchField
                 onSearch={this.props.startSearch}
                 placeholder="Cocktail name"
-                useDelay
             />
         );
     }

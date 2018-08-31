@@ -18,9 +18,10 @@
     border-radius: 2px;
     width: 100px;
     animation-name: loading;
-    animation-duration: 2s;
-    animation-timing-function: linear;
+    animation-duration: 3s;
+    animation-delay: 400ms;
+    animation-timing-function: ease-out;
     animation-iteration-count: infinite;
     position: relative;
-    left: -50px;
+    left: -100px;
 }

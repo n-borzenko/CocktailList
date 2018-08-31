@@ -12,11 +12,6 @@ class SearchField extends Component {
     static propTypes = {
         onSearch: PropTypes.func.isRequired,
         placeholder: PropTypes.string,
-        useDelay: PropTypes.bool.isRequired,
-    };
-
-    static defaultProps = {
-        useDelay: false,
     };
 
     timer = null;
@@ -32,14 +27,10 @@ class SearchField extends Component {
 
     valueChanged = value => {
         this.setState({ text: value });
-        if (this.props.useDelay) {
-            clearTimeout(this.timer);
-            this.timer = setTimeout(() => {
-                this.props.onSearch(this.state.text);
-            }, SEARCH_DELAY);
-        } else {
-            this.props.onSearch(value);
-        }
+        clearTimeout(this.timer);
+        this.timer = setTimeout(() => {
+            this.props.onSearch(this.state.text);
+        }, SEARCH_DELAY);
     };
 
     render() {
