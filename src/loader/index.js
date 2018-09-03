@@ -1,24 +1,18 @@
-import axios from "axios";
-
 import store from "../store";
 import { startLoading, finishLoading } from "../actions/loading";
+import axios from "axios";
 
-const get = query => {
+const request = async (...args) => {
     store.dispatch(startLoading());
-    return new Promise((resolve, reject) => {
-        axios.get(query).then(
-            data => {
-                store.dispatch(finishLoading());
-                resolve(data);
-            },
-            error => {
-                store.dispatch(finishLoading(error));
-                reject(error);
-            }
-        );
-    });
+    try {
+        return await axios(...args);
+    } catch (error) {
+        throw error;
+    } finally {
+        store.dispatch(finishLoading());
+    }
 };
 
 export default {
-    get,
+    request,
 };
