@@ -1,7 +1,9 @@
 import React, { Component } from "react";
-import MenuContext from "../context/MenuContext";
+import { connect } from "react-redux";
+
 import Mode from "../Mode";
 import Filters from "../Filters";
+
 import "./Settings.css";
 
 class Settings extends Component {
@@ -37,14 +39,10 @@ class Settings extends Component {
     };
 
     render() {
-        return (
-            <MenuContext.Consumer>
-                {menu =>
-                    this.renders[menu.items[menu.selected].toLowerCase()]()
-                }
-            </MenuContext.Consumer>
-        );
+        return this.renders[this.props.menuItem]();
     }
 }
 
-export default Settings;
+export default connect(state => ({
+    menuItem: state.menu.items[state.menu.selected].toLowerCase(),
+}))(Settings);

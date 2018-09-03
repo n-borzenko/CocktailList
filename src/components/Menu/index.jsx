@@ -1,29 +1,33 @@
 import React, { Component } from "react";
-import MenuContext from "../context/MenuContext";
+import { connect } from "react-redux";
+
+import { selectMenuItem } from "../../actions/menu";
 import SelectableButton from "../common/SelectableButton";
+
 import "./Menu.css";
 
 class Menu extends Component {
-    renderItems(menu) {
-        return menu.items.map((item, index) => (
-            <div className="menu__item" key={index}>
-                <SelectableButton
-                    selected={menu.selected === index}
-                    onClick={() => menu.selectMenuItem(index)}
-                >
-                    {item}
-                </SelectableButton>
-            </div>
-        ));
-    }
-
     render() {
         return (
             <div className="menu">
-                <MenuContext.Consumer>{this.renderItems}</MenuContext.Consumer>
+                {this.props.items.map((item, index) => (
+                    <div className="menu__item" key={index}>
+                        <SelectableButton
+                            selected={this.props.selected === index}
+                            onClick={() => this.props.selectMenuItem(index)}
+                        >
+                            {item}
+                        </SelectableButton>
+                    </div>
+                ))}
             </div>
         );
     }
 }
 
-export default Menu;
+export default connect(
+    state => ({
+        ...state.menu,
+    }),
+    { selectMenuItem }
+)(Menu);

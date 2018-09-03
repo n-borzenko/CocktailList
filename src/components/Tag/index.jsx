@@ -1,7 +1,9 @@
 import React, { Component } from "react";
-import Text from "../common/Text";
 import PropTypes from "prop-types";
 import classNames from "classnames";
+
+import Text from "../common/Text";
+
 import "./Tag.css";
 
 class Tag extends Component {

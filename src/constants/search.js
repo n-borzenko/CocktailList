@@ -1,0 +1,5 @@
+const SEARCH_COMPLETED = "SEARCH_COMPLETED";
+
+export default {
+    SEARCH_COMPLETED,
+};

@@ -1,0 +1,27 @@
+.loading-bar {
+    width: 100%;
+    height: 100%;
+}
+
+@keyframes loading {
+    0% {
+        left: -50px;
+    }
+    100% {
+        left: calc(100% - 50px);
+    }
+}
+
+.loading-bar__item {
+    background: white;
+    height: 100%;
+    border-radius: 2px;
+    width: 100px;
+    animation-name: loading;
+    animation-duration: 3s;
+    animation-delay: 400ms;
+    animation-timing-function: ease-out;
+    animation-iteration-count: infinite;
+    position: relative;
+    left: -100px;
+}

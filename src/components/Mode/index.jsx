@@ -1,9 +1,12 @@
 import React, { Component } from "react";
-import SearchContext from "../context/SearchContext";
+import { connect } from "react-redux";
+
+import { startSearch } from "../../actions/search";
 import Subheader from "../common/Subheader";
 import ButtonGroup from "../common/ButtonGroup";
 import RoundedCollection from "../RoundedCollection";
 import SearchField from "../common/SearchField";
+
 import "./Mode.css";
 
 class Mode extends Component {
@@ -11,6 +14,10 @@ class Mode extends Component {
         modes: ["By query", "By first letter"],
         selectedMode: 0,
     };
+
+    componentDidMount() {
+        this.props.startSearch();
+    }
 
     changeMode = index => {
         this.setState({ selectedMode: index });
@@ -21,14 +28,10 @@ class Mode extends Component {
             return <RoundedCollection />;
         }
         return (
-            <SearchContext.Consumer>
-                {searchData => (
-                    <SearchField
-                        onSearch={searchData.updateText}
-                        placeholder="Cocktail name"
-                    />
-                )}
-            </SearchContext.Consumer>
+            <SearchField
+                onSearch={this.props.startSearch}
+                placeholder="Cocktail name"
+            />
         );
     }
 
@@ -53,4 +56,7 @@ class Mode extends Component {
     }
 }
 
-export default Mode;
+export default connect(
+    null,
+    { startSearch }
+)(Mode);

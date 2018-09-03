@@ -1,29 +1,26 @@
 import React, { Component } from "react";
-import SearchContext from "../context/SearchContext";
+import { connect } from "react-redux";
+
 import "./Content.css";
 
 class Content extends Component {
     render() {
         return (
             <div className="content">
-                <SearchContext.Consumer>
-                    {searchData => (
-                        <span>
-                            Search results for request: {searchData.text}
-                            <br />
-                            {searchData.results &&
-                                searchData.results.map(item => (
-                                    <span key={item.id}>
-                                        {`${item.id}: ${item.name}`}
-                                        <br />
-                                    </span>
-                                ))}
-                        </span>
-                    )}
-                </SearchContext.Consumer>
+                <span>
+                    Search results for request: {this.props.text}
+                    <br />
+                    {this.props.results &&
+                        this.props.results.map(item => (
+                            <span key={item.idDrink}>
+                                {`${item.idDrink}: ${item.strDrink}`}
+                                <br />
+                            </span>
+                        ))}
+                </span>
             </div>
         );
     }
 }
 
-export default Content;
+export default connect(state => ({ ...state.search }))(Content);

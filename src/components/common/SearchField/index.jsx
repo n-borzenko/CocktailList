@@ -1,8 +1,12 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+
 import Input from "../Input";
 import ActionButton from "../ActionButton";
+
 import "./SearchField.css";
+
+const SEARCH_DELAY = 300;
 
 class SearchField extends Component {
     static propTypes = {
@@ -10,17 +14,23 @@ class SearchField extends Component {
         placeholder: PropTypes.string,
     };
 
+    timer = null;
+
     state = {
         text: null,
     };
 
     startSearch = () => {
+        clearTimeout(this.timer);
         this.props.onSearch(this.state.text);
     };
 
     valueChanged = value => {
         this.setState({ text: value });
-        this.props.onSearch(value, false);
+        clearTimeout(this.timer);
+        this.timer = setTimeout(() => {
+            this.props.onSearch(this.state.text);
+        }, SEARCH_DELAY);
     };
 
     render() {

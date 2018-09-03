@@ -1,0 +1,7 @@
+const START_LOADING = "START_LOADING";
+const FINISH_LOADING = "FINISH_LOADING";
+
+export default {
+    START_LOADING,
+    FINISH_LOADING,
+};

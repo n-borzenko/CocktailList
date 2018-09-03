@@ -1,7 +1,9 @@
 import React, { Component } from "react";
+
 import Logo from "../Logo";
 import Menu from "../Menu";
 import Settings from "../Settings";
+
 import "./LeftBar.css";
 
 class LeftBar extends Component {

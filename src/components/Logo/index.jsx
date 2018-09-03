@@ -1,6 +1,8 @@
 import React, { Component } from "react";
+
 import Header from "../common/Header";
 import Icon from "../common/Icon";
+
 import "./Logo.css";
 
 class Logo extends Component {
