@@ -1,13 +1,16 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
+import { ConnectedRouter } from "connected-react-router";
 import { connect } from "react-redux";
 
+import { history } from "../../store";
 import LoadingBar from "../common/LoadingBar";
 import LeftBar from "../LeftBar";
 import SearchContent from "../SearchContent";
 import FavoritesContent from "../FavoritesContent";
 import RandomContent from "../RandomContent";
 import IngridientsContent from "../IngridientsContent";
+import NotFound from "../common/NotFound";
 
 import "./App.css";
 
@@ -19,7 +22,7 @@ class App extends Component {
 
     render() {
         return (
-            <Router>
+            <ConnectedRouter history={history}>
                 <div className="app">
                     {this.renderBackground(this.props.menuItem)}
 
@@ -41,10 +44,11 @@ class App extends Component {
                                 path="/ingridients"
                                 component={IngridientsContent}
                             />
+                            <Route component={NotFound} />
                         </Switch>
                     </div>
                 </div>
-            </Router>
+            </ConnectedRouter>
         );
     }
 }
