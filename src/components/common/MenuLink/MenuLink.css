@@ -1,34 +1,33 @@
 @import "../../../variables.css";
 
-.selectable-button {
+.menu-link,
+.menu-link:visited {
     font-weight: var(--text-size-subheader-secondary);
     line-height: var(--text-line-height-subheader);
     font-size: var(--text-size-subheader-secondary);
     color: rgba(255, 255, 255, 0.6);
     background: transparent;
-    border: none;
-    padding: 0;
-    outline: none;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     max-width: 100%;
+    text-decoration: none;
 }
 
-.selectable-button_selected {
+.menu-link_selected {
     color: white;
     font-size: var(--text-size-subheader);
     font-weight: var(--text-weight-subheader);
 }
 
-.selectable-button:hover:not(.selectable-button_selected) {
+.menu-link:hover:not(.menu-link_selected) {
     color: rgba(255, 255, 255, 0.8);
 }
 
-.selectable-button:active:not(.selectable-button_selected) {
+.menu-link:active:not(.menu-link_selected) {
     color: white;
 }
 
-.selectable-button:disabled:not(.selectable-button_selected) {
+.menu-link:disabled:not(.menu-link_selected) {
     color: rgba(255, 255, 255, 0.4);
 }

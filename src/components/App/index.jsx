@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 import { ConnectedRouter } from "connected-react-router";
-import { connect } from "react-redux";
 
 import { history } from "../../store";
 import LoadingBar from "../common/LoadingBar";
@@ -11,6 +10,7 @@ import FavoritesContent from "../FavoritesContent";
 import RandomContent from "../RandomContent";
 import IngridientsContent from "../IngridientsContent";
 import NotFound from "../common/NotFound";
+import locations from "../../constants/locations";
 
 import "./App.css";
 
@@ -34,15 +34,27 @@ class App extends Component {
                     </div>
                     <div className="app__right">
                         <Switch>
-                            <Route exact path="/" component={SearchContent} />
                             <Route
-                                path="/favorites"
+                                path={locations.search}
+                                component={SearchContent}
+                            />
+                            <Route
+                                path={locations.favorites}
                                 component={FavoritesContent}
                             />
-                            <Route path="/random" component={RandomContent} />
                             <Route
-                                path="/ingridients"
+                                path={locations.random}
+                                component={RandomContent}
+                            />
+                            <Route
+                                path={locations.ingridients}
                                 component={IngridientsContent}
+                            />
+                            <Route
+                                path="/"
+                                render={() => (
+                                    <Redirect to={locations.search} />
+                                )}
                             />
                             <Route component={NotFound} />
                         </Switch>
@@ -53,6 +65,4 @@ class App extends Component {
     }
 }
 
-export default connect(state => ({
-    menuItem: state.menu.items[state.menu.selected].toLowerCase(),
-}))(App);
+export default App;

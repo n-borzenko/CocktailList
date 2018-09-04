@@ -1,12 +1,8 @@
-const SELECT_MENU_ITEM = "SELECT_MENU_ITEM";
-
-export default {
-    SELECT_MENU_ITEM,
+const menuItems = {
+    search: "Search",
+    favorites: "Favorites",
+    random: "Random",
+    ingridients: "Ingridients",
 };
 
-export const MenuItems = {
-    SEARCH: "Search",
-    FAVORITES: "Favorites",
-    RANDOM: "Random",
-    INGRIDIENTS: "Ingridients",
-};
+export default menuItems;
