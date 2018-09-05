@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import MenuLink from "../common/MenuLink";
 import menuItems from "../../constants/menu";
 import locations from "../../constants/locations";
+import { searchURLFromState } from "../../helpers/urls";
 
 import "./Menu.css";
 
@@ -12,13 +13,7 @@ class Menu extends Component {
         items: [
             {
                 name: menuItems.search,
-                location: () => {
-                    if (this.props.search.type === "filters") {
-                        return locations.searchByFilters;
-                    } else {
-                        return locations.search;
-                    }
-                },
+                location: () => searchURLFromState(this.props.search),
             },
             {
                 name: menuItems.favorites,

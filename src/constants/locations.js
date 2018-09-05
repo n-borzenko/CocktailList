@@ -1,6 +1,6 @@
 const locations = {
     search: "/search",
-    searchByFilters: "/search/filters",
+    searchByFilter: "/search/filter",
     favorites: "/favorites",
     random: "/random",
     ingridients: "/ingridients",

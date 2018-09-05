@@ -6,35 +6,44 @@ import Subheader from "../../common/Subheader";
 import ButtonGroup from "../../common/ButtonGroup";
 import Filters from "../../Filters";
 import SearchField from "../../common/SearchField";
-import { startSearch, applyFilter } from "../../../actions/search";
+import {
+    searchByQuery,
+    searchByFilter,
+    searchByURL,
+} from "../../../actions/search";
 import locations from "../../../constants/locations";
+import { searchTypes } from "../../../constants/search";
 
 import "./SearchParameters.css";
 
 class SearchParameters extends Component {
     state = {
-        modes: ["By query", "By filter"],
+        modes: [`by ${searchTypes.query}`, `by ${searchTypes.filter}`],
     };
 
     componentDidMount() {
-        // this.props.startSearch();
+        console.log(this.props.search.query);
+        this.props.searchByURL(this.props.location);
     }
 
     changeMode = index => {
-        index === 0 ? this.props.startSearch() : this.props.applyFilter();
+        index === 0
+            ? this.props.searchByQuery(this.props.search.query)
+            : this.props.searchByFilter(this.props.search.filter);
     };
 
     renderSearchField = () => {
         return (
             <SearchField
-                onSearch={this.props.startSearch}
+                onSearch={this.props.searchByQuery}
                 placeholder="Cocktail name"
+                value={this.props.search.query}
             />
         );
     };
 
     render() {
-        const selected = this.props.search.type === "filters" ? 1 : 0;
+        const selected = this.props.search.type === searchTypes.filter ? 1 : 0;
         return (
             <div className="mode">
                 <div className="mode__header">
@@ -55,7 +64,7 @@ class SearchParameters extends Component {
                             render={this.renderSearchField}
                         />
                         <Route
-                            path={locations.searchByFilters}
+                            path={locations.searchByFilter}
                             component={Filters}
                         />
                     </Switch>
@@ -70,5 +79,5 @@ export default connect(
         search: state.search,
         location: state.router.location,
     }),
-    { startSearch, applyFilter }
+    { searchByQuery, searchByFilter, searchByURL }
 )(SearchParameters);

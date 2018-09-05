@@ -1,21 +1,19 @@
 import { push } from "connected-react-router";
 import qs from "qs";
 
-import types from "../constants/search";
+import types, { searchTypes } from "../constants/search";
+import { searchByQueryRequest, searchByFilterRequest } from "../api";
+import { searchURLByQuery, searchURLByFilter } from "../helpers/urls";
 import locations from "../constants/locations";
-import { searchRequest } from "../api";
 
-export const startSearch = (text = "") => async dispatch => {
-    const parameters = text.length ? qs.stringify({ text }) : "";
-    dispatch(push(`${locations.search}?${parameters}`));
-
+const performSearchByQuery = async (dispatch, query) => {
     try {
-        const response = await searchRequest(text);
+        const response = await searchByQueryRequest(query);
         dispatch({
             type: types.SEARCH_COMPLETED,
             payload: {
-                type: "query",
-                text,
+                type: searchTypes.query,
+                query,
                 results: response.data.drinks,
             },
         });
@@ -24,21 +22,75 @@ export const startSearch = (text = "") => async dispatch => {
     }
 };
 
-export const applyFilter = () => async dispatch => {
-    const parameters = qs.stringify({});
-    dispatch(push(`${locations.searchByFilters}?${parameters}`));
+export const searchByQuery = (query = "") => dispatch => {
+    dispatch(push(searchURLByQuery(query)));
+    performSearchByQuery(dispatch, query);
+};
 
+const performSearchByFilter = async (dispatch, filter) => {
     try {
-        const response = await searchRequest("");
+        const response = await searchByFilterRequest(filter);
         dispatch({
             type: types.SEARCH_COMPLETED,
             payload: {
-                type: "filters",
-                filters: { type: "ingridients", id: 0 },
+                type: searchTypes.filter,
+                filter,
                 results: response.data.drinks,
             },
         });
     } catch (error) {
         console.log(error);
+    }
+};
+
+export const searchByFilter = (
+    filter = { type: "categories", name: "Ordinary Drink" }
+) => dispatch => {
+    dispatch(push(searchURLByFilter(filter)));
+
+    if (filter === null) {
+        dispatch({
+            type: types.SEARCH_COMPLETED,
+            payload: {
+                type: searchTypes.filter,
+                filter,
+                results: [],
+            },
+        });
+        return;
+    }
+
+    performSearchByFilter(dispatch, filter);
+};
+
+export const searchByURL = location => dispatch => {
+    const parameters =
+        location && location.search && location.search.length > 1
+            ? qs.parse(location.search.substr(1))
+            : null;
+    console.log(parameters);
+    if (location.pathname === locations.search) {
+        if (parameters.query && parameters.query.length) {
+            performSearchByQuery(dispatch, parameters.query);
+        } else {
+            dispatch(push(searchURLByQuery("")));
+            performSearchByQuery(dispatch, "");
+        }
+    } else if (location.pathname === locations.searchByFilter) {
+        if (
+            !parameters.filter &&
+            ["ingridients", "alcoholic", "category", "glass"].includes(
+                parameters.filter.type
+            )
+        ) {
+            //&& "category contains parameters.filter.name"
+            performSearchByFilter(dispatch, parameters.filter);
+        } else {
+            dispatch(push(searchURLByFilter(null)));
+            performSearchByFilter(dispatch, null);
+        }
+    } else {
+        dispatch(push(searchURLByQuery("")));
+        performSearchByQuery(dispatch, "");
     }
 };

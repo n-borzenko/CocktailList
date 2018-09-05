@@ -12,13 +12,27 @@ class SearchField extends Component {
     static propTypes = {
         onSearch: PropTypes.func.isRequired,
         placeholder: PropTypes.string,
+        value: PropTypes.string,
     };
 
     timer = null;
 
     state = {
-        text: null,
+        value: this.props.value ? this.props.value : "",
     };
+
+    static getDerivedStateFromProps(props, state) {
+        if (props.value !== state.previousPropValue) {
+            return {
+                previousStateValue: state.value,
+                previousPropValue: props.value,
+                value: props.value ? props.value : "",
+            };
+        } else if (state.value !== state.previousStateValue) {
+            return { previousStateValue: state.value, value: state.value };
+        }
+        return null;
+    }
 
     startSearch = () => {
         clearTimeout(this.timer);
@@ -40,6 +54,7 @@ class SearchField extends Component {
                     <Input
                         onChange={this.valueChanged}
                         placeholder={this.props.placeholder}
+                        value={this.state.value}
                     />
                 </div>
                 <div className="search-field__action">
