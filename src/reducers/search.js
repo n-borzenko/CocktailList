@@ -8,9 +8,11 @@ const initialState = {
 export default (state = initialState, action) => {
     switch (action.type) {
         case types.SEARCH_COMPLETED:
-            const { text, results } = action.payload;
+            const { type, text, results, filters } = action.payload;
             return {
+                type,
                 text,
+                filters,
                 results: results
                     ? results.sort((item1, item2) =>
                           item1.strDrink.localeCompare(item2.strDrink)

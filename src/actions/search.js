@@ -6,7 +6,7 @@ import locations from "../constants/locations";
 import { searchRequest } from "../api";
 
 export const startSearch = (text = "") => async dispatch => {
-    const parameters = qs.stringify({ text });
+    const parameters = text.length ? qs.stringify({ text }) : "";
     dispatch(push(`${locations.search}?${parameters}`));
 
     try {
@@ -14,7 +14,27 @@ export const startSearch = (text = "") => async dispatch => {
         dispatch({
             type: types.SEARCH_COMPLETED,
             payload: {
+                type: "query",
                 text,
+                results: response.data.drinks,
+            },
+        });
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export const applyFilter = () => async dispatch => {
+    const parameters = qs.stringify({});
+    dispatch(push(`${locations.searchByFilters}?${parameters}`));
+
+    try {
+        const response = await searchRequest("");
+        dispatch({
+            type: types.SEARCH_COMPLETED,
+            payload: {
+                type: "filters",
+                filters: { type: "ingridients", id: 0 },
                 results: response.data.drinks,
             },
         });
