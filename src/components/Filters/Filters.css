@@ -9,7 +9,8 @@
 }
 
 .filters__button {
-    width: 100px;
+    width: 30px;
+    height: 30px;
 }
 
 .filters__list {

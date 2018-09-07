@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import MenuLink from "../common/MenuLink";
 import menuItems from "../../constants/menu";
 import locations from "../../constants/locations";
-import { searchURLFromState } from "../../helpers/urls";
+import { searchURLFromState } from "../../actions/search";
 
 import "./Menu.css";
 

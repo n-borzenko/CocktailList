@@ -22,7 +22,6 @@ class SearchParameters extends Component {
     };
 
     componentDidMount() {
-        console.log(this.props.search.query);
         this.props.searchByURL(this.props.location);
     }
 
@@ -44,6 +43,7 @@ class SearchParameters extends Component {
 
     render() {
         const selected = this.props.search.type === searchTypes.filter ? 1 : 0;
+        console.log(selected);
         return (
             <div className="mode">
                 <div className="mode__header">

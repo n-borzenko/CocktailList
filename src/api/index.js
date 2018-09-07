@@ -2,13 +2,25 @@ import axios from "axios";
 
 import loader from "../helpers/loader";
 import api from "./constants";
+import axios from "axios";
 
 axios.defaults.baseURL = api.BASEURL;
 
+let cancellationSearchToken = null;
 export const searchByQueryRequest = async query => {
-    const config = { params: { s: query }, ...api.configs.search };
+    if (cancellationSearchToken) {
+        cancellationSearchToken.cancel();
+    }
+    cancellationSearchToken = axios.CancelToken.source();
+    const config = {
+        ...api.configs.search,
+        params: { s: query },
+        cancelToken: cancellationSearchToken.token,
+    };
     try {
-        return await loader.request(config);
+        const result = await loader.request(config);
+        cancellationSearchToken = null;
+        return result;
     } catch (error) {
         throw error;
     }

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
-import Subheader from "../common/Subheader";
-import Button from "../common/Button";
+import Title from "../common/Title";
+import ActionButton from "../common/ActionButton";
 import Tag from "../Tag";
 
 import "./Filters.css";
@@ -31,20 +31,23 @@ class Filters extends Component {
         );
     };
 
-    render() {
+    renderFiltersBlock() {
         return (
-            <div className="filters">
-                <div className="filters__header">
-                    <Subheader>Filters</Subheader>
-                    <div className="filters__button">
-                        <Button stretched onClick={this.loadItems}>
-                            {this.state.items ? "Edit" : "Add"}
-                        </Button>
-                    </div>
+            <div className="filters__header">
+                <Title>Categories</Title>
+                <div className="filters__button">
+                    <ActionButton
+                        type={ActionButton.types.arrowDown}
+                        style={ActionButton.styles.dark}
+                        onClick={() => console.log("open")}
+                    />
                 </div>
-                {this.renderItems()}
             </div>
         );
+    }
+
+    render() {
+        return <div className="filters">{this.renderFiltersBlock()}</div>;
     }
 }
 
