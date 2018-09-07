@@ -8,7 +8,7 @@ class SearchContent extends Component {
         return (
             <div className="search-content">
                 <span>
-                    Search results for request: {this.props.text}
+                    Search results:
                     <br />
                     {this.props.results &&
                         this.props.results.map(item => (
@@ -23,4 +23,6 @@ class SearchContent extends Component {
     }
 }
 
-export default connect(state => ({ ...state.search }))(SearchContent);
+export default connect(state => ({ results: state.search.response.results }))(
+    SearchContent
+);

@@ -9,7 +9,6 @@ import "./LeftBar.css";
 
 class LeftBar extends Component {
     render() {
-        console.log(this.props.location);
         return (
             <div className="left-bar">
                 <div className="left-bar__item">

@@ -27,23 +27,26 @@ class SearchParameters extends Component {
 
     changeMode = index => {
         index === 0
-            ? this.props.searchByQuery(this.props.search.query)
-            : this.props.searchByFilter(this.props.search.filter);
+            ? this.props.searchByQuery(this.props.request.query)
+            : this.props.searchByFilter(this.props.request.filter);
+    };
+
+    onSearch = query => {
+        this.props.searchByQuery(query, true);
     };
 
     renderSearchField = () => {
         return (
             <SearchField
-                onSearch={this.props.searchByQuery}
+                onSearch={this.onSearch}
                 placeholder="Cocktail name"
-                value={this.props.search.query}
+                value={this.props.request.query}
             />
         );
     };
 
     render() {
-        const selected = this.props.search.type === searchTypes.filter ? 1 : 0;
-        console.log(selected);
+        const selected = this.props.request.type === searchTypes.filter ? 1 : 0;
         return (
             <div className="mode">
                 <div className="mode__header">
@@ -76,7 +79,7 @@ class SearchParameters extends Component {
 
 export default connect(
     state => ({
-        search: state.search,
+        request: state.search.request,
         location: state.router.location,
     }),
     { searchByQuery, searchByFilter, searchByURL }

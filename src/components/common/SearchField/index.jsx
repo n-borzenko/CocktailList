@@ -6,16 +6,12 @@ import ActionButton from "../ActionButton";
 
 import "./SearchField.css";
 
-const SEARCH_DELAY = 300;
-
 class SearchField extends Component {
     static propTypes = {
         onSearch: PropTypes.func.isRequired,
         placeholder: PropTypes.string,
         value: PropTypes.string,
     };
-
-    timer = null;
 
     state = {
         value: this.props.value ? this.props.value : "",
@@ -35,16 +31,12 @@ class SearchField extends Component {
     }
 
     startSearch = () => {
-        clearTimeout(this.timer);
         this.props.onSearch(this.state.text);
     };
 
     valueChanged = value => {
         this.setState({ text: value });
-        clearTimeout(this.timer);
-        this.timer = setTimeout(() => {
-            this.props.onSearch(this.state.text);
-        }, SEARCH_DELAY);
+        this.props.onSearch(value);
     };
 
     render() {

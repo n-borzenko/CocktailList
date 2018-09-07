@@ -19,7 +19,7 @@
     width: 100px;
     animation-name: loading;
     animation-duration: 3s;
-    animation-delay: 400ms;
+    animation-delay: 500ms;
     animation-timing-function: ease-out;
     animation-iteration-count: infinite;
     position: relative;

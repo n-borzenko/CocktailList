@@ -3,10 +3,14 @@ import qs from "qs";
 import axios from "axios";
 
 import types, { searchTypes } from "../constants/search";
-import { searchByQueryRequest, searchByFilterRequest } from "../api";
+import { searchRequest } from "../api";
 import locations from "../constants/locations";
 
-const searchURLByQuery = query => {
+const SEARCH_DELAY = 300;
+
+let timer = null;
+
+const queryToURL = query => {
     const parameters =
         query && query.length
             ? qs.stringify({
@@ -16,37 +20,25 @@ const searchURLByQuery = query => {
     return `${locations.search}?${parameters}`;
 };
 
-const searchURLByFilter = filter => {
+const filterToURL = filter => {
     const parameters = filter ? qs.stringify(filter) : "";
     return `${locations.searchByFilter}?${parameters}`;
 };
 
-const performSearchByQuery = async (dispatch, query) => {
-    try {
-        const response = await searchByQueryRequest(query);
-        dispatch({
-            type: types.SEARCH_COMPLETED,
-            payload: {
-                type: searchTypes.query,
-                query,
-                results: response.data.drinks,
-            },
-        });
-    } catch (error) {
-        if (axios.isCancel(error)) {
-            return;
-        }
-        console.log(error);
-    }
-};
+const performSearch = async (dispatch, type, data) => {
+    dispatch({
+        type: types.SEARCH_STARTED,
+        payload: {
+            type,
+            query: type === searchTypes.query ? data : null,
+            filter: type === searchTypes.filter ? data : null,
+        },
+    });
 
-const performSearchByFilter = async (dispatch, filter) => {
-    if (filter === null) {
+    if (data === null) {
         dispatch({
             type: types.SEARCH_COMPLETED,
             payload: {
-                type: searchTypes.filter,
-                filter,
                 results: [],
             },
         });
@@ -54,38 +46,51 @@ const performSearchByFilter = async (dispatch, filter) => {
     }
 
     try {
-        const response = await searchByFilterRequest(filter);
+        const response = await searchRequest(type, data);
         dispatch({
             type: types.SEARCH_COMPLETED,
             payload: {
-                type: searchTypes.filter,
-                filter,
                 results: response.data.drinks,
             },
         });
     } catch (error) {
+        if (axios.isCancel(error)) {
+            console.log("cancelled");
+            return;
+        }
         console.log(error);
     }
 };
 
-export const searchURLFromState = state => {
+const startSearchByQuery = (dispatch, query) => {
+    dispatch(push(queryToURL(query)));
+    performSearch(dispatch, searchTypes.query, query);
+};
+
+export const stateToSearchURL = state => {
     if (state.type === searchTypes.filter) {
-        return searchURLByFilter(state.filter);
+        return filterToURL(state.filter);
     } else {
-        return searchURLByQuery(state.query);
+        return queryToURL(state.query);
     }
 };
 
-export const searchByQuery = (query = "") => dispatch => {
-    dispatch(push(searchURLByQuery(query)));
-    performSearchByQuery(dispatch, query);
+export const searchByQuery = (text, useDelay = false) => dispatch => {
+    clearTimeout(timer);
+    const query = text ? text : "";
+
+    if (useDelay && query.length > 0) {
+        timer = setTimeout(() => {
+            startSearchByQuery(dispatch, query);
+        }, SEARCH_DELAY);
+    } else {
+        startSearchByQuery(dispatch, query);
+    }
 };
 
-export const searchByFilter = (
-    filter = { type: "categories", name: "Ordinary Drink" }
-) => dispatch => {
-    dispatch(push(searchURLByFilter(filter)));
-    performSearchByFilter(dispatch, filter);
+export const searchByFilter = (filter = null) => dispatch => {
+    dispatch(push(filterToURL(filter)));
+    performSearch(dispatch, searchTypes.filter, filter);
 };
 
 export const searchByURL = location => dispatch => {
@@ -95,10 +100,10 @@ export const searchByURL = location => dispatch => {
             : null;
     if (location.pathname === locations.search) {
         if (parameters && parameters.query && parameters.query.length) {
-            performSearchByQuery(dispatch, parameters.query);
+            performSearch(dispatch, searchTypes.query, parameters.query);
         } else {
-            dispatch(push(searchURLByQuery("")));
-            performSearchByQuery(dispatch, "");
+            dispatch(push(queryToURL("")));
+            performSearch(dispatch, searchTypes.query, "");
         }
     } else if (location.pathname === locations.searchByFilter) {
         if (
@@ -109,13 +114,13 @@ export const searchByURL = location => dispatch => {
             )
         ) {
             //&& "category contains parameters.name"
-            performSearchByFilter(dispatch, parameters.filter);
+            performSearch(dispatch, searchTypes.filter, parameters.filter);
         } else {
-            dispatch(push(searchURLByFilter(null)));
-            performSearchByFilter(dispatch, null);
+            dispatch(push(filterToURL(null)));
+            performSearch(dispatch, searchTypes.filter, null);
         }
     } else {
-        dispatch(push(searchURLByQuery("")));
-        performSearchByQuery(dispatch, "");
+        dispatch(push(queryToURL("")));
+        performSearch(dispatch, searchTypes.query, "");
     }
 };
