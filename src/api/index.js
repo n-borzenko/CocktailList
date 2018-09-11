@@ -11,8 +11,8 @@ let cancellationSearchToken = null;
 const createConfig = (type, data, cancelToken) => {
     if (type === searchTypes.filter) {
         return {
-            params: { [data.type[0]]: data.name },
             ...api.configs.filter,
+            params: { [data.type[0]]: data.name },
             cancelToken,
         };
     } else {
@@ -33,5 +33,15 @@ export const searchRequest = async (type, data) => {
         throw error;
     } finally {
         cancellationSearchToken = null;
+    }
+};
+
+export const filterRequest = async type => {
+    const config = { ...api.configs.list, params: { [type[0]]: "list" } };
+    try {
+        const result = await loader.request(config);
+        return result;
+    } catch (error) {
+        throw error;
     }
 };

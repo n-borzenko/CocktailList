@@ -106,6 +106,7 @@ export const searchByURL = location => dispatch => {
             performSearch(dispatch, searchTypes.query, "");
         }
     } else if (location.pathname === locations.searchByFilter) {
+        //load filters if != null
         if (
             parameters &&
             parameters.type &&

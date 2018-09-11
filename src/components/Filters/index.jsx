@@ -1,17 +1,16 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 
-import Title from "../common/Title";
-import ActionButton from "../common/ActionButton";
+import FilterBlock from "../FilterBlock";
 import Tag from "../Tag";
+import { getFiltersList } from "../../actions/filters";
 
 import "./Filters.css";
 
 class Filters extends Component {
-    state = {};
-
-    loadItems = () => {
-        this.setState(data);
-    };
+    componentDidMount() {
+        this.props.getFiltersList();
+    }
 
     renderItems = () => {
         if (this.state.items === undefined) {
@@ -31,75 +30,19 @@ class Filters extends Component {
         );
     };
 
-    renderFiltersBlock() {
-        return (
-            <div className="filters__header">
-                <Title>Categories</Title>
-                <div className="filters__button">
-                    <ActionButton
-                        type={ActionButton.types.arrowDown}
-                        style={ActionButton.styles.dark}
-                        onClick={() => console.log("open")}
-                    />
-                </div>
-            </div>
-        );
+    renderFiltersBlocks() {
+        // return <div className="filters__header" />;
+        return Object.entries(this.props.filters).map(([key, value]) => (
+            <FilterBlock type={key} values={value} key={key} />
+        ));
     }
 
     render() {
-        return <div className="filters">{this.renderFiltersBlock()}</div>;
+        return <div className="filters">{this.renderFiltersBlocks()}</div>;
     }
 }
 
-export default Filters;
-
-let data = {
-    items: [
-        {
-            title: "Ordinary drink",
-            type: 0,
-        },
-        {
-            title: "Cocktail",
-            type: 0,
-        },
-        {
-            title: "Highball glass",
-            type: 1,
-        },
-        {
-            title: "Collins glass",
-            type: 1,
-        },
-        {
-            title: "Old-fashioned glass",
-            type: 1,
-        },
-        {
-            title: "Alcoholic",
-            type: 2,
-        },
-        {
-            title: "Optional alcohol",
-            type: 2,
-        },
-        {
-            title: "Light rum",
-            type: 3,
-        },
-        {
-            title: "Strawberry schnappsStrawberry schnappsStrawberry schnapps",
-            type: 3,
-        },
-        {
-            title: "Scotch",
-            type: 3,
-        },
-    ],
-    types: {
-        0: "Categories",
-        1: "Glass",
-        2: "Alcoholic",
-        3: "Ingridients",
-    },
-};
+export default connect(
+    state => ({ filters: state.filters }),
+    { getFiltersList }
+)(Filters);

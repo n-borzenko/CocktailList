@@ -5,9 +5,10 @@ import { connectRouter, routerMiddleware } from "connected-react-router";
 
 import search from "../reducers/search";
 import loading from "../reducers/loading";
+import filters from "../reducers/filters";
 
 export const history = createBrowserHistory();
-const rootReducer = combineReducers({ search, loading });
+const rootReducer = combineReducers({ search, loading, filters });
 
 const store = createStore(
     connectRouter(history)(rootReducer),
