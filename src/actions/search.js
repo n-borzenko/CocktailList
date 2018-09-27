@@ -5,6 +5,8 @@ import axios from "axios";
 import types, { searchTypes } from "../constants/search";
 import { searchRequest } from "../api";
 import locations from "../constants/locations";
+import { getFiltersList } from "./filters";
+import { filterTypes } from "../constants/filters";
 
 const SEARCH_DELAY = 300;
 
@@ -95,7 +97,7 @@ export const searchByFilter = (filter = null) => dispatch => {
     performSearch(dispatch, searchTypes.filter, filter);
 };
 
-export const searchByURL = location => dispatch => {
+export const searchByURL = location => async (dispatch, getState) => {
     const parameters =
         location && location.search && location.search.length > 1
             ? qs.parse(location.search.substr(1))
@@ -108,16 +110,19 @@ export const searchByURL = location => dispatch => {
             performSearch(dispatch, searchTypes.query, "");
         }
     } else if (location.pathname === locations.searchByFilter) {
-        //load filters if != null
+        let filters = getState().filters;
+        if (filters.category.length === 0) {
+            await dispatch(getFiltersList());
+            filters = getState().filters;
+        }
         if (
             parameters &&
             parameters.type &&
-            ["ingridients", "alcoholic", "category", "glass"].includes(
-                parameters.type
-            )
+            parameters.name &&
+            Object.keys(filterTypes).includes(parameters.type) &&
+            filters[parameters.type].includes(parameters.name)
         ) {
-            //&& "category contains parameters.name"
-            performSearch(dispatch, searchTypes.filter, parameters.filter);
+            performSearch(dispatch, searchTypes.filter, parameters);
         } else {
             dispatch(push(filterToURL(null)));
             performSearch(dispatch, searchTypes.filter, null);
