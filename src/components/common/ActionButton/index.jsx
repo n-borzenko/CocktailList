@@ -7,15 +7,6 @@ import Icon from "../Icon";
 import "./ActionButton.css";
 
 class ActionButton extends Component {
-    static types = {
-        arrowUp: Icon.types.arrowUp,
-        arrowDown: Icon.types.arrowDown,
-        arrowLeft: Icon.types.arrowLeft,
-        arrowRight: Icon.types.arrowRight,
-        remove: Icon.types.remove,
-        search: Icon.types.search,
-    };
-
     static styles = {
         dark: "dark",
         light: "light",
@@ -24,10 +15,10 @@ class ActionButton extends Component {
     };
 
     static propTypes = {
-        type: PropTypes.oneOf(Object.values(ActionButton.types)).isRequired,
         style: PropTypes.oneOf(Object.values(ActionButton.styles)).isRequired,
         disabled: PropTypes.bool.isRequired,
         onClick: PropTypes.func,
+        children: PropTypes.node.isRequired,
     };
 
     static defaultProps = {
@@ -36,16 +27,13 @@ class ActionButton extends Component {
     };
 
     renderIcon() {
-        return (
-            <Icon
-                type={this.props.type}
-                color={
-                    this.props.style !== ActionButton.styles.dark
-                        ? Icon.colors.light
-                        : Icon.colors.dark
-                }
-            />
-        );
+        return React.cloneElement(this.props.children, {
+            ...this.props.children.props,
+            color:
+                this.props.style !== ActionButton.styles.dark
+                    ? Icon.colors.light
+                    : Icon.colors.dark,
+        });
     }
 
     render() {

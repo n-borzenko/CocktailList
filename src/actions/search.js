@@ -25,7 +25,27 @@ const filterToURL = filter => {
     return `${locations.searchByFilter}?${parameters}`;
 };
 
-const performSearch = async (dispatch, type, data) => {
+const performRequest = async (dispatch, type, data) => {
+    try {
+        const response = await searchRequest(type, data);
+        dispatch({
+            type: types.SEARCH_COMPLETED,
+            payload: {
+                results: response.data.drinks,
+            },
+        });
+    } catch (error) {
+        if (axios.isCancel(error)) {
+            console.log("cancelled");
+            return;
+        }
+        console.log(error);
+    }
+};
+
+const performSearch = (dispatch, type, data, useDelay = false) => {
+    clearTimeout(timer);
+
     dispatch({
         type: types.SEARCH_STARTED,
         payload: {
@@ -45,26 +65,13 @@ const performSearch = async (dispatch, type, data) => {
         return;
     }
 
-    try {
-        const response = await searchRequest(type, data);
-        dispatch({
-            type: types.SEARCH_COMPLETED,
-            payload: {
-                results: response.data.drinks,
-            },
-        });
-    } catch (error) {
-        if (axios.isCancel(error)) {
-            console.log("cancelled");
-            return;
-        }
-        console.log(error);
+    if (useDelay) {
+        timer = setTimeout(() => {
+            performRequest(dispatch, type, data);
+        }, SEARCH_DELAY);
+    } else {
+        performRequest(dispatch, type, data);
     }
-};
-
-const startSearchByQuery = (dispatch, query) => {
-    dispatch(push(queryToURL(query)));
-    performSearch(dispatch, searchTypes.query, query);
 };
 
 export const stateToSearchURL = state => {
@@ -78,14 +85,9 @@ export const stateToSearchURL = state => {
 export const searchByQuery = (text, useDelay = false) => dispatch => {
     clearTimeout(timer);
     const query = text ? text : "";
-
-    if (useDelay && query.length > 0) {
-        timer = setTimeout(() => {
-            startSearchByQuery(dispatch, query);
-        }, SEARCH_DELAY);
-    } else {
-        startSearchByQuery(dispatch, query);
-    }
+    dispatch(push(queryToURL(query)));
+    const needDelay = useDelay && query.length > 0;
+    performSearch(dispatch, searchTypes.query, query, needDelay);
 };
 
 export const searchByFilter = (filter = null) => dispatch => {

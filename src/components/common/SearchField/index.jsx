@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 
 import Input from "../Input";
 import ActionButton from "../ActionButton";
+import Icon from "../Icon";
 
 import "./SearchField.css";
 
@@ -12,23 +13,6 @@ class SearchField extends Component {
         placeholder: PropTypes.string,
         value: PropTypes.string,
     };
-
-    state = {
-        value: this.props.value ? this.props.value : "",
-    };
-
-    static getDerivedStateFromProps(props, state) {
-        if (props.value !== state.previousPropValue) {
-            return {
-                previousStateValue: state.value,
-                previousPropValue: props.value,
-                value: props.value ? props.value : "",
-            };
-        } else if (state.value !== state.previousStateValue) {
-            return { previousStateValue: state.value, value: state.value };
-        }
-        return null;
-    }
 
     startSearch = () => {
         this.props.onSearch(this.state.text);
@@ -46,14 +30,13 @@ class SearchField extends Component {
                     <Input
                         onChange={this.valueChanged}
                         placeholder={this.props.placeholder}
-                        value={this.state.value}
+                        value={this.props.value ? this.props.value : ""}
                     />
                 </div>
                 <div className="search-field__action">
-                    <ActionButton
-                        type={ActionButton.types.search}
-                        onClick={this.startSearch}
-                    />
+                    <ActionButton onClick={this.startSearch}>
+                        <Icon type={Icon.types.search} />
+                    </ActionButton>
                 </div>
             </div>
         );

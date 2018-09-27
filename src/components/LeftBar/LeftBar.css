@@ -14,9 +14,13 @@
 
 .left-bar__item {
     width: 100%;
-    margin: 16px 0 16px 0;
+    margin: 16px 0;
 }
 
 .left-bar__item:first-child {
     margin: 0;
+}
+
+.left-bar__item:last-child {
+    margin-bottom: 0;
 }

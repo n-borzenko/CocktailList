@@ -1,48 +1,49 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
-import FilterBlock from "../FilterBlock";
-import Tag from "../Tag";
+import FiltersCluster from "../FiltersCluster";
 import { getFiltersList } from "../../actions/filters";
 
 import "./Filters.css";
 
 class Filters extends Component {
+    static propTypes = {
+        selectFilter: PropTypes.func,
+    };
+
     componentDidMount() {
         this.props.getFiltersList();
     }
 
-    renderItems = () => {
-        if (this.state.items === undefined) {
-            return null;
-        }
-        return (
-            <div className="filters__list">
-                {this.state.items.map(item => (
-                    <div
-                        className="filters__item"
-                        key={`${item.type}_${item.title}`}
-                    >
-                        <Tag type={item.type}>{item.title}</Tag>
-                    </div>
-                ))}
-            </div>
-        );
+    selectFilter = (type, name) => {
+        this.props.selectFilter({ type, name });
     };
 
-    renderFiltersBlocks() {
-        // return <div className="filters__header" />;
+    renderFiltersClusters() {
+        const checkSelection = filterType => {
+            return this.props.current && this.props.current.type === filterType
+                ? this.props.current.name
+                : null;
+        };
+
         return Object.entries(this.props.filters).map(([key, value]) => (
-            <FilterBlock type={key} values={value} key={key} />
+            <FiltersCluster
+                type={key}
+                values={value}
+                key={key}
+                selected={checkSelection(key)}
+                selectFilter={this.selectFilter}
+            />
         ));
     }
 
     render() {
-        return <div className="filters">{this.renderFiltersBlocks()}</div>;
+        return <div className="filters">{this.renderFiltersClusters()}</div>;
     }
 }
 
 export default connect(
-    state => ({ filters: state.filters }),
+    state => ({ filters: state.filters, current: state.search.request.filter }),
     { getFiltersList }
 )(Filters);

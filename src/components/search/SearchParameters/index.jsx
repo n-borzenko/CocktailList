@@ -35,6 +35,10 @@ class SearchParameters extends Component {
         this.props.searchByQuery(query, true);
     };
 
+    selectFilter = filter => {
+        this.props.searchByFilter(filter);
+    };
+
     renderSearchField = () => {
         return (
             <SearchField
@@ -45,21 +49,25 @@ class SearchParameters extends Component {
         );
     };
 
+    renderFilters = () => {
+        return <Filters selectFilter={this.selectFilter} />;
+    };
+
     render() {
         const selected = this.props.request.type === searchTypes.filter ? 1 : 0;
         return (
-            <div className="mode">
-                <div className="mode__header">
+            <div className="search-parameters">
+                <div className="search-parameters__header">
                     <Subheader>Parameters</Subheader>
                 </div>
-                <div className="mode__selector">
+                <div className="search-parameters__selector">
                     <ButtonGroup
                         values={this.state.modes}
                         selected={selected}
                         onSelect={this.changeMode}
                     />
                 </div>
-                <div className="mode__criteria">
+                <div className="search-parameters__details">
                     <Switch location={this.props.location}>
                         <Route
                             exact
@@ -68,7 +76,7 @@ class SearchParameters extends Component {
                         />
                         <Route
                             path={locations.searchByFilter}
-                            component={Filters}
+                            render={this.renderFilters}
                         />
                     </Switch>
                 </div>

@@ -12,7 +12,9 @@ const createConfig = (type, data, cancelToken) => {
     if (type === searchTypes.filter) {
         return {
             ...api.configs.filter,
-            params: { [data.type[0]]: data.name },
+            params: {
+                [data.type[0]]: data.name,
+            },
             cancelToken,
         };
     } else {

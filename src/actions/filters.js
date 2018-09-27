@@ -23,9 +23,9 @@ export const getFiltersList = () => async dispatch => {
                     item => item.strCategory
                 ),
                 glass: glassList.data.drinks.map(item => item.strGlass),
-                alcoholic: alcoholicList.data.drinks.map(
-                    item => (item.strAlcoholic ? item.strAlcoholic : "Not set")
-                ),
+                alcoholic: alcoholicList.data.drinks
+                    .map(item => item.strAlcoholic)
+                    .filter(item => item !== null),
                 ingridient: ingridientList.data.drinks.map(
                     item => item.strIngredient1
                 ),

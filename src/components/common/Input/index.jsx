@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 import ActionButton from "../ActionButton";
+import Icon from "../Icon";
 
 import "./Input.css";
 
@@ -14,27 +15,10 @@ class Input extends Component {
 
     containerRef = React.createRef();
     inputRef = React.createRef();
-    state = {
-        value: this.props.value ? this.props.value : "",
-    };
-
-    static getDerivedStateFromProps(props, state) {
-        if (props.value !== state.previousPropValue) {
-            return {
-                previousStateValue: state.value,
-                previousPropValue: props.value,
-                value: props.value ? props.value : "",
-            };
-        } else if (state.value !== state.previousStateValue) {
-            return { previousStateValue: state.value, value: state.value };
-        }
-        return null;
-    }
 
     clearInput = () => {
         this.props.onChange("");
         this.inputRef.current.focus();
-        this.setState({ value: "" });
     };
 
     onFocus = () => {
@@ -48,20 +32,20 @@ class Input extends Component {
     onChange = e => {
         let value = e.target.value;
         this.props.onChange(value);
-        this.setState({ value: value });
     };
 
     renderRemoveButton() {
-        if (!this.state.value) {
+        if (!this.props.value) {
             return null;
         }
         return (
             <span className="input__remove">
                 <ActionButton
-                    type={ActionButton.types.remove}
                     style={ActionButton.styles.none}
                     onClick={this.clearInput}
-                />
+                >
+                    <Icon type={Icon.types.remove} />
+                </ActionButton>
             </span>
         );
     }
@@ -75,7 +59,7 @@ class Input extends Component {
                 onBlur={this.onBlur}
             >
                 <input
-                    value={this.state.value}
+                    value={this.props.value ? this.props.value : ""}
                     onChange={this.onChange}
                     className="input__field"
                     placeholder={this.props.placeholder}
