@@ -3,12 +3,13 @@ import { connect } from "react-redux";
 
 import Mode from "../Mode";
 import Filters from "../Filters";
+import locations from "../../constants/locations";
 
 import "./Settings.css";
 
 class Settings extends Component {
     renders = {
-        search: () => (
+        [locations.search]: () => (
             <div className="settings">
                 <div className="settings__item">
                     <Mode />
@@ -18,7 +19,7 @@ class Settings extends Component {
                 </div> */}
             </div>
         ),
-        favorites: () => (
+        [locations.favorites]: () => (
             <div className="settings">
                 <div className="settings__item">
                     <Mode />
@@ -28,8 +29,8 @@ class Settings extends Component {
                 </div> */}
             </div>
         ),
-        random: () => null,
-        ingridients: () => (
+        [locations.random]: () => null,
+        [locations.ingridients]: () => (
             <div className="settings">
                 <div className="settings__item">
                     <Mode />
@@ -39,10 +40,14 @@ class Settings extends Component {
     };
 
     render() {
-        return this.renders[this.props.menuItem]();
+        if (this.renders.hasOwnProperty(this.props.location)) {
+            return this.renders[this.props.location]();
+        } else {
+            return null;
+        }
     }
 }
 
 export default connect(state => ({
-    menuItem: state.menu.items[state.menu.selected].toLowerCase(),
+    location: state.router.location.pathname,
 }))(Settings);

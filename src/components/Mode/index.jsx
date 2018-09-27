@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { startSearch } from "../../actions/search";
 import Subheader from "../common/Subheader";
 import ButtonGroup from "../common/ButtonGroup";
 import RoundedCollection from "../RoundedCollection";
 import SearchField from "../common/SearchField";
+import { startSearch } from "../../actions/search";
 
 import "./Mode.css";
 
@@ -14,10 +14,6 @@ class Mode extends Component {
         modes: ["By query", "By first letter"],
         selectedMode: 0,
     };
-
-    componentDidMount() {
-        this.props.startSearch();
-    }
 
     changeMode = index => {
         this.setState({ selectedMode: index });

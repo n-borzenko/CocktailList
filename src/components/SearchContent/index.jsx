@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import "./Content.css";
+import "./SearchContent.css";
 
-class Content extends Component {
+class SearchContent extends Component {
     render() {
         return (
-            <div className="content">
+            <div className="search-content">
                 <span>
                     Search results for request: {this.props.text}
                     <br />
@@ -23,4 +23,4 @@ class Content extends Component {
     }
 }
 
-export default connect(state => ({ ...state.search }))(Content);
+export default connect(state => ({ ...state.search }))(SearchContent);
