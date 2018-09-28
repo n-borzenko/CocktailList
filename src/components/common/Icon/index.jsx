@@ -12,6 +12,7 @@ class Icon extends Component {
         arrowRight: "arrow_right",
         remove: "remove",
         search: "search",
+        spinner: "spinner",
         checked: "checked",
         logo: "logo",
     };

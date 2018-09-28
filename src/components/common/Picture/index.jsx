@@ -1,0 +1,50 @@
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+
+import AnimatedIcon from "../AnimatedIcon";
+import Icon from "../Icon";
+
+import "./Picture.css";
+
+class Picture extends Component {
+    static propTypes = {
+        source: PropTypes.string.isRequired,
+    };
+
+    constructor(props) {
+        super(props);
+        this.state = { loaded: false };
+
+        const image = new Image();
+        image.onload = () => {
+            this.setState({ loaded: true });
+        };
+        image.src = props.source;
+    }
+
+    renderSpinner = () => {
+        if (this.state.loaded) {
+            return null;
+        }
+        return (
+            <div className="picture__spinner">
+                <AnimatedIcon animation={AnimatedIcon.animation.forever}>
+                    <Icon type={Icon.types.spinner} color={Icon.colors.light} />
+                </AnimatedIcon>
+            </div>
+        );
+    };
+
+    render() {
+        const style = this.state.loaded
+            ? { backgroundImage: `url(${this.props.source})` }
+            : null;
+        return (
+            <div className="picture" style={style}>
+                {this.renderSpinner()}
+            </div>
+        );
+    }
+}
+
+export default Picture;

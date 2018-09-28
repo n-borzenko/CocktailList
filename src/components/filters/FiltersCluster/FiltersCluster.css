@@ -3,18 +3,6 @@
     margin: 16px 0;
 }
 
-.filters-cluster__header {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-}
-
-.filters-cluster__button {
-    width: 30px;
-    height: 30px;
-}
-
 .filters-cluster__values {
     margin: 16px 0;
     width: 100%;

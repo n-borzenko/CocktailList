@@ -1,34 +1,33 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import classNames from "classnames";
 
 import Icon from "../Icon";
 
 import "./AnimatedIcon.css";
 
 class AnimatedIcon extends Component {
-    static position = {
+    static animation = {
         up: "up",
         down: "down",
+        forever: "forever",
     };
 
     static propTypes = {
         style: PropTypes.oneOf(Object.values(Icon.colors)).isRequired,
         children: PropTypes.node.isRequired,
-        position: PropTypes.oneOf(Object.values(AnimatedIcon.position))
+        animation: PropTypes.oneOf(Object.values(AnimatedIcon.animation))
             .isRequired,
     };
 
     static defaultProps = {
         style: Icon.colors.dark,
-        position: AnimatedIcon.position.down,
+        animation: AnimatedIcon.animation.down,
     };
 
     render() {
         const className = `animated-icon animated-icon_rotate-${
-            this.props.position
+            this.props.animation
         }`;
-
         return (
             <span className={className}>
                 {React.cloneElement(this.props.children, {

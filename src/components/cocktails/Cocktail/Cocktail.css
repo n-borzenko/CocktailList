@@ -1,0 +1,13 @@
+.cocktail {
+    border: 1px solid white;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    height: 350px;
+    overflow: hidden;
+}
+
+.coctail__picture {
+    height: 250px;
+    position: relative;
+    top: -1px;
+}

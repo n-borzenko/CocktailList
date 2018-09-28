@@ -2,12 +2,9 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 
-import ActionButton from "../../common/ActionButton";
-import AnimatedIcon from "../../common/AnimatedIcon";
-import Icon from "../../common/Icon";
-import Title from "../../common/Title";
 import Filter from "../Filter";
-import { filterTypes, filterTitles } from "../../../constants/filters";
+import FiltersHeader from "../FiltersHeader";
+import { filterTypes } from "../../../constants/filters";
 
 import "./FiltersCluster.css";
 
@@ -64,25 +61,11 @@ class FiltersCluster extends Component {
     render() {
         return (
             <div className="filters-cluster">
-                <div className="filters-cluster__header">
-                    <Title>{filterTitles[this.props.type]}</Title>
-                    <div className="filters-cluster__button">
-                        <ActionButton
-                            style={ActionButton.styles.dark}
-                            onClick={this.toggleCluster}
-                        >
-                            <AnimatedIcon
-                                position={
-                                    this.state.opened
-                                        ? AnimatedIcon.position.up
-                                        : AnimatedIcon.position.down
-                                }
-                            >
-                                <Icon type={Icon.types.arrowDown} />
-                            </AnimatedIcon>
-                        </ActionButton>
-                    </div>
-                </div>
+                <FiltersHeader
+                    type={this.props.type}
+                    opened={this.state.opened}
+                    onClick={this.toggleCluster}
+                />
                 <div className="filters-cluster__values">
                     <TransitionGroup component={null}>
                         {this.renderValues()}

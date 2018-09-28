@@ -28,6 +28,14 @@
     background-image: url("./resources/search_light.svg");
 }
 
+.icon_spinner {
+    background-image: url("./resources/spinner.svg");
+}
+
+.icon_spinner.icon_light {
+    background-image: url("./resources/spinner_light.svg");
+}
+
 .icon_checked {
     background-image: url("./resources/checked.svg");
 }

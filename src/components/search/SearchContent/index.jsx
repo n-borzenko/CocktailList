@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
+import Cocktails from "../../cocktails/Cocktails";
+
 import "./SearchContent.css";
 
 class SearchContent extends Component {
@@ -10,13 +12,7 @@ class SearchContent extends Component {
                 <span>
                     Search results:
                     <br />
-                    {this.props.results &&
-                        this.props.results.map(item => (
-                            <span key={item.idDrink}>
-                                {`${item.idDrink}: ${item.strDrink}`}
-                                <br />
-                            </span>
-                        ))}
+                    <Cocktails values={this.props.results} />
                 </span>
             </div>
         );

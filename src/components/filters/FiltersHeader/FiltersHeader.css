@@ -1,0 +1,45 @@
+.filters-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    border: none;
+    background: transparent;
+    outline: none;
+    padding: 0;
+    color: white;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.filters-header__button {
+    width: 30px;
+    height: 30px;
+
+    border: 1px solid transparent;
+    border-radius: 50%;
+    background: white;
+    mix-blend-mode: screen;
+}
+
+.filters-header:hover .filters-header__button {
+    background: rgba(255, 255, 255, 0.8);
+}
+
+.filters-header:active .filters-header__button {
+    background: rgba(255, 255, 255, 0.6);
+}
+
+.filters-header:disabled .filters-header__button {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+.filters-header__icon {
+    display: block;
+    width: 60%;
+    height: 60%;
+    margin: 20%;
+}
