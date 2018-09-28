@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
 import FiltersCluster from "../FiltersCluster";
-import { getFiltersList } from "../../actions/filters";
+import { getFiltersList } from "../../../actions/filters";
 
 import "./Filters.css";
 

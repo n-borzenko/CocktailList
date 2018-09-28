@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 
 import Subheader from "../../common/Subheader";
 import ButtonGroup from "../../common/ButtonGroup";
-import Filters from "../../Filters";
+import Filters from "../../filters/Filters";
 import SearchField from "../../common/SearchField";
 import {
     searchByQuery,

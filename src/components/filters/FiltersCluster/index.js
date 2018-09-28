@@ -2,12 +2,12 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 
-import ActionButton from "../common/ActionButton";
-import AnimatedIcon from "../common/AnimatedIcon";
-import Icon from "../common/Icon";
-import Title from "../common/Title";
+import ActionButton from "../../common/ActionButton";
+import AnimatedIcon from "../../common/AnimatedIcon";
+import Icon from "../../common/Icon";
+import Title from "../../common/Title";
 import Filter from "../Filter";
-import { filterTypes, filterTitles } from "../../constants/filters";
+import { filterTypes, filterTitles } from "../../../constants/filters";
 
 import "./FiltersCluster.css";
 

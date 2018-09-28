@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 
-import Icon from "../common/Icon";
-import { filterTypes } from "../../constants/filters";
+import Icon from "../../common/Icon";
+import { filterTypes } from "../../../constants/filters";
 
 import "./Filter.css";
 
