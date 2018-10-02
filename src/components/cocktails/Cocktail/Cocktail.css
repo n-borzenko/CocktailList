@@ -2,12 +2,55 @@
     border: 1px solid white;
     border-radius: 20px;
     background: rgba(255, 255, 255, 0.1);
-    height: 350px;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
 }
 
 .coctail__picture {
     height: 250px;
     position: relative;
     top: -1px;
+}
+
+.cocktail__info {
+    margin: 8px;
+    flex: 1 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.cocktail__title {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 8px 0;
+}
+
+.cocktail__star {
+    height: 30px;
+    margin-left: 8px;
+    flex: 0 0 30px;
+}
+
+.summary {
+    display: flex;
+    flex-direction: column;
+    flex: 1 0 auto;
+    justify-content: center;
+}
+
+.summary__item {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    height: 24px;
+    margin: 4px 0;
+}
+
+.summary__icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
 }

@@ -17,9 +17,16 @@ class Picture extends Component {
 
         const image = new Image();
         image.onload = () => {
+            if (this.unmounted) {
+                return;
+            }
             this.setState({ loaded: true });
         };
         image.src = props.source;
+    }
+
+    componentWillUnmount() {
+        this.unmounted = true;
     }
 
     renderSpinner = () => {

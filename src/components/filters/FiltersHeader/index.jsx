@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-import ActionButton from "../../common/ActionButton";
 import AnimatedIcon from "../../common/AnimatedIcon";
 import Icon from "../../common/Icon";
 import Title from "../../common/Title";

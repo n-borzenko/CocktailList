@@ -2,6 +2,12 @@
 
 .title {
     font-size: var(--text-size-title);
-    line-height: var(--text-size-title);
+    line-height: var(--text-line-height-title);
     font-weight: var(--text-weight-title);
+}
+
+.title_truncated {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }

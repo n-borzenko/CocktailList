@@ -15,6 +15,12 @@ class Icon extends Component {
         spinner: "spinner",
         checked: "checked",
         logo: "logo",
+        category: "category",
+        glass: "glass",
+        iba: "iba",
+        alcohol: "alcohol",
+        star: "star",
+        starFilled: "star_filled",
     };
 
     static colors = {

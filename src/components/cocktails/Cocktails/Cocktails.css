@@ -4,3 +4,11 @@
     grid-gap: 16px;
     justify-content: space-around;
 }
+
+.cocktails_small {
+    grid-auto-rows: 312px;
+}
+
+.cocktails_large {
+    grid-auto-rows: 442px;
+}
