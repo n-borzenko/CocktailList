@@ -32,7 +32,7 @@ class App extends Component {
                     <div className="app__left">
                         <LeftBar />
                     </div>
-                    <div className="app__right">
+                    {/* <div className="app__right">
                         <Switch>
                             <Route
                                 path={locations.search}
@@ -58,7 +58,7 @@ class App extends Component {
                             />
                             <Route component={NotFound} />
                         </Switch>
-                    </div>
+                    </div> */}
                 </div>
             </ConnectedRouter>
         );

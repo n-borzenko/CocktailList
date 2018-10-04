@@ -1,0 +1,40 @@
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.main-header__title {
+    margin-right: 10px;
+}
+
+.main-header__button {
+    height: 40px;
+    flex: 0 0 40px;
+}
+
+@media (min-width: 400px) {
+    .main-header__button {
+        display: none;
+    }
+}
+
+.main-header__icon {
+    height: 60%;
+    width: 60%;
+    margin: 20%;
+}
+
+.main-header__icon-wrapper {
+    display: none;
+    height: 40px;
+    flex: 0 0 40px;
+    border: 1px solid white;
+    border-radius: 20px;
+}
+
+@media (min-width: 400px) {
+    .main-header__icon-wrapper {
+        display: block;
+    }
+}

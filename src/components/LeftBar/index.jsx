@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import Logo from "../Logo";
+import MainHeader from "../MainHeader";
 import Menu from "../Menu";
 import Settings from "../Settings";
 
@@ -11,14 +11,18 @@ class LeftBar extends Component {
         return (
             <div className="left-bar">
                 <div className="left-bar__item">
-                    <Logo />
+                    <MainHeader
+                        type={MainHeader.types.popup}
+                        title="Search"
+                        onClick={() => console.log("clicked")}
+                    />
                 </div>
-                <div className="left-bar__item">
-                    <Menu />
+                {/* <div className="left-bar__item">
+                    <Menu location={this.props.location} />
                 </div>
                 <div className="left-bar__item">
                     <Settings />
-                </div>
+                </div> */}
             </div>
         );
     }
