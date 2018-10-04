@@ -37,37 +37,28 @@ class FiltersCluster extends Component {
     };
 
     renderValues = () => {
-        return (
-            <div className="filters-cluster__values">
-                <TransitionGroup component={null}>
-                    {this.props.values.map(item => {
-                        if (
-                            !this.state.opened &&
-                            this.props.selected !== item
-                        ) {
-                            return null;
-                        }
-                        return (
-                            <CSSTransition
-                                classNames="filter_fade"
-                                key={item}
-                                timeout={200}
-                            >
-                                <Filter
-                                    type={this.props.type}
-                                    selected={this.props.selected === item}
-                                    onClick={() => {
-                                        this.selectFilter(item);
-                                    }}
-                                >
-                                    {item}
-                                </Filter>
-                            </CSSTransition>
-                        );
-                    })}
-                </TransitionGroup>
-            </div>
-        );
+        return this.props.values.map(item => {
+            if (!this.state.opened && this.props.selected !== item) {
+                return null;
+            }
+            return (
+                <CSSTransition
+                    classNames="filter_fade"
+                    key={item}
+                    timeout={200}
+                >
+                    <Filter
+                        type={this.props.type}
+                        selected={this.props.selected === item}
+                        onClick={() => {
+                            this.selectFilter(item);
+                        }}
+                    >
+                        {item}
+                    </Filter>
+                </CSSTransition>
+            );
+        });
     };
 
     render() {
@@ -92,7 +83,11 @@ class FiltersCluster extends Component {
                         </ActionButton>
                     </div>
                 </div>
-                {this.renderValues()}
+                <div className="filters-cluster__values">
+                    <TransitionGroup component={null}>
+                        {this.renderValues()}
+                    </TransitionGroup>
+                </div>
             </div>
         );
     }

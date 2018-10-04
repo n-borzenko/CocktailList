@@ -19,12 +19,15 @@ const queryToURL = query => {
                   query,
               })
             : "";
-    return `${locations.search}?${parameters}`;
+    return {
+        pathname: locations.search,
+        search: `?${parameters}`,
+    };
 };
 
 const filterToURL = filter => {
     const parameters = filter ? qs.stringify(filter) : "";
-    return `${locations.searchByFilter}?${parameters}`;
+    return { pathname: locations.searchByFilter, search: `?${parameters}` };
 };
 
 const performRequest = async (dispatch, type, data) => {
@@ -86,7 +89,7 @@ export const stateToSearchURL = state => {
 
 export const searchByQuery = (text, useDelay = false) => dispatch => {
     clearTimeout(timer);
-    const query = text ? text : "";
+    const query = text || "";
     dispatch(push(queryToURL(query)));
     const needDelay = useDelay && query.length > 0;
     performSearch(dispatch, searchTypes.query, query, needDelay);

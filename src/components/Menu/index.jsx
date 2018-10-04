@@ -46,4 +46,5 @@ class Menu extends Component {
 export default connect(state => ({
     search: state.search,
     filters: state.filters,
+    location: state.router.location,
 }))(Menu);

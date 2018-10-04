@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 
 import Logo from "../Logo";
 import Menu from "../Menu";
@@ -15,7 +14,7 @@ class LeftBar extends Component {
                     <Logo />
                 </div>
                 <div className="left-bar__item">
-                    <Menu location={this.props.location} />
+                    <Menu />
                 </div>
                 <div className="left-bar__item">
                     <Settings />
@@ -25,4 +24,4 @@ class LeftBar extends Component {
     }
 }
 
-export default connect(state => ({ location: state.router.location }))(LeftBar);
+export default LeftBar;

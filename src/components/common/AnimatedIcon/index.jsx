@@ -25,10 +25,9 @@ class AnimatedIcon extends Component {
     };
 
     render() {
-        const className = classNames(
-            "animated-icon_rotate",
-            `animated-icon_rotate_${this.props.position}`
-        );
+        const className = `animated-icon animated-icon_rotate-${
+            this.props.position
+        }`;
 
         return (
             <span className={className}>

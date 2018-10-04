@@ -30,7 +30,7 @@ class SearchField extends Component {
                     <Input
                         onChange={this.valueChanged}
                         placeholder={this.props.placeholder}
-                        value={this.props.value ? this.props.value : ""}
+                        value={this.props.value || ""}
                     />
                 </div>
                 <div className="search-field__action">
