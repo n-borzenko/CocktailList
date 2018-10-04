@@ -11,6 +11,14 @@ const configs = {
         method: methods.get,
         url: "/search.php",
     },
+    filter: {
+        method: methods.get,
+        url: "/filter.php",
+    },
+    list: {
+        method: methods.get,
+        url: "/list.php",
+    },
 };
 
 export default {

@@ -5,10 +5,10 @@ import { ConnectedRouter } from "connected-react-router";
 import { history } from "../../store";
 import LoadingBar from "../common/LoadingBar";
 import LeftBar from "../LeftBar";
-import SearchContent from "../SearchContent";
-import FavoritesContent from "../FavoritesContent";
-import RandomContent from "../RandomContent";
-import IngridientsContent from "../IngridientsContent";
+import SearchContent from "../search/SearchContent";
+import FavoritesContent from "../favorites/FavoritesContent";
+import RandomContent from "../random/RandomContent";
+import IngridientsContent from "../ingridients/IngridientsContent";
 import NotFound from "../common/NotFound";
 import locations from "../../constants/locations";
 

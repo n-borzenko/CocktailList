@@ -1,0 +1,50 @@
+.filters-cluster {
+    width: 100%;
+    margin: 16px 0;
+}
+
+.filters-cluster__header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.filters-cluster__button {
+    width: 30px;
+    height: 30px;
+}
+
+.filters-cluster__values {
+    margin: 16px 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    width: calc(100% + 32px);
+    position: relative;
+    left: -16px;
+}
+
+.filters-cluster__item {
+    margin: 0 5px 5px 0;
+    max-width: 100%;
+}
+
+.filter_fade-enter {
+    opacity: 0.01;
+    height: 0;
+}
+.filter_fade-enter-active {
+    opacity: 1;
+    height: 30px;
+    transition: opacity 200ms ease-in, height 200ms ease-in;
+}
+.filter_fade-exit {
+    opacity: 1;
+    height: 30px;
+}
+.filter_fade-exit-active {
+    opacity: 0.01;
+    height: 0;
+    transition: opacity 200ms ease-in, height 200ms ease-in;
+}

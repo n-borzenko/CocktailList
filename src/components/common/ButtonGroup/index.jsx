@@ -16,15 +16,7 @@ class ButtonGroup extends Component {
         disabled: false,
     };
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            selected: props.selected,
-        };
-    }
-
     selectItem = index => {
-        this.setState({ selected: index });
         if (this.props.onSelect) {
             this.props.onSelect(index);
         }
@@ -36,7 +28,7 @@ class ButtonGroup extends Component {
         }
         return this.props.values.map((item, index) => {
             const className = classNames("button-group__item", {
-                "button-group__item_selected": this.state.selected === index,
+                "button-group__item_selected": this.props.selected === index,
             });
             return (
                 <button

@@ -3,34 +3,24 @@ import PropTypes from "prop-types";
 
 import Input from "../Input";
 import ActionButton from "../ActionButton";
+import Icon from "../Icon";
 
 import "./SearchField.css";
-
-const SEARCH_DELAY = 300;
 
 class SearchField extends Component {
     static propTypes = {
         onSearch: PropTypes.func.isRequired,
         placeholder: PropTypes.string,
-    };
-
-    timer = null;
-
-    state = {
-        text: null,
+        value: PropTypes.string,
     };
 
     startSearch = () => {
-        clearTimeout(this.timer);
         this.props.onSearch(this.state.text);
     };
 
     valueChanged = value => {
         this.setState({ text: value });
-        clearTimeout(this.timer);
-        this.timer = setTimeout(() => {
-            this.props.onSearch(this.state.text);
-        }, SEARCH_DELAY);
+        this.props.onSearch(value);
     };
 
     render() {
@@ -40,13 +30,13 @@ class SearchField extends Component {
                     <Input
                         onChange={this.valueChanged}
                         placeholder={this.props.placeholder}
+                        value={this.props.value || ""}
                     />
                 </div>
                 <div className="search-field__action">
-                    <ActionButton
-                        type={ActionButton.types.search}
-                        onClick={this.startSearch}
-                    />
+                    <ActionButton onClick={this.startSearch}>
+                        <Icon type={Icon.types.search} />
+                    </ActionButton>
                 </div>
             </div>
         );

@@ -1,21 +1,37 @@
-import types from "../constants/search";
+import types, { searchTypes } from "../constants/search";
 
 const initialState = {
-    text: null,
-    results: [],
+    request: {
+        type: searchTypes.query,
+        query: null,
+        filter: null,
+    },
+    response: {
+        results: [],
+    },
 };
 
 export default (state = initialState, action) => {
     switch (action.type) {
-        case types.SEARCH_COMPLETED:
-            const { text, results } = action.payload;
+        case types.SEARCH_STARTED:
+            const { type } = action.payload;
             return {
-                text,
-                results: results
-                    ? results.sort((item1, item2) =>
-                          item1.strDrink.localeCompare(item2.strDrink)
-                      )
-                    : [],
+                ...state,
+                request: {
+                    ...state.request,
+                    type,
+                    [type]: action.payload[type],
+                },
+            };
+        case types.SEARCH_COMPLETED:
+            const { results = [] } = action.payload;
+            return {
+                ...state,
+                response: {
+                    results: results.sort((item1, item2) =>
+                        item1.strDrink.localeCompare(item2.strDrink)
+                    ),
+                },
             };
         default:
             return state;

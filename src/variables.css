@@ -36,8 +36,8 @@
     --text-line-height-header: 38px;
     --text-weight-header: bold;
 
-    --tag-color-0: rgba(247, 57, 217, 0.1);
-    --tag-color-1: rgba(57, 133, 247, 0.1);
-    --tag-color-2: rgba(247, 183, 57, 0.1);
-    --tag-color-3: rgba(57, 247, 99, 0.1);
+    --filter-category-color: rgba(247, 57, 217, 0.1);
+    --filter-glass-color: rgba(57, 133, 247, 0.1);
+    --filter-alcoholic-color: rgba(247, 183, 57, 0.1);
+    --filter-ingridient-color: rgba(57, 247, 99, 0.1);
 }

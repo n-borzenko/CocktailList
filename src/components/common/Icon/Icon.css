@@ -28,11 +28,23 @@
     background-image: url("./resources/search_light.svg");
 }
 
+.icon_checked {
+    background-image: url("./resources/checked.svg");
+}
+
+.icon_checked.icon_light {
+    background-image: url("./resources/checked_light.svg");
+}
+
 .icon_arrow_up {
+    top: -1px;
+    position: relative;
     background-image: url("./resources/arrow_up.svg");
 }
 
 .icon_arrow_down {
+    top: 1px;
+    position: relative;
     transform: rotate(180deg);
     background-image: url("./resources/arrow_up.svg");
 }
