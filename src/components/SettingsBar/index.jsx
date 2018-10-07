@@ -3,29 +3,32 @@ import React, { Component } from "react";
 import MainHeader from "../MainHeader";
 import Menu from "../Menu";
 import Settings from "../Settings";
+import Popup from "../common/Popup";
 
-import "./LeftBar.css";
+import "./SettingsBar.css";
 
-class LeftBar extends Component {
+class SettingsBar extends Component {
     render() {
         return (
-            <div className="left-bar">
-                <div className="left-bar__item">
+            <div className="settings-bar">
+                <div className="settings-bar__item">
                     <MainHeader
-                        type={MainHeader.types.popup}
+                        type={MainHeader.types.logo}
                         title="Search"
                         onClick={() => console.log("clicked")}
                     />
                 </div>
-                {/* <div className="left-bar__item">
+                <Popup>wertyukilo;</Popup>
+
+                <div className="settings-bar__item">
                     <Menu location={this.props.location} />
                 </div>
-                <div className="left-bar__item">
+                <div className="settings-bar__item">
                     <Settings />
-                </div> */}
+                </div>
             </div>
         );
     }
 }
 
-export default LeftBar;
+export default SettingsBar;

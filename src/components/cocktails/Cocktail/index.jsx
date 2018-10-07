@@ -17,7 +17,6 @@ class Cocktail extends Component {
     constructor(props) {
         super(props);
         const summary = [];
-        console.log(this.props.value.strCategory);
         if (props.value.strCategory) {
             summary.push({
                 type: Icon.types.category,

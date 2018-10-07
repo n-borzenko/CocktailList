@@ -1,4 +1,4 @@
-.left-bar {
+.settings-bar {
     width: 100%;
     background: linear-gradient(
         90deg,
@@ -12,15 +12,15 @@
     justify-content: flex-start;
 }
 
-.left-bar__item {
+.settings-bar__item {
     width: 100%;
     margin: 16px 0;
 }
 
-.left-bar__item:first-child {
+.settings-bar__item:first-child {
     margin: 0;
 }
 
-.left-bar__item:last-child {
+.settings-bar__item:last-child {
     margin-bottom: 0;
 }

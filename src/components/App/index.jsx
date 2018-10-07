@@ -4,35 +4,33 @@ import { ConnectedRouter } from "connected-react-router";
 
 import { history } from "../../store";
 import LoadingBar from "../common/LoadingBar";
-import LeftBar from "../LeftBar";
+import BackgroundImage from "../common/BackgroundImage";
+import SettingsBar from "../SettingsBar";
 import SearchContent from "../search/SearchContent";
 import FavoritesContent from "../favorites/FavoritesContent";
 import RandomContent from "../random/RandomContent";
 import IngridientsContent from "../ingridients/IngridientsContent";
 import NotFound from "../common/NotFound";
 import locations from "../../constants/locations";
+import { POPUP_ID } from "../../constants/views";
 
 import "./App.css";
 
 class App extends Component {
-    renderBackground(menuItem) {
-        const className = `app__background app__background_${menuItem}`;
-        return <div className={className} />;
-    }
-
     render() {
         return (
             <ConnectedRouter history={history}>
                 <div className="app">
-                    {this.renderBackground(this.props.menuItem)}
+                    <BackgroundImage />
 
                     <div className="app__loading-bar">
                         <LoadingBar />
                     </div>
-                    <div className="app__left">
-                        <LeftBar />
+
+                    <div className="app__settings">
+                        <SettingsBar />
                     </div>
-                    {/* <div className="app__right">
+                    <div className="app__content">
                         <Switch>
                             <Route
                                 path={locations.search}
@@ -58,7 +56,8 @@ class App extends Component {
                             />
                             <Route component={NotFound} />
                         </Switch>
-                    </div> */}
+                    </div>
+                    <div className="app__popup" id={POPUP_ID} />
                 </div>
             </ConnectedRouter>
         );

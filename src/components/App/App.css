@@ -3,39 +3,19 @@
     display: flex;
 }
 
-.app__background {
-    position: fixed;
-    z-index: -1;
-    height: 100vh;
+.app__popup {
     width: 100%;
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-image: url("./resources/search.png");
+    height: 0;
+    position: fixed;
+    pointer-events: none;
 }
 
-.app__background_search {
-    background-image: url("./resources/search.png");
-}
-
-.app__background_favorites {
-    background-image: url("./resources/favorites.png");
-}
-
-.app__background_random {
-    background-image: url("./resources/random.png");
-}
-
-.app__background_ingridients {
-    background-image: url("./resources/ingridients.png");
-}
-
-.app__left {
+.app__settings {
     flex: 0 0 auto;
     width: 300px;
 }
 
-.app__right {
+.app__content {
     flex: 1 1 auto;
 }
 
