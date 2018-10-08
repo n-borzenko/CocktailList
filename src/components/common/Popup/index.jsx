@@ -1,16 +1,14 @@
-import React, { Component } from "react";
+import { Component } from "react";
 import ReactDOM from "react-dom";
 import PropTypes from "prop-types";
 
-import BackgroundImage from "../BackgroundImage";
 import { POPUP_ID } from "../../../constants/views";
 
 import "./Popup.css";
 
 class Popup extends Component {
     static propTypes = {
-        children: PropTypes.oneOfType([PropTypes.element, PropTypes.string])
-            .isRequired,
+        children: PropTypes.element.isRequired,
     };
 
     constructor(props) {
@@ -29,10 +27,7 @@ class Popup extends Component {
     }
 
     render() {
-        return ReactDOM.createPortal(
-            [<BackgroundImage />, this.props.children],
-            this.element
-        );
+        return ReactDOM.createPortal(this.props.children, this.element);
     }
 }
 
