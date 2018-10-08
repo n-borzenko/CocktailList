@@ -1,6 +1,6 @@
 .popup-content {
     width: 100%;
-    height: 100%;
+    min-height: 100%;
     background: linear-gradient(
         90deg,
         rgba(0, 0, 0, 0.1) 15%,
@@ -10,4 +10,8 @@
 
 .popup-content__container {
     padding: 16px;
+}
+
+.popup-content__data {
+    margin-top: 16px;
 }

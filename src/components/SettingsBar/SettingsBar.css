@@ -5,22 +5,32 @@
         rgba(0, 0, 0, 0.1) 15%,
         rgba(0, 0, 0, 0.3)
     );
-    min-height: 100vh;
     padding: 16px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
 }
+@media (min-width: 592px) {
+    .settings-bar {
+        min-height: 100vh;
+    }
+}
 
-.settings-bar__item {
+.settings-bar__header {
+    width: 100%;
+}
+
+.settings-bar__menu {
     width: 100%;
     margin: 16px 0;
+    display: none;
+}
+@media (min-width: 592px) {
+    .settings-bar__menu {
+        display: block;
+    }
 }
 
-.settings-bar__item:first-child {
-    margin: 0;
-}
-
-.settings-bar__item:last-child {
-    margin-bottom: 0;
+.settings-bar__parameters {
+    width: 100%;
 }

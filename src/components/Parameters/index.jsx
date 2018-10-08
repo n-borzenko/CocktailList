@@ -5,9 +5,7 @@ import { Switch, Route } from "react-router-dom";
 import SearchParameters from "../search/SearchParameters";
 import locations from "../../constants/locations";
 
-import "./Settings.css";
-
-class Settings extends Component {
+class Parameters extends Component {
     render() {
         return (
             <Switch location={this.props.location}>
@@ -19,4 +17,4 @@ class Settings extends Component {
 
 export default connect(state => ({
     location: state.router.location,
-}))(Settings);
+}))(Parameters);

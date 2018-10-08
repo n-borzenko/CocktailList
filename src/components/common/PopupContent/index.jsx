@@ -24,7 +24,9 @@ class PopupContent extends Component {
                         compactTitle={this.props.title}
                         onClick={this.props.onClick}
                     />
-                    {this.props.children}
+                    <div className="popup-content__data">
+                        {this.props.children}
+                    </div>
                 </div>
             </div>
         );

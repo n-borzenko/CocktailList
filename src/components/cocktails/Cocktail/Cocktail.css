@@ -8,9 +8,7 @@
 }
 
 .coctail__picture {
-    height: 250px;
-    position: relative;
-    top: -1px;
+    height: 256px;
 }
 
 .cocktail__info {
@@ -29,9 +27,9 @@
 }
 
 .cocktail__star {
-    height: 30px;
+    height: 32px;
     margin-left: 8px;
-    flex: 0 0 30px;
+    flex: 0 0 32px;
 }
 
 .summary {

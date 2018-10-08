@@ -24,12 +24,12 @@
 }
 .filter_fade-enter-active {
     opacity: 1;
-    height: 30px;
+    height: 32px;
     transition: opacity 200ms ease-in, height 200ms ease-in;
 }
 .filter_fade-exit {
     opacity: 1;
-    height: 30px;
+    height: 32px;
 }
 .filter_fade-exit-active {
     opacity: 0.01;

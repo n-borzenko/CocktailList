@@ -1,12 +1,38 @@
 .search-parameters {
+    margin-top: 16px;
 }
 
 .search-parameters__header {
+    display: none;
+    margin-bottom: 16px;
+}
+@media (min-width: 592px) {
+    .search-parameters__header {
+        display: block;
+    }
 }
 
 .search-parameters__selector {
-    margin: 16px 0;
+    margin-bottom: 16px;
 }
 
 .search-parameters__details {
+}
+
+.search-parameters__filters-button {
+    display: block;
+}
+@media (min-width: 592px) {
+    .search-parameters__filters-button {
+        display: none;
+    }
+}
+
+.search-parameters__filters {
+    display: none;
+}
+@media (min-width: 592px) {
+    .search-parameters__filters {
+        display: block;
+    }
 }

@@ -2,9 +2,9 @@
 
 .button {
     border: none;
-    padding: 0 10px;
-    height: 30px;
-    border-radius: 15px;
+    padding: 0 8px;
+    height: 32px;
+    border-radius: 16px;
     background: white;
     color: black;
     mix-blend-mode: screen;

@@ -1,6 +1,15 @@
 .app {
     scroll-behavior: smooth;
     display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+@media (min-width: 592px) {
+    .app {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+    }
 }
 
 .app__popup {
@@ -11,12 +20,23 @@
 }
 
 .app__settings {
-    flex: 0 0 auto;
-    width: 300px;
+    width: 100%;
+}
+@media (min-width: 592px) {
+    .app__settings {
+        flex: 0 0 auto;
+        width: 304px;
+    }
 }
 
 .app__content {
-    flex: 1 1 auto;
+    width: 100%;
+    padding: 16px;
+}
+@media (min-width: 592px) {
+    .app__content {
+        flex: 1 1 auto;
+    }
 }
 
 .app__loading-bar {

@@ -14,6 +14,7 @@ class MenuLink extends Component {
             }),
             PropTypes.string,
         ]).isRequired,
+        onClick: PropTypes.func,
     };
 
     render() {
@@ -22,6 +23,7 @@ class MenuLink extends Component {
                 className="menu-link"
                 activeClassName="menu-link_selected"
                 to={this.props.to}
+                onClick={this.props.onClick}
             >
                 {this.props.children}
             </NavLink>

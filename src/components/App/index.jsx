@@ -30,7 +30,7 @@ class App extends Component {
                     <div className="app__settings">
                         <SettingsBar />
                     </div>
-                    {/* <div className="app__content">
+                    <div className="app__content">
                         <Switch>
                             <Route
                                 path={locations.search}
@@ -56,7 +56,8 @@ class App extends Component {
                             />
                             <Route component={NotFound} />
                         </Switch>
-                    </div> */}
+                    </div>
+
                     <div className="app__popup" id={POPUP_ID} />
                 </div>
             </ConnectedRouter>

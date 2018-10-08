@@ -36,7 +36,7 @@ class SettingsBar extends Component {
 
     checkWidth = () => {
         if (this.state.showMenuPopup && window.innerWidth > 400) {
-            this.setState({ showMenuPopup: false });
+            this.closePopup();
         }
     };
 
@@ -58,17 +58,17 @@ class SettingsBar extends Component {
         );
     };
 
+    closePopup = () => {
+        this.setState({
+            showMenuPopup: false,
+        });
+    };
+
     renderPopup = () => {
         return !this.state.showMenuPopup ? null : (
             <Popup>
-                <PopupContent
-                    onClick={() =>
-                        this.setState({
-                            showMenuPopup: false,
-                        })
-                    }
-                >
-                    <Menu />
+                <PopupContent onClick={this.closePopup}>
+                    <Menu onClick={this.closePopup} />
                 </PopupContent>
             </Popup>
         );
@@ -77,7 +77,7 @@ class SettingsBar extends Component {
     render() {
         return (
             <div className="settings-bar">
-                <div className="settings-bar__item">
+                <div className="settings-bar__header">
                     <Switch>
                         {this.state.items.map(item => (
                             <Route
@@ -90,13 +90,13 @@ class SettingsBar extends Component {
                 </div>
 
                 {this.renderPopup()}
-                {/* <Popup>wertyukilo;</Popup> */}
-                {/* <div className="settings-bar__item">
+
+                <div className="settings-bar__menu">
                     <Menu location={this.props.location} />
                 </div>
-                <div className="settings-bar__item">
-                    <Settings />
-                </div> */}
+                {/* <div className="settings-bar__parameters"> */}
+                <Settings />
+                {/* </div> */}
             </div>
         );
     }

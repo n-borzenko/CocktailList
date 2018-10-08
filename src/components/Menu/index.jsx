@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 import MenuLink from "../common/MenuLink";
@@ -9,6 +10,10 @@ import { stateToSearchURL } from "../../actions/search";
 import "./Menu.css";
 
 class Menu extends Component {
+    static propTypes = {
+        onClick: PropTypes.func,
+    };
+
     state = {
         items: [
             {
@@ -35,7 +40,12 @@ class Menu extends Component {
             <div className="menu">
                 {this.state.items.map((item, index) => (
                     <div className="menu__item" key={index}>
-                        <MenuLink to={item.location()}>{item.name}</MenuLink>
+                        <MenuLink
+                            to={item.location()}
+                            onClick={this.props.onClick}
+                        >
+                            {item.name}
+                        </MenuLink>
                     </div>
                 ))}
             </div>

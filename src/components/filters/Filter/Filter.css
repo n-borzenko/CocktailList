@@ -11,7 +11,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     padding: 0 16px;
-    height: 30px;
+    height: 32px;
     border-bottom: 1px solid white;
     display: flex;
     align-items: center;
@@ -102,5 +102,5 @@
     display: block;
     width: calc(30px * 0.6);
     height: calc(30px * 0.6);
-    margin: calc(30px * 0.2);
+    margin: calc(32px * 0.2);
 }

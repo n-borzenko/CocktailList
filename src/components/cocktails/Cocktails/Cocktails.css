@@ -1,6 +1,6 @@
 .cocktails {
     display: grid;
-    grid-template-columns: repeat(auto-fit, 250px);
+    grid-template-columns: repeat(auto-fit, 256px);
     grid-gap: 16px;
     justify-content: space-around;
 }
