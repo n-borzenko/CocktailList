@@ -19,6 +19,8 @@ class Menu extends Component {
             {
                 name: menuItems.search,
                 location: () => stateToSearchURL(this.props.search.request),
+                isActive: (match, location) =>
+                    location.pathname.startsWith(locations.search),
             },
             {
                 name: menuItems.favorites,
@@ -43,6 +45,7 @@ class Menu extends Component {
                         <MenuLink
                             to={item.location()}
                             onClick={this.props.onClick}
+                            isActive={item.isActive || null}
                         >
                             {item.name}
                         </MenuLink>

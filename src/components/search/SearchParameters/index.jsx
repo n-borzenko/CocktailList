@@ -106,13 +106,12 @@ class SearchParameters extends Component {
                 <div className="search-parameters__details">
                     <Switch location={this.props.location}>
                         <Route
-                            exact
-                            path={locations.search}
-                            render={this.renderSearchField}
-                        />
-                        <Route
                             path={locations.searchByFilter}
                             render={this.renderFilters}
+                        />
+                        <Route
+                            path={locations.search}
+                            render={this.renderSearchField}
                         />
                     </Switch>
                 </div>

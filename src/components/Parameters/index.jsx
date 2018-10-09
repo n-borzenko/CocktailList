@@ -9,6 +9,7 @@ class Parameters extends Component {
     render() {
         return (
             <Switch location={this.props.location}>
+                <Route path={locations.searchCocktail} render={() => null} />
                 <Route path={locations.search} component={SearchParameters} />
             </Switch>
         );

@@ -15,6 +15,7 @@ class Cocktails extends Component {
     static propTypes = {
         size: PropTypes.oneOf(Object.values(Cocktails.sizes)).isRequired,
         values: PropTypes.array.isRequired,
+        linkCreator: PropTypes.func.isRequired,
     };
 
     static defaultProps = {
@@ -29,6 +30,7 @@ class Cocktails extends Component {
             <Cocktail
                 value={cocktail}
                 key={`${this.props.size}${cocktail.idDrink}`}
+                to={this.props.linkCreator(cocktail.idDrink)}
             />
         ));
     }

@@ -34,11 +34,11 @@ class Picture extends Component {
             return null;
         }
         return (
-            <div className="picture__spinner">
+            <span className="picture__spinner">
                 <AnimatedIcon animation={AnimatedIcon.animation.forever}>
                     <Icon type={Icon.types.spinner} color={Icon.colors.light} />
                 </AnimatedIcon>
-            </div>
+            </span>
         );
     };
 
@@ -47,9 +47,9 @@ class Picture extends Component {
             ? { backgroundImage: `url(${this.props.source})` }
             : null;
         return (
-            <div className="picture" style={style}>
+            <span className="picture" style={style}>
                 {this.renderSpinner()}
-            </div>
+            </span>
         );
     }
 }

@@ -19,6 +19,10 @@ const configs = {
         method: methods.get,
         url: "/list.php",
     },
+    cocktail: {
+        method: methods.get,
+        url: "/lookup.php",
+    },
 };
 
 export default {

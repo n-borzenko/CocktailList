@@ -1,0 +1,5 @@
+const COCKTAIL_RECEIVED = "COCKTAIL_RECEIVED";
+
+export default {
+    COCKTAIL_RECEIVED,
+};

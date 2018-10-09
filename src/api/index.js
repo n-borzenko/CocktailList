@@ -7,6 +7,7 @@ import { searchTypes } from "../constants/search";
 axios.defaults.baseURL = api.BASEURL;
 
 let cancellationSearchToken = null;
+let cancellationCocktailToken = null;
 
 const createConfig = (type, data, cancelToken) => {
     if (type === searchTypes.filter) {
@@ -45,5 +46,21 @@ export const filterRequest = async type => {
         return result;
     } catch (error) {
         throw error;
+    }
+};
+
+export const cocktailRequest = async id => {
+    if (cancellationCocktailToken) {
+        cancellationCocktailToken.cancel();
+    }
+    cancellationCocktailToken = axios.CancelToken.source();
+    const config = { ...api.configs.cocktail, params: { i: id } };
+    try {
+        const result = await loader.request(config);
+        return result;
+    } catch (error) {
+        throw error;
+    } finally {
+        cancellationCocktailToken = null;
     }
 };

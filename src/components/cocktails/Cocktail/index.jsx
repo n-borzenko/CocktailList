@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 import Picture from "../../common/Picture";
 import Title from "../../common/Title";
@@ -12,6 +13,7 @@ import "./Cocktail.css";
 class Cocktail extends Component {
     static propTypes = {
         value: PropTypes.object.isRequired,
+        to: PropTypes.string.isRequired,
     };
 
     constructor(props) {
@@ -48,15 +50,16 @@ class Cocktail extends Component {
         favorite: false,
     };
 
-    toggleFavorite = () => {
+    toggleFavorite = event => {
+        event.preventDefault();
         this.setState({ favorite: !this.state.favorite });
     };
 
     renderTitle = () => {
         return (
-            <div className="cocktail__title">
+            <span className="cocktail__title">
                 <Title truncate>{this.props.value.strDrink}</Title>
-                <div className="cocktail__star">
+                <span className="cocktail__star">
                     <ActionButton
                         style={ActionButton.styles.dark}
                         onClick={this.toggleFavorite}
@@ -69,8 +72,8 @@ class Cocktail extends Component {
                             }
                         />
                     </ActionButton>
-                </div>
-            </div>
+                </span>
+            </span>
         );
     };
 
@@ -79,30 +82,32 @@ class Cocktail extends Component {
             return null;
         }
         return (
-            <div className="summary">
+            <span className="summary">
                 {this.state.summary.map(item => (
-                    <div className="summary__item" key={item.type}>
-                        <div className="summary__icon">
+                    <span className="summary__item" key={item.type}>
+                        <span className="summary__icon">
                             <Icon type={item.type} color={Icon.colors.light} />
-                        </div>
+                        </span>
                         <Text truncate>{item.name}</Text>
-                    </div>
+                    </span>
                 ))}
-            </div>
+            </span>
         );
     };
 
     render() {
         return (
-            <div className="cocktail">
-                <div className="coctail__picture">
-                    <Picture source={this.props.value.strDrinkThumb} />
-                </div>
-                <div className="cocktail__info">
-                    {this.renderTitle()}
-                    {this.renderSummary()}
-                </div>
-            </div>
+            <Link to={this.props.to} className="cocktail-link">
+                <span className="cocktail">
+                    <span className="coctail__picture">
+                        <Picture source={this.props.value.strDrinkThumb} />
+                    </span>
+                    <span className="cocktail__info">
+                        {this.renderTitle()}
+                        {this.renderSummary()}
+                    </span>
+                </span>
+            </Link>
         );
     }
 }
