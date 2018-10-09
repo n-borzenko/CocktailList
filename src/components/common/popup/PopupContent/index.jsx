@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-import BackgroundImage from "../BackgroundImage";
-import MainHeader from "../MainHeader";
+import BackgroundImage from "../../BackgroundImage";
+import MainHeader from "../../MainHeader";
 
 import "./PopupContent.css";
 

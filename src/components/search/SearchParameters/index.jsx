@@ -7,8 +7,8 @@ import Button from "../../common/Button";
 import ButtonGroup from "../../common/ButtonGroup";
 import Filters from "../../filters/Filters";
 import SearchField from "../../common/SearchField";
-import Popup from "../../common/Popup";
-import PopupContent from "../../common/PopupContent";
+import PopupContent from "../../common/popup/PopupContent";
+import PopupPresenter from "../../common/popup/PopupPresenter";
 import {
     searchByQuery,
     searchByFilter,
@@ -22,22 +22,11 @@ import "./SearchParameters.css";
 class SearchParameters extends Component {
     state = {
         modes: [`by ${searchTypes.query}`, `by ${searchTypes.filter}`],
-        showFiltersPopup: false,
-    };
-
-    checkWidth = () => {
-        if (this.state.showFiltersPopup && window.innerWidth > 400) {
-            this.closePopup();
-        }
+        showPopup: false,
     };
 
     componentDidMount() {
-        window.addEventListener("resize", this.checkWidth);
         this.props.searchByURL(this.props.location);
-    }
-
-    componentWillUnmount() {
-        window.removeEventListener("resize", this.checkWidth);
     }
 
     changeMode = index => {
@@ -67,13 +56,11 @@ class SearchParameters extends Component {
     renderFilters = () => {
         return (
             <div className="search-parameters__filters-container">
-                {this.renderPopup()}
+                {this.renderPopupContent()}
                 <div className="search-parameters__filters-button">
                     <Button
                         stretched
-                        onClick={() =>
-                            this.setState({ showFiltersPopup: true })
-                        }
+                        onClick={() => this.setState({ showPopup: true })}
                     >
                         select filter
                     </Button>
@@ -86,18 +73,19 @@ class SearchParameters extends Component {
     };
 
     closePopup = () => {
-        this.setState({
-            showFiltersPopup: false,
-        });
+        this.setState({ showPopup: false });
     };
 
-    renderPopup = () => {
-        return !this.state.showFiltersPopup ? null : (
-            <Popup>
+    renderPopupContent = () => {
+        return (
+            <PopupPresenter
+                showPopup={this.state.showPopup}
+                closePopup={this.closePopup}
+            >
                 <PopupContent title="Filters" onClick={this.closePopup}>
                     <Filters selectFilter={this.selectFilter} />
                 </PopupContent>
-            </Popup>
+            </PopupPresenter>
         );
     };
 

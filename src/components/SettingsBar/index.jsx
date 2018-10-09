@@ -3,9 +3,9 @@ import { Switch, Route } from "react-router-dom";
 
 import MainHeader from "../common/MainHeader";
 import Menu from "../Menu";
-import Settings from "../Settings";
-import Popup from "../common/Popup";
-import PopupContent from "../common/PopupContent";
+import Parameters from "../Parameters";
+import PopupContent from "../common/popup/PopupContent";
+import PopupPresenter from "../common/popup/PopupPresenter";
 import menuItems from "../../constants/menu";
 import locations from "../../constants/locations";
 
@@ -31,46 +31,33 @@ class SettingsBar extends Component {
                 location: locations.ingridients,
             },
         ],
-        showMenuPopup: false,
+        showPopup: false,
     };
-
-    checkWidth = () => {
-        if (this.state.showMenuPopup && window.innerWidth > 400) {
-            this.closePopup();
-        }
-    };
-
-    componentDidMount() {
-        window.addEventListener("resize", this.checkWidth);
-    }
-
-    componentWillUnmount() {
-        window.removeEventListener("resize", this.checkWidth);
-    }
 
     renderHeader = title => {
         return (
             <MainHeader
                 type={MainHeader.types.logo}
                 compactTitle={title}
-                onClick={() => this.setState({ showMenuPopup: true })}
+                onClick={() => this.setState({ showPopup: true })}
             />
         );
     };
 
     closePopup = () => {
-        this.setState({
-            showMenuPopup: false,
-        });
+        this.setState({ showPopup: false });
     };
 
     renderPopup = () => {
-        return !this.state.showMenuPopup ? null : (
-            <Popup>
+        return (
+            <PopupPresenter
+                showPopup={this.state.showPopup}
+                closePopup={this.closePopup}
+            >
                 <PopupContent onClick={this.closePopup}>
                     <Menu onClick={this.closePopup} />
                 </PopupContent>
-            </Popup>
+            </PopupPresenter>
         );
     };
 
@@ -94,9 +81,7 @@ class SettingsBar extends Component {
                 <div className="settings-bar__menu">
                     <Menu location={this.props.location} />
                 </div>
-                {/* <div className="settings-bar__parameters"> */}
-                <Settings />
-                {/* </div> */}
+                <Parameters />
             </div>
         );
     }

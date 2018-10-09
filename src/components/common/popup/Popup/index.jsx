@@ -2,7 +2,7 @@ import { Component } from "react";
 import ReactDOM from "react-dom";
 import PropTypes from "prop-types";
 
-import { POPUP_ID } from "../../../constants/views";
+import { POPUP_ID } from "../../../../constants/views";
 
 import "./Popup.css";
 
