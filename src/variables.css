@@ -6,9 +6,13 @@
     --text-color-secondary: rgba(255, 255, 255, 0.5);
     --text-font: Helvetica, Arial, sans-serif;
 
-    --text-size: 18px;
-    --text-line-height: 22px;
+    --text-size: 16px;
+    --text-line-height: 20px;
     --text-weight: normal;
+
+    --text-size-name: 16px;
+    --text-line-height-name: 20px;
+    --text-weight-name: bold;
 
     --text-size-control: 18px;
     --text-line-height-control: 22px;
@@ -18,19 +22,17 @@
     --text-line-height-title: 22px;
     --text-weight-title: bold;
 
-    --text-size-cell: 20px;
-    --text-line-height-cell: 24px;
-    --text-weight-cell: normal;
+    --text-size-menu: 20px;
+    --text-line-height-menu: 28px;
+    --text-weight-menu: normal;
 
-    --text-size-caption: 20px;
-    --text-line-height-caption: 24px;
-    --text-weight-caption: bold;
+    --text-size-selected-menu: 24px;
+    --text-line-height-selected-menu: 28px;
+    --text-weight-selected-menu: bold;
 
     --text-size-subheader: 24px;
     --text-line-height-subheader: 28px;
     --text-weight-subheader: bold;
-    --text-size-subheader-secondary: 20px;
-    --text-weight-subheader-secondary: normal;
 
     --text-size-header: 32px;
     --text-line-height-header: 38px;

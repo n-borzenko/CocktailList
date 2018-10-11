@@ -1,7 +1,0 @@
-@import "../../../variables.css";
-
-.cell-text {
-    font-size: var(--text-size-cell);
-    line-height: var(--text-line-height-cell);
-    font-weight: var(--text-weight-cell);
-}

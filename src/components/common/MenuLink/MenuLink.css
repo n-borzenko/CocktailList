@@ -2,9 +2,9 @@
 
 .menu-link,
 .menu-link:visited {
-    font-weight: var(--text-size-subheader-secondary);
-    line-height: var(--text-line-height-subheader);
-    font-size: var(--text-size-subheader-secondary);
+    font-weight: var(--text-weight-menu);
+    line-height: var(--text-line-menu);
+    font-size: var(--text-size-menu);
     color: rgba(255, 255, 255, 0.6);
     background: transparent;
     white-space: nowrap;
@@ -16,8 +16,9 @@
 
 .menu-link_selected {
     color: white;
-    font-size: var(--text-size-subheader);
-    font-weight: var(--text-weight-subheader);
+    font-weight: var(--text-weight-selected-menu);
+    line-height: var(--text-line-selected-menu);
+    font-size: var(--text-size-selected-menu);
 }
 
 .menu-link:hover:not(.menu-link_selected) {

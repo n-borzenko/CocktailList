@@ -4,10 +4,8 @@ import types from "../constants/cocktail";
 import { searchTypes } from "../constants/search";
 import { cocktailRequest } from "../api";
 
-export const showCocktailDetails = id => async (dispatch, getState) => {
+export const loadCocktailDetails = id => async (dispatch, getState) => {
     const search = getState().search;
-
-    // dispatch(push(queryToURL(query)));
 
     if (search.request.type === searchTypes.query) {
         const cocktail = search.response.results.find(
@@ -17,20 +15,18 @@ export const showCocktailDetails = id => async (dispatch, getState) => {
             dispatch({
                 type: types.COCKTAIL_RECEIVED,
                 payload: {
-                    id: cocktail,
+                    value: cocktail,
                 },
             });
-            console.log("exited");
             return;
         }
     }
-    console.log("searched");
     try {
         const result = await cocktailRequest(id);
         dispatch({
             type: types.COCKTAIL_RECEIVED,
             payload: {
-                id: result.data.drinks[0],
+                value: result.data.drinks[0],
             },
         });
     } catch (error) {

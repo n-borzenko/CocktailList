@@ -1,0 +1,21 @@
+.summary {
+    display: flex;
+    flex-direction: column;
+    flex: 1 0 auto;
+    justify-content: center;
+}
+
+.summary__item {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    height: 24px;
+    margin: 4px 0;
+}
+
+.summary__icon {
+    display: block;
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+}

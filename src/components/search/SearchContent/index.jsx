@@ -5,16 +5,11 @@ import { connect } from "react-redux";
 import Cocktails from "../../cocktails/Cocktails";
 import CocktailDetails from "../../cocktails/CocktailDetails";
 import { searchTypes } from "../../../constants/search";
-import { showCocktailDetails } from "../../../actions/cocktail";
 import locations from "../../../constants/locations";
 
 import "./SearchContent.css";
 
 class SearchContent extends Component {
-    shouldComponentUpdate(nextProps) {
-        return this.props.results !== nextProps.results;
-    }
-
     renderCocktailDetails = () => {
         return <CocktailDetails />;
     };
@@ -55,11 +50,8 @@ class SearchContent extends Component {
     }
 }
 
-export default connect(
-    state => ({
-        requestType: state.search.request.type,
-        results: state.search.response.results,
-        location: state.router.location,
-    }),
-    { showCocktailDetails }
-)(SearchContent);
+export default connect(state => ({
+    requestType: state.search.request.type,
+    results: state.search.response.results,
+    location: state.router.location,
+}))(SearchContent);
