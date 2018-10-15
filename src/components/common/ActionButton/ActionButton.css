@@ -64,6 +64,23 @@
     opacity: 0.4;
 }
 
+.action-button.action-button_transparent {
+    background: transparent;
+    opacity: 1;
+}
+
+.action-button.action-button_transparent:hover {
+    opacity: 0.8;
+}
+
+.action-button.action-button_transparent:active {
+    opacity: 0.6;
+}
+
+.action-button.action-button_transparent:disabled {
+    opacity: 0.4;
+}
+
 .action-button__icon {
     display: block;
 }

@@ -31,14 +31,15 @@ class Cocktail extends Component {
                 <Title truncate>{this.props.value.strDrink}</Title>
                 <span className="cocktail__star">
                     <ActionButton
-                        style={ActionButton.styles.dark}
+                        size={ActionButton.sizes.full}
+                        style={ActionButton.styles.transparent}
                         onClick={this.toggleFavorite}
                     >
                         <Icon
                             type={
                                 this.state.favorite
-                                    ? Icon.types.starFilled
-                                    : Icon.types.star
+                                    ? Icon.types.favoritesFilled
+                                    : Icon.types.favorites
                             }
                         />
                     </ActionButton>

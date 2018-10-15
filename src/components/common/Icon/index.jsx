@@ -21,6 +21,8 @@ class Icon extends Component {
         alcohol: "alcohol",
         star: "star",
         starFilled: "star_filled",
+        favorites: "favorites",
+        favoritesFilled: "favorites_filled",
     };
 
     static colors = {

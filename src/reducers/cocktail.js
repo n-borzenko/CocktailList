@@ -8,6 +8,8 @@ export default (state = initialState, action) => {
             return {
                 ...action.payload,
             };
+        case types.COCKTAIL_CLEAR:
+            return {};
         default:
             return state;
     }

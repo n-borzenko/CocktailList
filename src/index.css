@@ -11,6 +11,7 @@ html {
 html,
 body {
     min-width: 320px;
+    height: 100%;
 }
 
 body {
@@ -21,6 +22,10 @@ body {
     font-family: var(--text-font);
     font-size: var(--text-size);
     font-weight: var(--text-weight);
+}
+
+#root {
+    height: 100%;
 }
 
 button {

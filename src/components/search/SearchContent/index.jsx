@@ -10,6 +10,28 @@ import locations from "../../../constants/locations";
 import "./SearchContent.css";
 
 class SearchContent extends Component {
+    containerRef = React.createRef();
+    state = {
+        width: 0,
+        height: 0,
+    };
+
+    resizeHandler = () => {
+        this.setState({
+            width: this.containerRef.current.clientWidth,
+            height: this.containerRef.current.clientHeight,
+        });
+    };
+
+    componentDidMount() {
+        this.resizeHandler();
+        window.addEventListener("resize", this.resizeHandler);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener("resize", this.resizeHandler);
+    }
+
     renderCocktailDetails = () => {
         return <CocktailDetails />;
     };
@@ -17,6 +39,8 @@ class SearchContent extends Component {
     renderCocktails = () => {
         return (
             <Cocktails
+                width={this.state.width}
+                height={this.state.height}
                 values={this.props.results}
                 size={
                     this.props.requestType === searchTypes.filter
@@ -30,21 +54,17 @@ class SearchContent extends Component {
 
     render() {
         return (
-            <div className="search-content">
-                <span>
-                    Search results:
-                    <br />
-                    <Switch location={this.props.location}>
-                        <Route
-                            path={locations.searchCocktail}
-                            render={this.renderCocktailDetails}
-                        />
-                        <Route
-                            path={locations.search}
-                            render={this.renderCocktails}
-                        />
-                    </Switch>
-                </span>
+            <div className="search-content" ref={this.containerRef}>
+                <Switch location={this.props.location}>
+                    <Route
+                        path={locations.searchCocktail}
+                        render={this.renderCocktailDetails}
+                    />
+                    <Route
+                        path={locations.search}
+                        render={this.renderCocktails}
+                    />
+                </Switch>
             </div>
         );
     }

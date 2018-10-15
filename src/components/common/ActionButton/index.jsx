@@ -11,6 +11,7 @@ class ActionButton extends Component {
         dark: "dark",
         light: "light",
         none: "none",
+        transparent: "transparent",
     };
 
     static sizes = {

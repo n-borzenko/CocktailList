@@ -3,6 +3,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: 100%;
 }
 @media (min-width: 592px) {
     .app {
@@ -21,6 +22,8 @@
 
 .app__settings {
     width: 100%;
+    overflow: scroll;
+    max-height: 100%;
 }
 @media (min-width: 592px) {
     .app__settings {
@@ -31,11 +34,15 @@
 
 .app__content {
     width: 100%;
-    padding: 16px;
+    flex: 1 0 auto;
+    height: auto;
+    display: flex;
+    flex-direction: column;
 }
 @media (min-width: 592px) {
     .app__content {
         flex: 1 1 auto;
+        height: 100%;
     }
 }
 

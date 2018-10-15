@@ -12,3 +12,18 @@
 .cocktails_large {
     grid-auto-rows: 442px;
 }
+
+.cocktails__stub {
+    width: 256px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid white;
+    border-radius: 20px;
+}
+
+.cocktails__stub_small {
+    height: 320px;
+}
+
+.cocktails__stub_large {
+    height: 442px;
+}

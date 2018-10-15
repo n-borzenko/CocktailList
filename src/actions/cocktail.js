@@ -5,6 +5,9 @@ import { searchTypes } from "../constants/search";
 import { cocktailRequest } from "../api";
 
 export const loadCocktailDetails = id => async (dispatch, getState) => {
+    dispatch({
+        type: types.COCKTAIL_CLEAR,
+    });
     const search = getState().search;
 
     if (search.request.type === searchTypes.query) {
