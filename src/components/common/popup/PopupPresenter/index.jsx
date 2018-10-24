@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 
 import Popup from "../Popup";
 
+const MOBILE_MAX_WIDTH = 592;
+
 class PopupPresenter extends Component {
     static propTypes = {
         showPopup: PropTypes.bool.isRequired,
@@ -12,7 +14,7 @@ class PopupPresenter extends Component {
     };
 
     checkWidth = () => {
-        if (this.props.showPopup && window.innerWidth >= 592) {
+        if (this.props.showPopup && window.innerWidth >= MOBILE_MAX_WIDTH) {
             this.props.closePopup();
         }
     };

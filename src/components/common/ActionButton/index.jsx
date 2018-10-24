@@ -45,20 +45,12 @@ class ActionButton extends Component {
     }
 
     render() {
-        const className = classNames(
-            "action-button",
-            `action-button_${this.props.size}`,
-            {
-                [`action-button_${this.props.style}`]:
-                    this.props.style !== ActionButton.styles.dark,
-            }
-        );
+        const { style, size, children, ...other } = this.props;
+        const className = classNames("action-button", `action-button_${size}`, {
+            [`action-button_${style}`]: style !== ActionButton.styles.dark,
+        });
         return (
-            <button
-                className={className}
-                disabled={this.props.disabled}
-                onClick={this.props.onClick}
-            >
+            <button className={className} {...other}>
                 <span className="action-button__icon">{this.renderIcon()}</span>
             </button>
         );
