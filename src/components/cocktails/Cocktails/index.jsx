@@ -9,6 +9,7 @@ import "./Cocktails.css";
 const CELL_HEIGHT_SMALL = 320;
 const CELL_HEIGHT_LARGE = 442;
 const CELL_WIDTH = 256;
+const MARGIN = 8;
 
 class Cocktails extends Component {
     static sizes = {
@@ -33,13 +34,13 @@ class Cocktails extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            columnsCount: Math.floor(props.width / CELL_WIDTH),
+            columnsCount: Math.floor(props.width / (CELL_WIDTH + 2 * MARGIN)),
         };
     }
 
     static getDerivedStateFromProps(props) {
         return {
-            columnsCount: Math.floor(props.width / CELL_WIDTH),
+            columnsCount: Math.floor(props.width / (CELL_WIDTH + 2 * MARGIN)),
         };
     }
 
@@ -58,11 +59,7 @@ class Cocktails extends Component {
         const cocktail = this.props.values[index];
         const content =
             isScrolling && !isVisible ? (
-                <div
-                    className={`cocktails__stub cocktails__stub_${
-                        this.props.size
-                    }`}
-                />
+                <div className="cocktails__stub" />
             ) : (
                 <Cocktail
                     value={cocktail}
@@ -70,8 +67,14 @@ class Cocktails extends Component {
                 />
             );
         return (
-            <div key={key} style={style}>
-                {content}
+            <div key={key} style={style} className="cocktails__cell">
+                <div
+                    className={`cocktails__wrapper cocktails__wrapper_${
+                        this.props.size
+                    }`}
+                >
+                    {content}
+                </div>
             </div>
         );
     };
@@ -88,16 +91,17 @@ class Cocktails extends Component {
 
         return (
             <Grid
+                className="cocktails"
                 cellRenderer={this.cellRenderer}
                 columnCount={this.state.columnsCount}
                 rowCount={Math.ceil(
                     this.props.values.length / this.state.columnsCount
                 )}
-                columnWidth={CELL_WIDTH}
+                columnWidth={this.props.width / this.state.columnsCount}
                 rowHeight={
                     this.props.size === Cocktails.sizes.large
-                        ? CELL_HEIGHT_LARGE
-                        : CELL_HEIGHT_SMALL
+                        ? CELL_HEIGHT_LARGE + 2 * MARGIN
+                        : CELL_HEIGHT_SMALL + 2 * MARGIN
                 }
                 height={this.props.height}
                 width={this.props.width}

@@ -22,6 +22,9 @@ export default (state = initialState, action) => {
                     type,
                     [type]: action.payload[type],
                 },
+                response: {
+                    results: [],
+                },
             };
         case types.SEARCH_COMPLETED:
             const { results = [] } = action.payload;
