@@ -7,7 +7,15 @@ import "./MenuLink.css";
 class MenuLink extends Component {
     static propTypes = {
         children: PropTypes.node.isRequired,
-        to: PropTypes.string.isRequired,
+        to: PropTypes.oneOfType([
+            PropTypes.shape({
+                pathname: PropTypes.string.isRequired,
+                search: PropTypes.string,
+            }),
+            PropTypes.string,
+        ]).isRequired,
+        onClick: PropTypes.func,
+        isActive: PropTypes.func,
     };
 
     render() {
@@ -16,6 +24,8 @@ class MenuLink extends Component {
                 className="menu-link"
                 activeClassName="menu-link_selected"
                 to={this.props.to}
+                onClick={this.props.onClick}
+                isActive={this.props.isActive}
             >
                 {this.props.children}
             </NavLink>

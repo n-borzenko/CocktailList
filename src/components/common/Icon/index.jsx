@@ -12,8 +12,17 @@ class Icon extends Component {
         arrowRight: "arrow_right",
         remove: "remove",
         search: "search",
+        spinner: "spinner",
         checked: "checked",
         logo: "logo",
+        category: "category",
+        glass: "glass",
+        iba: "iba",
+        alcohol: "alcohol",
+        star: "star",
+        starFilled: "star_filled",
+        favorites: "favorites",
+        favoritesFilled: "favorites_filled",
     };
 
     static colors = {

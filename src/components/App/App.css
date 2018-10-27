@@ -1,42 +1,49 @@
 .app {
     scroll-behavior: smooth;
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+}
+@media (min-width: 592px) {
+    .app {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+    }
 }
 
-.app__background {
-    position: fixed;
-    z-index: -1;
-    height: 100vh;
+.app__popup {
     width: 100%;
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-image: url("./resources/search.png");
+    height: 0;
+    position: fixed;
+    pointer-events: none;
 }
 
-.app__background_search {
-    background-image: url("./resources/search.png");
+.app__settings {
+    width: 100%;
+    overflow: scroll;
+    max-height: 100%;
+}
+@media (min-width: 592px) {
+    .app__settings {
+        flex: 0 0 auto;
+        width: 304px;
+    }
 }
 
-.app__background_favorites {
-    background-image: url("./resources/favorites.png");
+.app__content {
+    width: 100%;
+    flex: 1 0 auto;
+    height: auto;
+    display: flex;
+    flex-direction: column;
 }
-
-.app__background_random {
-    background-image: url("./resources/random.png");
-}
-
-.app__background_ingridients {
-    background-image: url("./resources/ingridients.png");
-}
-
-.app__left {
-    flex: 0 0 auto;
-    width: 300px;
-}
-
-.app__right {
-    flex: 1 1 auto;
+@media (min-width: 592px) {
+    .app__content {
+        flex: 1 1 auto;
+        height: 100%;
+    }
 }
 
 .app__loading-bar {

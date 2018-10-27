@@ -1,9 +1,10 @@
 const locations = {
     search: "/search",
     searchByFilter: "/search/filter",
+    searchCocktail: "/search/cocktail",
     favorites: "/favorites",
     random: "/random",
-    ingridients: "/ingridients",
+    ingredients: "/ingredients",
 };
 
 export default locations;

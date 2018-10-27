@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import "./Subheader.css";
 
-function Subheader({ children, light }) {
+function Subheader({ children }) {
     return <span className="subheader">{children}</span>;
 }
 

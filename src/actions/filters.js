@@ -6,7 +6,7 @@ export const getFiltersList = () => async dispatch => {
         filterTypes.category,
         filterTypes.alcoholic,
         filterTypes.glass,
-        filterTypes.ingridient,
+        filterTypes.ingredient,
     ].map(type => filterRequest(type));
 
     try {
@@ -14,7 +14,7 @@ export const getFiltersList = () => async dispatch => {
             categoryList,
             alcoholicList,
             glassList,
-            ingridientList,
+            ingredientList,
         ] = await Promise.all(requests);
         dispatch({
             type: types.FILTERS_RECEIVED,
@@ -26,7 +26,7 @@ export const getFiltersList = () => async dispatch => {
                 alcoholic: alcoholicList.data.drinks
                     .map(item => item.strAlcoholic)
                     .filter(item => item !== null),
-                ingridient: ingridientList.data.drinks.map(
+                ingredient: ingredientList.data.drinks.map(
                     item => item.strIngredient1
                 ),
             },

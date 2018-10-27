@@ -15,11 +15,10 @@ class SearchField extends Component {
     };
 
     startSearch = () => {
-        this.props.onSearch(this.state.text);
+        this.props.onSearch(this.props.value || "", false);
     };
 
     valueChanged = value => {
-        this.setState({ text: value });
         this.props.onSearch(value);
     };
 

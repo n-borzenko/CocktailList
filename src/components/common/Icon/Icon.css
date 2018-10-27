@@ -8,8 +8,11 @@
 }
 
 .icon_logo {
-    background-size: cover;
-    background-image: url("./resources/logo2.svg");
+    background-image: url("./resources/logo.svg");
+}
+
+.icon_logo.icon_light {
+    background-image: url("./resources/logo_light.svg");
 }
 
 .icon_remove {
@@ -21,11 +24,76 @@
 }
 
 .icon_search {
+    background-position: left;
     background-image: url("./resources/search.svg");
 }
 
 .icon_search.icon_light {
     background-image: url("./resources/search_light.svg");
+}
+
+.icon_spinner {
+    background-image: url("./resources/spinner.svg");
+}
+
+.icon_spinner.icon_light {
+    background-image: url("./resources/spinner_light.svg");
+}
+
+.icon_category {
+    background-image: url("./resources/category.svg");
+}
+
+.icon_category.icon_light {
+    background-image: url("./resources/category_light.svg");
+}
+
+.icon_glass {
+    background-image: url("./resources/glass.svg");
+}
+
+.icon_glass.icon_light {
+    background-image: url("./resources/glass_light.svg");
+}
+
+.icon_iba {
+    background-image: url("./resources/iba.svg");
+}
+
+.icon_iba.icon_light {
+    background-image: url("./resources/iba_light.svg");
+}
+
+.icon_alcohol {
+    background-image: url("./resources/alcohol.svg");
+}
+
+.icon_alcohol.icon_light {
+    background-image: url("./resources/alcohol_light.svg");
+}
+
+.icon_star {
+    background-image: url("./resources/star.svg");
+}
+
+.icon_star.icon_light {
+    background-image: url("./resources/star_light.svg");
+}
+
+.icon_star_filled {
+    background-image: url("./resources/star_filled.svg");
+}
+
+.icon_star_filled.icon_light {
+    background-image: url("./resources/star_filled_light.svg");
+}
+
+.icon_favorites {
+    background-image: url("./resources/favorites_light.svg");
+}
+
+.icon_favorites_filled {
+    background-image: url("./resources/favorites_filled_light.svg");
 }
 
 .icon_checked {

@@ -11,6 +11,7 @@ html {
 html,
 body {
     min-width: 320px;
+    height: 100%;
 }
 
 body {
@@ -23,17 +24,19 @@ body {
     font-weight: var(--text-weight);
 }
 
+#root {
+    height: 100%;
+}
+
 button {
     cursor: pointer;
     -webkit-appearance: none;
     margin: 0;
-    outline: 0;
 }
 
 input {
     margin: 0;
     padding: 0;
-    outline: 0;
     vertical-align: middle;
     -webkit-appearance: none;
     border-radius: 0;
@@ -41,4 +44,8 @@ input {
     border: 0;
     cursor: pointer;
     font: inherit;
+}
+
+*:focus {
+    outline: orange auto;
 }

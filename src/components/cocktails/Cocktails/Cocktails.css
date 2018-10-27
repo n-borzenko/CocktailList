@@ -1,0 +1,25 @@
+.cocktails__cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cocktails__wrapper {
+    width: 256px;
+}
+
+.cocktails__wrapper_small {
+    height: 320px;
+}
+
+.cocktails__wrapper_large {
+    height: 442px;
+}
+
+.cocktails__stub {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid white;
+    border-radius: 20px;
+    width: 100%;
+    height: 100%;
+}

@@ -3,9 +3,12 @@ import { Switch, Route } from "react-router-dom";
 import { connect } from "react-redux";
 
 import Subheader from "../../common/Subheader";
+import Button from "../../common/Button";
 import ButtonGroup from "../../common/ButtonGroup";
 import Filters from "../../filters/Filters";
 import SearchField from "../../common/SearchField";
+import PopupContent from "../../common/popup/PopupContent";
+import PopupPresenter from "../../common/popup/PopupPresenter";
 import {
     searchByQuery,
     searchByFilter,
@@ -19,6 +22,7 @@ import "./SearchParameters.css";
 class SearchParameters extends Component {
     state = {
         modes: [`by ${searchTypes.query}`, `by ${searchTypes.filter}`],
+        showPopup: false,
     };
 
     componentDidMount() {
@@ -31,8 +35,8 @@ class SearchParameters extends Component {
             : this.props.searchByFilter(this.props.request.filter);
     };
 
-    onSearch = query => {
-        this.props.searchByQuery(query, true);
+    onSearch = (query, delay = true) => {
+        this.props.searchByQuery(query, delay);
     };
 
     selectFilter = filter => {
@@ -50,7 +54,39 @@ class SearchParameters extends Component {
     };
 
     renderFilters = () => {
-        return <Filters selectFilter={this.selectFilter} />;
+        return (
+            <div className="search-parameters__filters-container">
+                {this.renderPopupContent()}
+                <div className="search-parameters__filters-button">
+                    <Button
+                        stretched
+                        onClick={() => this.setState({ showPopup: true })}
+                    >
+                        select filter
+                    </Button>
+                </div>
+                <div className="search-parameters__filters">
+                    <Filters selectFilter={this.selectFilter} />
+                </div>
+            </div>
+        );
+    };
+
+    closePopup = () => {
+        this.setState({ showPopup: false });
+    };
+
+    renderPopupContent = () => {
+        return (
+            <PopupPresenter
+                showPopup={this.state.showPopup}
+                closePopup={this.closePopup}
+            >
+                <PopupContent title="Filters" onClick={this.closePopup}>
+                    <Filters selectFilter={this.selectFilter} />
+                </PopupContent>
+            </PopupPresenter>
+        );
     };
 
     render() {
@@ -70,13 +106,12 @@ class SearchParameters extends Component {
                 <div className="search-parameters__details">
                     <Switch location={this.props.location}>
                         <Route
-                            exact
-                            path={locations.search}
-                            render={this.renderSearchField}
-                        />
-                        <Route
                             path={locations.searchByFilter}
                             render={this.renderFilters}
+                        />
+                        <Route
+                            path={locations.search}
+                            render={this.renderSearchField}
                         />
                     </Switch>
                 </div>

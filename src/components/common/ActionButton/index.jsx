@@ -10,12 +10,19 @@ class ActionButton extends Component {
     static styles = {
         dark: "dark",
         light: "light",
-        transparent: "transparent",
         none: "none",
+        transparent: "transparent",
+    };
+
+    static sizes = {
+        full: "full",
+        medium: "medium",
+        default: "default",
     };
 
     static propTypes = {
         style: PropTypes.oneOf(Object.values(ActionButton.styles)).isRequired,
+        size: PropTypes.oneOf(Object.values(ActionButton.sizes)).isRequired,
         disabled: PropTypes.bool.isRequired,
         onClick: PropTypes.func,
         children: PropTypes.node.isRequired,
@@ -23,6 +30,7 @@ class ActionButton extends Component {
 
     static defaultProps = {
         style: ActionButton.styles.dark,
+        size: ActionButton.sizes.medium,
         disabled: false,
     };
 
@@ -37,16 +45,12 @@ class ActionButton extends Component {
     }
 
     render() {
-        const className = classNames("action-button", {
-            [`action-button_${this.props.style}`]:
-                this.props.style !== ActionButton.styles.dark,
+        const { style, size, children, ...other } = this.props;
+        const className = classNames("action-button", `action-button_${size}`, {
+            [`action-button_${style}`]: style !== ActionButton.styles.dark,
         });
         return (
-            <button
-                className={className}
-                disabled={this.props.disabled}
-                onClick={this.props.onClick}
-            >
+            <button className={className} {...other}>
                 <span className="action-button__icon">{this.renderIcon()}</span>
             </button>
         );

@@ -2,7 +2,7 @@ const menuItems = {
     search: "Search",
     favorites: "Favorites",
     random: "Random",
-    ingridients: "Ingridients",
+    ingredients: "Ingredients",
 };
 
 export default menuItems;

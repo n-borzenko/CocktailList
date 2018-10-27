@@ -4,12 +4,16 @@
     position: relative;
     display: flex;
     align-items: center;
-    height: 30px;
+    height: 32px;
     width: 100%;
-    border-radius: 15px;
+    border-radius: 16px;
     border: 1px solid white;
     background: rgba(255, 255, 255, 0.1);
     padding: 1px;
+}
+
+.input:focus-within {
+    outline: orange auto;
 }
 
 .input:hover,
@@ -23,10 +27,9 @@
     color: white;
     caret-color: white;
     font-size: var(--text-size-control);
-    line-height: var(--text-line-height-control);
     font-weight: var(--text-weight-control);
-    z-index: 10;
     padding-left: 8px;
+    outline: none;
 }
 
 .input__field::placeholder {
@@ -34,8 +37,7 @@
 }
 
 .input__remove {
-    flex: 0 0 30px;
-    height: 30px;
+    flex: 0 0 32px;
+    height: 32px;
     display: inline-block;
-    z-index: 10;
 }

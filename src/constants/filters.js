@@ -8,12 +8,12 @@ export const filterTypes = {
     category: "category",
     alcoholic: "alcoholic",
     glass: "glass",
-    ingridient: "ingridient",
+    ingredient: "ingredient",
 };
 
 export const filterTitles = {
     [filterTypes.category]: "Categories",
     [filterTypes.alcoholic]: "Alcoholic",
     [filterTypes.glass]: "Glasses",
-    [filterTypes.ingridient]: "Ingridients",
+    [filterTypes.ingredient]: "Ingredients",
 };

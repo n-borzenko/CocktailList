@@ -1,7 +1,0 @@
-@import "../../../variables.css";
-
-.caption {
-    font-size: var(--text-size-caption);
-    line-height: var(--text-line-height-caption);
-    font-weight: var(--text-weight-caption);
-}

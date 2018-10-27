@@ -14,10 +14,9 @@
 
 .button-group__item {
     flex: 1 1;
-    padding: 0 10px;
-    height: 30px;
+    padding: 0 8px;
+    height: 32px;
     mix-blend-mode: screen;
-    outline: none;
     font-size: var(--text-size-control);
     line-height: var(--text-line-height-control);
     font-weight: var(--text-weight-control);
@@ -31,13 +30,13 @@
 }
 
 .button-group__item:first-child {
-    border-top-left-radius: 15px;
-    border-bottom-left-radius: 15px;
+    border-top-left-radius: 16px;
+    border-bottom-left-radius: 16px;
 }
 
 .button-group__item:last-child {
-    border-top-right-radius: 15px;
-    border-bottom-right-radius: 15px;
+    border-top-right-radius: 16px;
+    border-bottom-right-radius: 16px;
 }
 
 .button-group__item:hover:not(:disabled) {
