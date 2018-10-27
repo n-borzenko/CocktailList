@@ -4,9 +4,9 @@ import PropTypes from "prop-types";
 import Picture from "../../common/Picture";
 import Name from "../../common/Name";
 import Text from "../../common/Text";
-import { ingridientImage } from "../../../api/images";
+import { ingredientImage } from "../../../api/images";
 
-import "./IngridientsList.css";
+import "./IngredientsList.css";
 
 // api provides data format:
 // {
@@ -20,14 +20,14 @@ import "./IngridientsList.css";
 // so, we have to check type of all 30 object properties
 // using PropTypes and skip empty props in render
 
-class IngridientsList extends Component {
+class ingredientsList extends Component {
     static allData = new Array(15)
         .fill(0)
         .map((item, i) => [`strIngredient${i + 1}`, `strMeasure${i + 1}`]);
 
     static propTypes = {
         value: PropTypes.shape(
-            IngridientsList.allData.reduce((shape, item) => {
+            ingredientsList.allData.reduce((shape, item) => {
                 shape[item[0]] = PropTypes.string;
                 shape[item[1]] = PropTypes.string;
                 return shape;
@@ -36,24 +36,24 @@ class IngridientsList extends Component {
     };
 
     renderValues = () => {
-        return IngridientsList.allData
+        return ingredientsList.allData
             .filter(
                 item =>
                     this.props.value[item[0]] &&
                     this.props.value[item[0]].length > 0
             )
             .map(item => (
-                <div className="ingridients-list__item" key={item[0]}>
-                    <div className="ingridients-list__picture">
+                <div className="ingredients-list__item" key={item[0]}>
+                    <div className="ingredients-list__picture">
                         <Picture
-                            source={ingridientImage(this.props.value[item[0]])}
+                            source={ingredientImage(this.props.value[item[0]])}
                         />
                     </div>
-                    <div className="ingridients-list__data">
-                        <div className="ingridients-list__text">
+                    <div className="ingredients-list__data">
+                        <div className="ingredients-list__text">
                             <Name truncate>{this.props.value[item[0]]}</Name>
                         </div>
-                        <div className="ingridients-list__text">
+                        <div className="ingredients-list__text">
                             <Text truncate>{this.props.value[item[1]]}</Text>
                         </div>
                     </div>
@@ -62,8 +62,8 @@ class IngridientsList extends Component {
     };
 
     render() {
-        return <div className="ingridients-list">{this.renderValues()}</div>;
+        return <div className="ingredients-list">{this.renderValues()}</div>;
     }
 }
 
-export default IngridientsList;
+export default ingredientsList;

@@ -4,7 +4,7 @@ const locations = {
     searchCocktail: "/search/cocktail",
     favorites: "/favorites",
     random: "/random",
-    ingridients: "/ingridients",
+    ingredients: "/ingredients",
 };
 
 export default locations;

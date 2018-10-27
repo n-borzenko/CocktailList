@@ -31,8 +31,8 @@ class Menu extends Component {
                 location: () => locations.random,
             },
             {
-                name: menuItems.ingridients,
-                location: () => locations.ingridients,
+                name: menuItems.ingredients,
+                location: () => locations.ingredients,
             },
         ],
     };

@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import Summary from "../Summary";
 import Subheader from "../../common/Subheader";
 import Title from "../../common/Title";
-import IngridientsList from "../IngridientsList";
+import IngredientsList from "../IngredientsList";
 import { loadCocktailDetails } from "../../../actions/cocktail";
 
 import "./CocktailDetails.css";
@@ -28,8 +28,8 @@ class CocktailDetails extends Component {
                 <Summary value={this.props.value} />
                 <Title>Instructions</Title>
                 {this.props.value.strInstructions}
-                <Title>Ingridients</Title>
-                <IngridientsList value={this.props.value} />
+                <Title>ingredients</Title>
+                <IngredientsList value={this.props.value} />
             </div>
         );
     };

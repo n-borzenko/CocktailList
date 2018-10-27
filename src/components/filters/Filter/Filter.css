@@ -81,19 +81,19 @@
     background: rgba(247, 183, 57, 0.3);
 }
 
-.filter_ingridient {
+.filter_ingredient {
     background: rgba(57, 247, 99, 0.1);
 }
 
-.filter_ingridient:disabled {
+.filter_ingredient:disabled {
     background: rgba(57, 247, 99, 0.05);
 }
 
-.filter_ingridient:hover {
+.filter_ingredient:hover {
     background: rgba(57, 247, 99, 0.2);
 }
 
-.filter_ingridient:active {
+.filter_ingredient:active {
     background: rgba(57, 247, 99, 0.3);
 }
 

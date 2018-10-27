@@ -9,7 +9,7 @@ import SettingsBar from "../SettingsBar";
 import SearchContent from "../search/SearchContent";
 import FavoritesContent from "../favorites/FavoritesContent";
 import RandomContent from "../random/RandomContent";
-import IngridientsContent from "../ingridients/IngridientsContent";
+import IngredientsContent from "../ingredients/IngredientsContent";
 import NotFound from "../common/NotFound";
 import locations from "../../constants/locations";
 import { POPUP_ID } from "../../constants/views";
@@ -45,8 +45,8 @@ class App extends Component {
                                 component={RandomContent}
                             />
                             <Route
-                                path={locations.ingridients}
-                                component={IngridientsContent}
+                                path={locations.ingredients}
+                                component={IngredientsContent}
                             />
                             <Route
                                 path="/"
