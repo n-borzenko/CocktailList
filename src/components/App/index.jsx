@@ -17,6 +17,28 @@ import { POPUP_ID } from "../../constants/views";
 import "./App.css";
 
 class App extends Component {
+    containerRef = React.createRef();
+    state = {
+        width: 0,
+        height: 0,
+    };
+
+    resizeHandler = () => {
+        this.setState({
+            width: this.containerRef.current.clientWidth,
+            height: this.containerRef.current.clientHeight,
+        });
+    };
+
+    componentDidMount() {
+        this.resizeHandler();
+        window.addEventListener("resize", this.resizeHandler);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener("resize", this.resizeHandler);
+    }
+
     render() {
         return (
             <ConnectedRouter history={history}>
@@ -30,11 +52,16 @@ class App extends Component {
                     <div className="app__settings">
                         <SettingsBar />
                     </div>
-                    <div className="app__content">
+                    <div className="app__content" ref={this.containerRef}>
                         <Switch>
                             <Route
                                 path={locations.search}
-                                component={SearchContent}
+                                render={() => (
+                                    <SearchContent
+                                        width={this.state.width}
+                                        height={this.state.height}
+                                    />
+                                )}
                             />
                             <Route
                                 path={locations.favorites}

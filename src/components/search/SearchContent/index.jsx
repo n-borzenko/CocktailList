@@ -10,28 +10,6 @@ import locations from "../../../constants/locations";
 import "./SearchContent.css";
 
 class SearchContent extends Component {
-    containerRef = React.createRef();
-    state = {
-        width: 0,
-        height: 0,
-    };
-
-    resizeHandler = () => {
-        this.setState({
-            width: this.containerRef.current.clientWidth,
-            height: this.containerRef.current.clientHeight,
-        });
-    };
-
-    componentDidMount() {
-        this.resizeHandler();
-        window.addEventListener("resize", this.resizeHandler);
-    }
-
-    componentWillUnmount() {
-        window.removeEventListener("resize", this.resizeHandler);
-    }
-
     renderCocktailDetails = () => {
         return <CocktailDetails />;
     };
@@ -39,8 +17,8 @@ class SearchContent extends Component {
     renderCocktails = () => {
         return (
             <Cocktails
-                width={this.state.width}
-                height={this.state.height}
+                width={this.props.width}
+                height={this.props.height}
                 values={this.props.results}
                 size={
                     this.props.requestType === searchTypes.filter
