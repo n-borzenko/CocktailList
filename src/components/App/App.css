@@ -38,6 +38,8 @@
     height: auto;
     display: flex;
     flex-direction: column;
+    position: relative;
+    overflow: hidden;
 }
 @media (min-width: 592px) {
     .app__content {
