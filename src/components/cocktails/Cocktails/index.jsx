@@ -31,12 +31,7 @@ class Cocktails extends Component {
         height: 0,
     };
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            columnsCount: Math.floor(props.width / (CELL_WIDTH + 2 * MARGIN)),
-        };
-    }
+    state = {};
 
     static getDerivedStateFromProps(props) {
         return {

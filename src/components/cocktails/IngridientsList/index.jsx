@@ -4,9 +4,21 @@ import PropTypes from "prop-types";
 import Picture from "../../common/Picture";
 import Name from "../../common/Name";
 import Text from "../../common/Text";
-import { ingridientImage } from "../../../api/constants";
+import { ingridientImage } from "../../../api/images";
 
 import "./IngridientsList.css";
+
+// api provides data format:
+// {
+//     "strIngredient1": "some data",
+//     ...
+//     "strIngredient15": "some data",
+//     "strMeasure1": "some data",
+//     ...
+//     "strMeasure15": "some data",
+// }
+// so, we have to check type of all 30 object properties
+// using PropTypes and skip empty props in render
 
 class IngridientsList extends Component {
     static allData = new Array(15)
