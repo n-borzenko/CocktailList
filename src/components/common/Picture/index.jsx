@@ -44,7 +44,7 @@ class Picture extends Component {
 
     render() {
         const style = this.state.loaded
-            ? { backgroundImage: `url(${this.props.source})` }
+            ? { backgroundImage: `url("${this.props.source}")` }
             : null;
         return (
             <span className="picture" style={style}>
