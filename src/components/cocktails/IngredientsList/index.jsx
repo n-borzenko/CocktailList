@@ -51,10 +51,10 @@ class ingredientsList extends Component {
                     </div>
                     <div className="ingredients-list__data">
                         <div className="ingredients-list__text">
-                            <Name truncate>{this.props.value[item[0]]}</Name>
+                            <Name>{this.props.value[item[0]]}</Name>
                         </div>
                         <div className="ingredients-list__text">
-                            <Text truncate>{this.props.value[item[1]]}</Text>
+                            <Text>{this.props.value[item[1]]}</Text>
                         </div>
                     </div>
                 </div>

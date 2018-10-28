@@ -39,13 +39,16 @@
     display: flex;
     flex-direction: column;
     position: relative;
-    overflow: hidden;
 }
 @media (min-width: 592px) {
     .app__content {
         flex: 1 1 auto;
         height: 100%;
     }
+}
+
+.app__content_hidden {
+    overflow: hidden;
 }
 
 .app__loading-bar {

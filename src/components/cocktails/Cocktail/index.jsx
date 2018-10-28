@@ -52,7 +52,7 @@ class Cocktail extends Component {
         return (
             <Link to={this.props.to} className="cocktail-link">
                 <span className="cocktail">
-                    <span className="coctail__picture">
+                    <span className="cocktail__picture">
                         <Picture source={this.props.value.strDrinkThumb} />
                     </span>
                     <span className="cocktail__info">

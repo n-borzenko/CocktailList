@@ -1,2 +1,29 @@
 .cocktail-details {
+    padding: 24px;
+}
+
+.cocktail-card {
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid white;
+}
+
+.cocktail-card__picture {
+    height: 300px;
+    width: 300px;
+    mask-image: url("./resources/picture_mask.svg");
+    mask-type: luminance;
+    mask-size: cover;
+    mask-position: center;
+    mask-repeat: no-repeat;
+}
+
+.cocktail-card__section {
+    display: flex;
+    flex-direction: column;
+    margin: 16px 0;
+}
+
+.cocktail-card__title {
+    margin-bottom: 8px;
 }

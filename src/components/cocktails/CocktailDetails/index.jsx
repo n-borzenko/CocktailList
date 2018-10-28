@@ -5,11 +5,21 @@ import Summary from "../Summary";
 import Subheader from "../../common/Subheader";
 import Title from "../../common/Title";
 import IngredientsList from "../IngredientsList";
+import Picture from "../../common/Picture";
+import Button from "../../common/Button";
 import { loadCocktailDetails } from "../../../actions/cocktail";
 
 import "./CocktailDetails.css";
 
 class CocktailDetails extends Component {
+    state = {
+        favorite: false,
+    };
+
+    toggleFavorite = () => {
+        this.setState({ favorite: !this.state.favorite });
+    };
+
     componentDidMount() {
         const id = this.props.location.pathname.substring(
             this.props.location.pathname.lastIndexOf("/") + 1
@@ -22,20 +32,40 @@ class CocktailDetails extends Component {
             return null;
         }
         return (
-            <div>
+            <div className="cocktail-card">
+                <div className="cocktail-card__picture">
+                    <Picture source={this.props.value.strDrinkThumb} />
+                </div>
                 <Subheader> {this.props.value.strDrink}</Subheader>
-                <Title>Summary</Title>
-                <Summary value={this.props.value} />
-                <Title>Instructions</Title>
-                {this.props.value.strInstructions}
-                <Title>ingredients</Title>
-                <IngredientsList value={this.props.value} />
+                <Button onClick={this.toggleFavorite}>
+                    {this.state.favorite
+                        ? "Remove from favorites"
+                        : "Add to favorites"}
+                </Button>
+                <div className="cocktail-card__section">
+                    <div className="cocktail-card__title">
+                        <Title>Summary</Title>
+                    </div>
+                    <Summary value={this.props.value} />
+                </div>
+                <div className="cocktail-card__section">
+                    <div className="cocktail-card__title">
+                        <Title>Instructions</Title>
+                    </div>
+                    {this.props.value.strInstructions}
+                </div>
+                <div className="cocktail-card__section">
+                    <div className="cocktail-card__title">
+                        <Title>Ingredients</Title>
+                    </div>
+                    <IngredientsList value={this.props.value} />
+                </div>
             </div>
         );
     };
 
     render() {
-        return <div className="cocktail-details">ololo {this.renderAll()}</div>;
+        return <div className="cocktail-details">{this.renderAll()}</div>;
     }
 }
 
