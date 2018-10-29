@@ -9,33 +9,78 @@
     background: rgba(0, 0, 0, 0.1);
     border: 1px solid white;
     padding: 16px;
-    max-width: 700px;
     min-height: 100%;
+}
+@media (min-width: 1024px) {
+    .card {
+        padding: 32px;
+    }
+}
+
+.card__buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+@media (min-width: 700px) {
+    .card__buttons {
+        display: none;
+    }
+}
+
+.card__navigation {
+    display: flex;
+    justify-content: space-between;
+    width: 80px;
 }
 
 .card__close {
-    position: absolute;
-    top: 0;
-    right: -8px;
+    display: none;
+}
+@media (min-width: 700px) {
+    .card__close {
+        display: block;
+        position: absolute;
+        top: 0;
+        right: -8px;
+        z-index: 1;
+    }
 }
 
 .card__arrows {
-    position: absolute;
-    width: calc(100% + 80px);
-    height: 50%;
-    bottom: 16px;
-    left: -40px;
+    display: none;
+}
+@media (min-width: 700px) {
+    .card__arrows {
+        display: block;
+        position: absolute;
+        width: calc(100% + 80px);
+        height: 50%;
+        bottom: 16px;
+        left: -40px;
+    }
 }
 
 .card__right-arrow {
-    position: absolute;
-    right: 32px;
+    display: none;
+}
+@media (min-width: 700px) {
+    .card__right-arrow {
+        display: block;
+        position: absolute;
+        right: 32px;
+    }
 }
 
 .card__button {
     width: 32px;
     height: 32px;
-    position: fixed;
+    position: static;
+}
+@media (min-width: 700px) {
+    .card__button {
+        position: fixed;
+    }
 }
 
 .card-container__gap {

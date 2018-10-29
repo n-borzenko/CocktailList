@@ -6,7 +6,7 @@
     grid-gap: 16px;
     justify-content: flex-start;
 }
-@media (min-width: 650px) {
+@media (min-width: 700px) {
     .ingredients-list {
         padding-top: 16px;
         grid-template-columns: repeat(auto-fit, 150px);
@@ -25,7 +25,7 @@
     align-items: center;
     justify-content: flex-start;
 }
-@media (min-width: 650px) {
+@media (min-width: 700px) {
     .ingredients-list__item {
         flex-direction: column;
         padding: 1px 8px 8px;
@@ -43,7 +43,7 @@
     border-width: 2px;
     padding: 0 7px;
 }
-@media (min-width: 650px) {
+@media (min-width: 700px) {
     .ingredients-list__item:hover {
         padding: 0 7px 7px;
     }
@@ -59,7 +59,7 @@
     position: relative;
     top: -8px;
 }
-@media (min-width: 650px) {
+@media (min-width: 700px) {
     .ingredients-list__picture {
         width: 100px;
         height: 100px;
@@ -74,7 +74,7 @@
     margin-left: 8px;
     width: calc(100% - 78px);
 }
-@media (min-width: 650px) {
+@media (min-width: 700px) {
     .ingredients-list__data {
         align-items: center;
         text-align: center;
@@ -91,7 +91,7 @@
     text-overflow: ellipsis;
     max-width: 100%;
 }
-@media (min-width: 650px) {
+@media (min-width: 700px) {
     .ingredients-list__text:first-child {
         overflow: visible;
         white-space: unset;

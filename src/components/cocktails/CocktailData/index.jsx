@@ -16,7 +16,7 @@ class CocktailData extends Component {
             strDrinkThumb: PropTypes.string.isRequired,
             strDrink: PropTypes.string.isRequired,
             strInstructions: PropTypes.string.isRequired,
-        }).isRequired,
+        }),
     };
 
     state = {

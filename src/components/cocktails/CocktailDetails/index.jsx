@@ -18,20 +18,7 @@ class CocktailDetails extends Component {
     render() {
         return (
             <div className="cocktail-details">
-                <div
-                    style={{
-                        background: "red",
-                        width: "100%",
-                        height: "140px",
-                        flex: "1 0 auto",
-                    }}
-                />
-                <div
-                    style={{
-                        position: "relative",
-                        height: "calc(100% - 140px)",
-                    }}
-                >
+                <div className="cocktail-details__card">
                     <Card>
                         <CocktailData value={this.props.value} />
                     </Card>

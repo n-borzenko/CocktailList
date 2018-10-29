@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import Popup from "../Popup";
 
-const MOBILE_MAX_WIDTH = 650;
+const MOBILE_MAX_WIDTH = 700;
 
 class PopupPresenter extends Component {
     static propTypes = {
