@@ -11,7 +11,7 @@
 .main-header_full {
     display: none;
 }
-@media (min-width: 592px) {
+@media (min-width: 650px) {
     .main-header_full {
         display: flex;
     }
@@ -20,7 +20,7 @@
 .main-header_compact {
     display: flex;
 }
-@media (min-width: 592px) {
+@media (min-width: 650px) {
     .main-header_compact {
         display: none;
     }

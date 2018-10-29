@@ -1,96 +1,13 @@
 .cocktail-details {
     padding: 24px;
-}
-@media (min-width: 592px) {
-    .cocktail-details {
-        padding: 24px 64px;
-    }
-}
-
-.cocktail-card {
-    border-radius: 20px;
-    background: rgba(0, 0, 0, 0.1);
-    border: 1px solid white;
-    padding: 16px;
     display: flex;
     justify-content: center;
-}
-
-.cocktail-card__content {
-    width: 100%;
+    min-height: 100%;
     height: 100%;
-    max-width: 700px;
+    flex-wrap: wrap;
 }
-
-.cocktail-card__header {
-    display: flex;
-    flex-direction: column;
-}
-@media (min-width: 1024px) {
-    .cocktail-card__header {
-        flex-direction: row;
-        justify-content: space-between;
+@media (min-width: 650px) {
+    .cocktail-details {
+        padding: 24px 48px;
     }
-}
-
-.cocktail-card__main-data {
-    display: flex;
-    flex-direction: column;
-}
-@media (min-width: 1024px) {
-    .cocktail-card__main-data {
-        justify-content: space-around;
-        margin-right: 16px;
-    }
-}
-
-.cocktail-card__favorites {
-    align-self: center;
-    width: 200px;
-}
-
-.cocktail-card__picture-wrapper {
-    align-self: center;
-    position: relative;
-    width: 100%;
-    max-width: 400px;
-    margin: 0 0 24px 0;
-}
-@media (min-width: 1024px) {
-    .cocktail-card__picture-wrapper {
-        order: 2;
-        margin: 0 0 0 16px;
-    }
-}
-
-.cocktail-card__picture-wrapper:after {
-    content: "";
-    display: block;
-    padding-bottom: 100%;
-}
-
-.cocktail-card__picture {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    border-radius: 20px;
-    overflow: hidden;
-}
-
-.cocktail-card__section {
-    display: flex;
-    flex-direction: column;
-    margin: 24px 0;
-}
-
-.cocktail-card__section_summary {
-    margin: 16px 0;
-}
-
-.cocktail-card__section:last-child {
-    margin-bottom: 0;
-}
-
-.cocktail-card__title {
-    margin-bottom: 8px;
 }

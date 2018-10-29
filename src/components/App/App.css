@@ -5,7 +5,7 @@
     align-items: center;
     height: 100%;
 }
-@media (min-width: 592px) {
+@media (min-width: 650px) {
     .app {
         display: flex;
         flex-direction: row;
@@ -25,7 +25,7 @@
     overflow: scroll;
     max-height: 100%;
 }
-@media (min-width: 592px) {
+@media (min-width: 650px) {
     .app__settings {
         flex: 0 0 auto;
         width: 304px;
@@ -40,7 +40,7 @@
     flex-direction: column;
     position: relative;
 }
-@media (min-width: 592px) {
+@media (min-width: 650px) {
     .app__content {
         flex: 1 1 auto;
         height: 100%;

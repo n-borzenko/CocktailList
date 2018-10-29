@@ -1,0 +1,77 @@
+.cocktail-data {
+    width: 100%;
+    height: auto;
+}
+
+.cocktail-data__header {
+    display: flex;
+    flex-direction: column;
+}
+@media (min-width: 1024px) {
+    .cocktail-data__header {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}
+
+.cocktail-data__main-data {
+    display: flex;
+    flex-direction: column;
+}
+@media (min-width: 1024px) {
+    .cocktail-data__main-data {
+        justify-content: space-around;
+        margin-right: 16px;
+    }
+}
+
+.cocktail-data__favorites {
+    align-self: center;
+    width: 200px;
+}
+
+.cocktail-data__picture-wrapper {
+    align-self: center;
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 0 24px 0;
+}
+@media (min-width: 1024px) {
+    .cocktail-data__picture-wrapper {
+        order: 2;
+        margin: 0 0 0 16px;
+    }
+}
+
+.cocktail-data__picture-wrapper:after {
+    content: "";
+    display: block;
+    padding-bottom: 100%;
+}
+
+.cocktail-data__picture {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.cocktail-data__section {
+    display: flex;
+    flex-direction: column;
+    margin: 24px 0;
+}
+
+.cocktail-data__section_summary {
+    margin: 16px 0;
+}
+
+.cocktail-data__section:last-child {
+    margin-bottom: 0;
+}
+
+.cocktail-data__title {
+    margin-bottom: 8px;
+}

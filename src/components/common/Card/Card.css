@@ -1,0 +1,44 @@
+.card-container {
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+.card {
+    border-radius: 20px;
+    background: rgba(0, 0, 0, 0.1);
+    border: 1px solid white;
+    padding: 16px;
+    max-width: 700px;
+    min-height: 100%;
+}
+
+.card__close {
+    position: absolute;
+    top: 0;
+    right: -8px;
+}
+
+.card__arrows {
+    position: absolute;
+    width: calc(100% + 80px);
+    height: 50%;
+    bottom: 16px;
+    left: -40px;
+}
+
+.card__right-arrow {
+    position: absolute;
+    right: 32px;
+}
+
+.card__button {
+    width: 32px;
+    height: 32px;
+    position: fixed;
+}
+
+.card-container__gap {
+    height: 24px;
+    width: 100%;
+}

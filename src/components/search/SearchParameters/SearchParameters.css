@@ -6,7 +6,7 @@
     display: none;
     margin-bottom: 16px;
 }
-@media (min-width: 592px) {
+@media (min-width: 650px) {
     .search-parameters__header {
         display: block;
     }
@@ -22,7 +22,7 @@
 .search-parameters__filters-button {
     display: block;
 }
-@media (min-width: 592px) {
+@media (min-width: 650px) {
     .search-parameters__filters-button {
         display: none;
     }
@@ -31,7 +31,7 @@
 .search-parameters__filters {
     display: none;
 }
-@media (min-width: 592px) {
+@media (min-width: 650px) {
     .search-parameters__filters {
         display: block;
     }
