@@ -1,9 +1,6 @@
 import React, { Fragment, Component } from "react";
 import PropTypes from "prop-types";
 
-import ActionButton from "../ActionButton";
-import Icon from "../Icon";
-
 import "./Card.css";
 
 // parent element must have style:
@@ -16,26 +13,25 @@ class Card extends Component {
     static propTypes = {
         children: PropTypes.oneOfType([PropTypes.element, PropTypes.string])
             .isRequired,
+        renderLeftButton: PropTypes.func,
+        renderRightButton: PropTypes.func,
+        renderCloseButton: PropTypes.func,
     };
 
-    renderButton = type => {
-        return (
-            <div className="card__button">
-                <ActionButton>
-                    <Icon type={type} />
-                </ActionButton>
-            </div>
-        );
+    renderButton = renderFunction => {
+        return renderFunction ? (
+            <div className="card__button">{renderFunction()}</div>
+        ) : null;
     };
 
     renderMobileButtons = () => {
         return (
             <div className="card__buttons">
                 <div className="card__navigation">
-                    {this.renderButton(Icon.types.arrowLeft)}
-                    {this.renderButton(Icon.types.arrowRight)}
+                    {this.renderButton(this.props.renderLeftButton)}
+                    {this.renderButton(this.props.renderRightButton)}
                 </div>
-                {this.renderButton(Icon.types.remove)}
+                {this.renderButton(this.props.renderCloseButton)}
             </div>
         );
     };
@@ -44,12 +40,12 @@ class Card extends Component {
         return (
             <Fragment>
                 <div className="card__close">
-                    {this.renderButton(Icon.types.remove)}
+                    {this.renderButton(this.props.renderCloseButton)}
                 </div>
                 <div className="card__arrows">
-                    {this.renderButton(Icon.types.arrowLeft)}
+                    {this.renderButton(this.props.renderLeftButton)}
                     <div className="card__right-arrow">
-                        {this.renderButton(Icon.types.arrowRight)}
+                        {this.renderButton(this.props.renderRightButton)}
                     </div>
                 </div>
             </Fragment>
