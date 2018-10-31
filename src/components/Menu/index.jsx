@@ -19,38 +19,20 @@ class Menu extends Component {
             {
                 name: menuItems.search,
                 location: () => stateToSearchURL(this.props.search.request),
-                isActive: match =>
-                    match ||
-                    locations.search === this.props.lastMenuPathname ||
-                    this.props.lastMenuPathname === null,
             },
             {
                 name: menuItems.favorites,
                 location: () => locations.favorites,
-                isActive: match =>
-                    match ||
-                    locations.favorites === this.props.lastMenuPathname,
             },
             {
                 name: menuItems.random,
                 location: () => locations.random,
-                isActive: match =>
-                    match || locations.random === this.props.lastMenuPathname,
             },
             {
                 name: menuItems.ingredients,
                 location: () => locations.ingredients,
-                isActive: match =>
-                    match ||
-                    locations.ingredients === this.props.lastMenuPathname,
             },
         ],
-    };
-
-    isActive = itemLocation => {
-        console.log(itemLocation);
-        return match =>
-            match || itemLocation.startsWith(this.props.lastMenuPathname);
     };
 
     render() {
@@ -61,7 +43,6 @@ class Menu extends Component {
                         <MenuLink
                             to={item.location()}
                             onClick={this.props.onClick}
-                            isActive={item.isActive || null}
                             location={this.props.location}
                         >
                             {item.name}
@@ -77,5 +58,4 @@ export default connect(state => ({
     search: state.search,
     filters: state.filters,
     location: state.router.location,
-    lastMenuPathname: state.locations.lastMenuPathname,
 }))(Menu);

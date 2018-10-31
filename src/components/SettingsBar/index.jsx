@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
-import { connect } from "react-redux";
 
 import MainHeader from "../common/MainHeader";
 import Menu from "../Menu";
@@ -19,6 +18,7 @@ class SettingsBar extends Component {
             [locations.favorites]: menuItems.favorites,
             [locations.random]: menuItems.random,
             [locations.ingredients]: menuItems.ingredients,
+            [locations.cocktail]: menuItems.cocktail,
         },
         showPopup: false,
     };
@@ -64,18 +64,6 @@ class SettingsBar extends Component {
                                 key={key}
                             />
                         ))}
-                        <Route
-                            key={"no match"}
-                            render={() =>
-                                this.renderHeader(
-                                    this.state.items[
-                                        this.props.lastMenuPathname
-                                            ? this.props.lastMenuPathname
-                                            : locations.search
-                                    ]
-                                )
-                            }
-                        />
                     </Switch>
                 </div>
 
@@ -90,6 +78,4 @@ class SettingsBar extends Component {
     }
 }
 
-export default connect(state => ({
-    lastMenuPathname: state.locations.lastMenuPathname,
-}))(SettingsBar);
+export default SettingsBar;

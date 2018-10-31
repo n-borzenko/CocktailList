@@ -3,6 +3,7 @@ const menuItems = {
     favorites: "Favorites",
     random: "Random",
     ingredients: "Ingredients",
+    cocktail: "Cocktail",
 };
 
 export default menuItems;

@@ -8,21 +8,5 @@
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-    background-image: url("./resources/search.png");
-}
-
-.background-image_search {
-    background-image: url("./resources/search.png");
-}
-
-.background-image_favorites {
-    background-image: url("./resources/favorites.png");
-}
-
-.background-image_random {
-    background-image: url("./resources/random.png");
-}
-
-.background-image_ingredients {
-    background-image: url("./resources/ingredients.png");
+    background-image: url("./resources/background.png");
 }
