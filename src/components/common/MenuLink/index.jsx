@@ -16,11 +16,13 @@ class MenuLink extends Component {
         ]).isRequired,
         onClick: PropTypes.func,
         isActive: PropTypes.func,
+        location: PropTypes.object,
     };
 
     render() {
         return (
             <NavLink
+                location={this.props.location}
                 className="menu-link"
                 activeClassName="menu-link_selected"
                 to={this.props.to}

@@ -4,7 +4,7 @@ import axios from "axios";
 
 import types, { searchTypes } from "../constants/search";
 import { searchRequest } from "../api";
-import locations from "../constants/locations";
+import { locations } from "../constants/locations";
 import { getFiltersList } from "./filters";
 import { filterTypes } from "../constants/filters";
 

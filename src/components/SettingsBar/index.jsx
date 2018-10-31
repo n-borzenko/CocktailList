@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
+import { connect } from "react-redux";
 
 import MainHeader from "../common/MainHeader";
 import Menu from "../Menu";
@@ -7,30 +8,18 @@ import Parameters from "../Parameters";
 import PopupContent from "../common/popup/PopupContent";
 import PopupPresenter from "../common/popup/PopupPresenter";
 import menuItems from "../../constants/menu";
-import locations from "../../constants/locations";
+import { locations } from "../../constants/locations";
 
 import "./SettingsBar.css";
 
 class SettingsBar extends Component {
     state = {
-        items: [
-            {
-                name: menuItems.search,
-                location: locations.search,
-            },
-            {
-                name: menuItems.favorites,
-                location: locations.favorites,
-            },
-            {
-                name: menuItems.random,
-                location: locations.random,
-            },
-            {
-                name: menuItems.ingredients,
-                location: locations.ingredients,
-            },
-        ],
+        items: {
+            [locations.search]: menuItems.search,
+            [locations.favorites]: menuItems.favorites,
+            [locations.random]: menuItems.random,
+            [locations.ingredients]: menuItems.ingredients,
+        },
         showPopup: false,
     };
 
@@ -66,20 +55,34 @@ class SettingsBar extends Component {
             <div className="settings-bar">
                 <div className="settings-bar__header">
                     <Switch>
-                        {this.state.items.map(item => (
+                        {Object.keys(this.state.items).map(key => (
                             <Route
-                                path={item.location}
-                                render={() => this.renderHeader(item.name)}
-                                key={item.name}
+                                path={key}
+                                render={() =>
+                                    this.renderHeader(this.state.items[key])
+                                }
+                                key={key}
                             />
                         ))}
+                        <Route
+                            key={"no match"}
+                            render={() =>
+                                this.renderHeader(
+                                    this.state.items[
+                                        this.props.lastMenuPathname
+                                            ? this.props.lastMenuPathname
+                                            : locations.search
+                                    ]
+                                )
+                            }
+                        />
                     </Switch>
                 </div>
 
                 {this.renderPopup()}
 
                 <div className="settings-bar__menu">
-                    <Menu location={this.props.location} />
+                    <Menu />
                 </div>
                 <Parameters />
             </div>
@@ -87,4 +90,6 @@ class SettingsBar extends Component {
     }
 }
 
-export default SettingsBar;
+export default connect(state => ({
+    lastMenuPathname: state.locations.lastMenuPathname,
+}))(SettingsBar);

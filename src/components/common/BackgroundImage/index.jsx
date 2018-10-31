@@ -1,14 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
+import { locations } from "../../../constants/locations";
+
 import "./BackgroundImage.css";
 
 class BackgroundImage extends Component {
     imageType = () => {
-        const index = this.props.location.lastIndexOf("/");
-        return index > 0
-            ? this.props.location.substring(1, index)
-            : this.props.location.substring(1);
+        return (this.props.lastMenuPathname || locations.search).substring(1);
     };
 
     render() {
@@ -18,5 +17,5 @@ class BackgroundImage extends Component {
 }
 
 export default connect(state => ({
-    location: state.router.location.pathname,
+    lastMenuPathname: state.locations.lastMenuPathname,
 }))(BackgroundImage);

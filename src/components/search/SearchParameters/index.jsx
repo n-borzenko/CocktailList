@@ -14,7 +14,7 @@ import {
     searchByFilter,
     searchByURL,
 } from "../../../actions/search";
-import locations from "../../../constants/locations";
+import { locations } from "../../../constants/locations";
 import { searchTypes } from "../../../constants/search";
 
 import "./SearchParameters.css";
@@ -103,7 +103,7 @@ class SearchParameters extends Component {
                         onSelect={this.changeMode}
                     />
                 </div>
-                <div className="search-parameters__details">
+                <div>
                     <Switch location={this.props.location}>
                         <Route
                             path={locations.searchByFilter}

@@ -6,7 +6,7 @@ import Picture from "../../common/Picture";
 import Title from "../../common/Title";
 import Icon from "../../common/Icon";
 import ActionButton from "../../common/ActionButton";
-import Summary from "../Summary";
+import Summary from "../../cocktail/Summary";
 
 import "./Cocktail.css";
 
@@ -50,13 +50,7 @@ class Cocktail extends Component {
 
     render() {
         return (
-            <Link
-                to={this.props.to}
-                onClick={() => {
-                    console.log("clicked");
-                }}
-                className="cocktail-link"
-            >
+            <Link to={this.props.to} className="cocktail-link">
                 <span className="cocktail">
                     <span className="cocktail__picture">
                         <Picture source={this.props.value.strDrinkThumb} />
