@@ -1,8 +1,12 @@
-export const locations = {
+const locations = {
     search: "/search",
     searchByFilter: "/search/filter",
-    cocktail: "/cocktail",
+    searchCocktail: "/search/cocktail",
     favorites: "/favorites",
+    favoritesCocktail: "/favorites/cocktail",
     random: "/random",
+    randomCocktail: "/random/cocktail",
     ingredients: "/ingredients",
 };
+
+export default locations;

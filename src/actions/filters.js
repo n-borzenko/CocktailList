@@ -1,7 +1,17 @@
 import types, { filterTypes } from "../constants/filters";
 import { filterRequest } from "../api";
 
-export const getFiltersList = () => async dispatch => {
+export const getFiltersList = () => async (dispatch, getState) => {
+    let filters = getState().filters;
+    if (
+        filters.category.length &&
+        filters.ingredient.length &&
+        filters.glass.length &&
+        filters.alcoholic.length
+    ) {
+        return;
+    }
+
     const requests = [
         filterTypes.category,
         filterTypes.alcoholic,

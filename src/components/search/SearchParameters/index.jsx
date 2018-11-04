@@ -3,26 +3,23 @@ import { Switch, Route } from "react-router-dom";
 import { connect } from "react-redux";
 
 import Subheader from "../../common/Subheader";
-import Button from "../../common/Button";
 import ButtonGroup from "../../common/ButtonGroup";
-import Filters from "../../filters/Filters";
 import SearchField from "../../common/SearchField";
-import PopupContent from "../../common/popup/PopupContent";
-import PopupPresenter from "../../common/popup/PopupPresenter";
+import FiltersParameters from "../FiltersParameters";
+
 import {
     searchByQuery,
     searchByFilter,
     searchByURL,
 } from "../../../actions/search";
-import { locations } from "../../../constants/locations";
+import locations from "../../../constants/locations";
 import { searchTypes } from "../../../constants/search";
 
 import "./SearchParameters.css";
 
 class SearchParameters extends Component {
     state = {
-        modes: [`by ${searchTypes.query}`, `by ${searchTypes.filter}`],
-        showPopup: false,
+        modes: [`By ${searchTypes.query}`, `By ${searchTypes.filter}`],
     };
 
     componentDidMount() {
@@ -35,61 +32,29 @@ class SearchParameters extends Component {
             : this.props.searchByFilter(this.props.request.filter);
     };
 
-    onSearch = (query, delay = true) => {
+    updateQuery = (query, delay = true) => {
         this.props.searchByQuery(query, delay);
-    };
-
-    selectFilter = filter => {
-        this.props.searchByFilter(filter);
     };
 
     renderSearchField = () => {
         return (
             <SearchField
-                onSearch={this.onSearch}
+                onSearch={this.updateQuery}
                 placeholder="Cocktail name"
                 value={this.props.request.query}
             />
         );
     };
 
-    renderFilters = () => {
-        return (
-            <div className="search-parameters__filters-container">
-                {this.renderPopupContent()}
-                <div className="search-parameters__filters-button">
-                    <Button
-                        stretched
-                        onClick={() => this.setState({ showPopup: true })}
-                    >
-                        select filter
-                    </Button>
-                </div>
-                <div className="search-parameters__filters">
-                    <Filters selectFilter={this.selectFilter} />
-                </div>
-            </div>
-        );
+    selectFilter = filter => {
+        this.props.searchByFilter(filter);
     };
 
-    closePopup = () => {
-        this.setState({ showPopup: false });
+    renderFiltersParameters = () => {
+        return <FiltersParameters selectFilter={this.selectFilter} />;
     };
 
-    renderPopupContent = () => {
-        return (
-            <PopupPresenter
-                showPopup={this.state.showPopup}
-                closePopup={this.closePopup}
-            >
-                <PopupContent title="Filters" onClick={this.closePopup}>
-                    <Filters selectFilter={this.selectFilter} />
-                </PopupContent>
-            </PopupPresenter>
-        );
-    };
-
-    render() {
+    renderSearchParameters = () => {
         const selected = this.props.request.type === searchTypes.filter ? 1 : 0;
         return (
             <div className="search-parameters">
@@ -107,7 +72,7 @@ class SearchParameters extends Component {
                     <Switch location={this.props.location}>
                         <Route
                             path={locations.searchByFilter}
-                            render={this.renderFilters}
+                            render={this.renderFiltersParameters}
                         />
                         <Route
                             path={locations.search}
@@ -116,6 +81,18 @@ class SearchParameters extends Component {
                     </Switch>
                 </div>
             </div>
+        );
+    };
+
+    render() {
+        return (
+            <Switch location={this.props.location}>
+                <Route path={locations.searchCocktail} render={() => null} />
+                <Route
+                    path={locations.search}
+                    render={this.renderSearchParameters}
+                />
+            </Switch>
         );
     }
 }

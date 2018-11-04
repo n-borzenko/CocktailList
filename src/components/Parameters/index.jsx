@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Switch, Route } from "react-router-dom";
 
 import SearchParameters from "../search/SearchParameters";
-import { locations } from "../../constants/locations";
+import locations from "../../constants/locations";
 
 class Parameters extends Component {
     render() {

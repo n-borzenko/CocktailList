@@ -1,0 +1,17 @@
+.filters-parameters__button {
+    display: block;
+}
+@media (min-width: 700px) {
+    .filters-parameters__button {
+        display: none;
+    }
+}
+
+.filters-parameters__values {
+    display: none;
+}
+@media (min-width: 700px) {
+    .filters-parameters__values {
+        display: block;
+    }
+}

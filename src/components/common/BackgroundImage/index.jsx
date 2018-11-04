@@ -1,9 +1,22 @@
-import React from "react";
+import React, { Component } from "react";
+import { connect } from "react-redux";
 
 import "./BackgroundImage.css";
 
-function BackgroundImage() {
-    return <div className="background-image" />;
+class BackgroundImage extends Component {
+    imageType = () => {
+        const index = this.props.location.indexOf("/", 1);
+        return index > 0
+            ? this.props.location.substring(1, index)
+            : this.props.location.substring(1);
+    };
+
+    render() {
+        const className = `background-image background-image_${this.imageType()}`;
+        return <div className={className} />;
+    }
 }
 
-export default BackgroundImage;
+export default connect(state => ({
+    location: state.router.location.pathname,
+}))(BackgroundImage);

@@ -10,9 +10,8 @@ import SearchContent from "../search/SearchContent";
 import FavoritesContent from "../favorites/FavoritesContent";
 import RandomContent from "../random/RandomContent";
 import IngredientsContent from "../ingredients/IngredientsContent";
-import CocktailContent from "../cocktail/CocktailContent";
 import NotFound from "../common/NotFound";
-import { locations } from "../../constants/locations";
+import locations from "../../constants/locations";
 import { POPUP_ID } from "../../constants/views";
 
 import "./App.css";
@@ -77,10 +76,6 @@ class App extends Component {
                             <Route
                                 path={locations.ingredients}
                                 component={IngredientsContent}
-                            />
-                            <Route
-                                path={locations.cocktail}
-                                component={CocktailContent}
                             />
                             <Route
                                 path="/"

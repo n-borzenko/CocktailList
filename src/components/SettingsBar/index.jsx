@@ -7,7 +7,7 @@ import Parameters from "../Parameters";
 import PopupContent from "../common/popup/PopupContent";
 import PopupPresenter from "../common/popup/PopupPresenter";
 import menuItems from "../../constants/menu";
-import { locations } from "../../constants/locations";
+import locations from "../../constants/locations";
 
 import "./SettingsBar.css";
 
@@ -18,7 +18,6 @@ class SettingsBar extends Component {
             [locations.favorites]: menuItems.favorites,
             [locations.random]: menuItems.random,
             [locations.ingredients]: menuItems.ingredients,
-            [locations.cocktail]: menuItems.cocktail,
         },
         showPopup: false,
     };

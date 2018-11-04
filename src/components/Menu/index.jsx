@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 
 import MenuLink from "../common/MenuLink";
 import menuItems from "../../constants/menu";
-import { locations } from "../../constants/locations";
+import locations from "../../constants/locations";
 import { stateToSearchURL } from "../../actions/search";
 
 import "./Menu.css";
@@ -19,6 +19,8 @@ class Menu extends Component {
             {
                 name: menuItems.search,
                 location: () => stateToSearchURL(this.props.search.request),
+                isActive: (match, location) =>
+                    location.pathname.startsWith(locations.search),
             },
             {
                 name: menuItems.favorites,
@@ -44,6 +46,7 @@ class Menu extends Component {
                             to={item.location()}
                             onClick={this.props.onClick}
                             location={this.props.location}
+                            isActive={item.isActive || null}
                         >
                             {item.name}
                         </MenuLink>

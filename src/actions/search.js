@@ -4,7 +4,7 @@ import axios from "axios";
 
 import types, { searchTypes } from "../constants/search";
 import { searchRequest } from "../api";
-import { locations } from "../constants/locations";
+import locations from "../constants/locations";
 import { getFiltersList } from "./filters";
 import { filterTypes } from "../constants/filters";
 
@@ -105,15 +105,29 @@ export const searchByURL = location => async (dispatch, getState) => {
         location && location.search && location.search.length > 1
             ? qs.parse(location.search.substr(1))
             : null;
-    if (location.pathname === locations.search) {
+
+    let pathname = location.pathname;
+    if (location.pathname.startsWith(locations.searchCocktail)) {
+        pathname =
+            parameters && parameters.type && parameters.name
+                ? locations.searchByFilter
+                : locations.search;
+    }
+
+    if (pathname === locations.search) {
         if (parameters && parameters.query && parameters.query.length) {
             performSearch(dispatch, searchTypes.query, parameters.query);
         } else {
             performSearch(dispatch, searchTypes.query, "");
         }
-    } else if (location.pathname === locations.searchByFilter) {
+    } else if (pathname === locations.searchByFilter) {
         let filters = getState().filters;
-        if (filters.category.length === 0) {
+        if (
+            !filters.category.length ||
+            !filters.ingredient.length ||
+            !filters.glass.length ||
+            !filters.alcoholic.length
+        ) {
             await dispatch(getFiltersList());
             filters = getState().filters;
         }
@@ -126,11 +140,9 @@ export const searchByURL = location => async (dispatch, getState) => {
         ) {
             performSearch(dispatch, searchTypes.filter, parameters);
         } else {
-            dispatch(push(filterToURL(null)));
             performSearch(dispatch, searchTypes.filter, null);
         }
     } else {
-        dispatch(push(queryToURL("")));
         performSearch(dispatch, searchTypes.query, "");
     }
 };
