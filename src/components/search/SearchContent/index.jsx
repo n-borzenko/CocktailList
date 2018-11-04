@@ -10,6 +10,8 @@ import { stateToSearchURL } from "../../../actions/search";
 
 import "./SearchContent.css";
 
+const PADDING_HEIGHT = 24;
+
 class SearchContent extends Component {
     renderCocktailDetails = () => {
         return <CocktailDetails />;
@@ -24,7 +26,7 @@ class SearchContent extends Component {
         return (
             <Cocktails
                 width={this.props.width}
-                height={this.props.height}
+                height={this.props.height - PADDING_HEIGHT * 2}
                 values={this.props.results}
                 size={
                     this.props.request.type === searchTypes.filter

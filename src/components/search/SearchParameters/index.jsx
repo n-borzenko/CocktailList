@@ -95,6 +95,12 @@ class SearchParameters extends Component {
             </Switch>
         );
     }
+
+    componentDidUpdate(prevProps) {
+        if (this.props.location.search !== prevProps.location.search) {
+            this.props.searchByURL(this.props.location);
+        }
+    }
 }
 
 export default connect(
