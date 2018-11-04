@@ -109,7 +109,6 @@ export const searchByURL = location => async (dispatch, getState) => {
         if (parameters && parameters.query && parameters.query.length) {
             performSearch(dispatch, searchTypes.query, parameters.query);
         } else {
-            dispatch(push(queryToURL("")));
             performSearch(dispatch, searchTypes.query, "");
         }
     } else if (location.pathname === locations.searchByFilter) {

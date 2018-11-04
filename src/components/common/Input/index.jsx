@@ -43,7 +43,7 @@ class Input extends Component {
                 <ActionButton
                     style={ActionButton.styles.none}
                     onClick={this.clearInput}
-                    tabindex={-1}
+                    tabIndex={-1}
                 >
                     <Icon type={Icon.types.remove} />
                 </ActionButton>
