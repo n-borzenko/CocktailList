@@ -6,7 +6,7 @@ import Cocktails from "../../cocktails/Cocktails";
 import CocktailDetails from "../../cocktail/CocktailDetails";
 import { searchTypes } from "../../../constants/search";
 import locations from "../../../constants/locations";
-import { stateToSearchURL, returnToURL } from "../../../actions/search";
+import { stateToSearchURL } from "../../../actions/search";
 
 import "./SearchContent.css";
 
@@ -16,14 +16,23 @@ class SearchContent extends Component {
     renderCocktailDetails = () => {
         return (
             <CocktailDetails
-                returnToURL={this.returnToURL}
+                getBackURL={this.getBackURL}
                 results={this.props.results}
+                locationCreator={this.locationCreator}
             />
         );
     };
 
-    returnToURL = () => {
-        this.props.returnToURL(stateToSearchURL(this.props.request));
+    getBackURL = () => {
+        return stateToSearchURL(this.props.request);
+    };
+
+    locationCreator = id => {
+        const parameters = stateToSearchURL(this.props.request).search || "";
+        return {
+            pathname: `${locations.searchCocktail}/${id}`,
+            search: parameters,
+        };
     };
 
     linkCreator = id => {
@@ -66,12 +75,9 @@ class SearchContent extends Component {
     }
 }
 
-export default connect(
-    state => ({
-        request: state.search.request,
-        results: state.search.response.results,
-        location: state.router.location,
-        cocktail: state.cocktail.value,
-    }),
-    { returnToURL }
-)(SearchContent);
+export default connect(state => ({
+    request: state.search.request,
+    results: state.search.response.results,
+    location: state.router.location,
+    cocktail: state.cocktail.value,
+}))(SearchContent);

@@ -68,10 +68,6 @@ const performSearch = (dispatch, type, data) => {
     performRequest(dispatch, type, data);
 };
 
-export const returnToURL = URL => dispatch => {
-    dispatch(push(URL));
-};
-
 export const stateToSearchURL = state => {
     if (state.type === searchTypes.filter) {
         return filterToURL(state.filter);

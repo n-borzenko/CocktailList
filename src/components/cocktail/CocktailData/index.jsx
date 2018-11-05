@@ -32,7 +32,10 @@ class CocktailData extends Component {
             <div className="cocktail-data__header">
                 <div className="cocktail-data__picture-wrapper">
                     <div className="cocktail-data__picture">
-                        <Picture source={this.props.value.strDrinkThumb} />
+                        <Picture
+                            key={this.props.value.strDrinkThumb}
+                            source={this.props.value.strDrinkThumb}
+                        />
                     </div>
                 </div>
 

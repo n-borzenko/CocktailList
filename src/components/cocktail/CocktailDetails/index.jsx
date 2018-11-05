@@ -6,35 +6,53 @@ import ActionButton from "../../common/ActionButton";
 import Icon from "../../common/Icon";
 import Card from "../../common/Card";
 import CocktailData from "../CocktailData";
-import { loadCocktailDetails } from "../../../actions/cocktail";
+import { loadCocktailDetails, moveToURL } from "../../../actions/cocktail";
 import { createCocktailTitle } from "../../../helpers/title";
 
 import "./CocktailDetails.css";
 
 class CocktailDetails extends Component {
     static propTypes = {
-        returnToURL: PropTypes.func,
-        results: PropTypes.array,
+        getBackURL: PropTypes.func.isRequired,
+        results: PropTypes.array.isRequired,
+        locationCreator: PropTypes.func.isRequired,
     };
 
+    state = { left: null, right: null };
+
+    static getDerivedStateFromProps(props) {
+        return {
+            id: props.location.pathname.substring(
+                props.location.pathname.lastIndexOf("/") + 1
+            ),
+        };
+    }
+
     componentDidMount() {
-        const id = this.props.location.pathname.substring(
-            this.props.location.pathname.lastIndexOf("/") + 1
-        );
-        this.props.loadCocktailDetails(id);
+        this.props.loadCocktailDetails(this.state.id);
     }
 
     renderLeftButton = () => {
+        const onClick = this.state.left
+            ? () => {
+                  this.props.moveToURL(this.state.left);
+              }
+            : null;
         return (
-            <ActionButton onClick={() => console.log("left")}>
+            <ActionButton disabled={!this.state.left} onClick={onClick}>
                 <Icon type={Icon.types.arrowLeft} />
             </ActionButton>
         );
     };
 
     renderRightButton = () => {
+        const onClick = this.state.right
+            ? () => {
+                  this.props.moveToURL(this.state.right);
+              }
+            : null;
         return (
-            <ActionButton onClick={() => console.log("right")}>
+            <ActionButton disabled={!this.state.right} onClick={onClick}>
                 <Icon type={Icon.types.arrowRight} />
             </ActionButton>
         );
@@ -42,7 +60,9 @@ class CocktailDetails extends Component {
 
     renderCloseButton = () => {
         return (
-            <ActionButton onClick={() => this.props.returnToURL()}>
+            <ActionButton
+                onClick={() => this.props.moveToURL(this.props.getBackURL())}
+            >
                 <Icon type={Icon.types.remove} />
             </ActionButton>
         );
@@ -53,6 +73,7 @@ class CocktailDetails extends Component {
             <div className="cocktail-details">
                 <div className="cocktail-details__card">
                     <Card
+                        // key={this.state.id}
                         renderLeftButton={this.renderLeftButton}
                         renderRightButton={this.renderRightButton}
                         renderCloseButton={this.renderCloseButton}
@@ -64,7 +85,34 @@ class CocktailDetails extends Component {
         );
     }
 
-    componentDidUpdate() {
+    createLinks = () => {
+        const { results, locationCreator } = this.props;
+        let left = null;
+        let right = null;
+        if (results.length) {
+            const index = results.findIndex(
+                item => item.idDrink === this.state.id
+            );
+            if (index > 0) {
+                left = locationCreator(results[index - 1].idDrink);
+            }
+            if (index < results.length - 1 && index >= 0) {
+                right = locationCreator(results[index + 1].idDrink);
+            }
+        }
+        this.setState({ left, right });
+    };
+
+    componentDidUpdate(prevProps) {
+        if (this.props.location !== prevProps.location) {
+            this.props.loadCocktailDetails(this.state.id);
+        }
+        if (
+            this.props.value !== prevProps.value ||
+            this.props.results !== prevProps.results
+        ) {
+            this.createLinks();
+        }
         createCocktailTitle(this.props.value ? this.props.value.strDrink : "");
     }
 }
@@ -74,5 +122,5 @@ export default connect(
         value: state.cocktail.value,
         location: state.router.location,
     }),
-    { loadCocktailDetails }
+    { loadCocktailDetails, moveToURL }
 )(CocktailDetails);

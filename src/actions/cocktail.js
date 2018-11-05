@@ -1,4 +1,5 @@
 import axios from "axios";
+import { push } from "connected-react-router";
 
 import types from "../constants/cocktail";
 import { searchTypes } from "../constants/search";
@@ -39,4 +40,8 @@ export const loadCocktailDetails = id => async (dispatch, getState) => {
         }
         console.log(error);
     }
+};
+
+export const moveToURL = URL => dispatch => {
+    dispatch(push(URL));
 };
