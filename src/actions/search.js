@@ -8,9 +8,9 @@ import locations from "../constants/locations";
 import { getFiltersList } from "./filters";
 import { filterTypes } from "../constants/filters";
 
-const SEARCH_DELAY = 300;
+const SEARCH_DELAY = 500;
 
-let timer = null;
+let updateUrlTimeout = null;
 
 const queryToURL = query => {
     const parameters =
@@ -45,9 +45,7 @@ const performRequest = async (dispatch, type, data) => {
     }
 };
 
-const performSearch = (dispatch, type, data, useDelay = false) => {
-    clearTimeout(timer);
-
+const performSearch = (dispatch, type, data) => {
     dispatch({
         type: types.SEARCH_STARTED,
         payload: {
@@ -67,13 +65,7 @@ const performSearch = (dispatch, type, data, useDelay = false) => {
         return;
     }
 
-    if (useDelay) {
-        timer = setTimeout(() => {
-            performRequest(dispatch, type, data);
-        }, SEARCH_DELAY);
-    } else {
-        performRequest(dispatch, type, data);
-    }
+    performRequest(dispatch, type, data);
 };
 
 export const returnToURL = URL => dispatch => {
@@ -88,17 +80,21 @@ export const stateToSearchURL = state => {
     }
 };
 
-export const searchByQuery = (text, useDelay = false) => dispatch => {
-    clearTimeout(timer);
+export const searchByQuery = (text, immediately) => dispatch => {
+    clearTimeout(updateUrlTimeout);
     const query = text || "";
-    dispatch(push(queryToURL(query)));
-    const needDelay = useDelay && query.length > 0;
-    performSearch(dispatch, searchTypes.query, query, needDelay);
+
+    if (immediately) {
+        dispatch(push(queryToURL(query)));
+        return;
+    }
+    updateUrlTimeout = setTimeout(() => {
+        dispatch(push(queryToURL(query)));
+    }, SEARCH_DELAY);
 };
 
 export const searchByFilter = (filter = null) => dispatch => {
     dispatch(push(filterToURL(filter)));
-    performSearch(dispatch, searchTypes.filter, filter);
 };
 
 export const searchByURL = location => async (dispatch, getState) => {

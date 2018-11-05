@@ -8,6 +8,7 @@ import "./Input.css";
 
 class Input extends Component {
     static propTypes = {
+        onClear: PropTypes.func.isRequired,
         onChange: PropTypes.func.isRequired,
         placeholder: PropTypes.string,
         value: PropTypes.string,
@@ -17,7 +18,7 @@ class Input extends Component {
     inputRef = React.createRef();
 
     clearInput = () => {
-        this.props.onChange("");
+        this.props.onClear("");
         this.inputRef.current.focus();
     };
 

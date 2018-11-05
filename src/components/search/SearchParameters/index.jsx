@@ -33,8 +33,8 @@ class SearchParameters extends Component {
             : this.props.searchByFilter(this.props.request.filter);
     };
 
-    updateQuery = (query, delay = true) => {
-        this.props.searchByQuery(query, delay);
+    updateQuery = (query, immediately = false) => {
+        this.props.searchByQuery(query, immediately);
     };
 
     renderSearchField = () => {

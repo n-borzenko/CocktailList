@@ -8,17 +8,36 @@ import Icon from "../Icon";
 import "./SearchField.css";
 
 class SearchField extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            value: props.value,
+        };
+    }
+
     static propTypes = {
         onSearch: PropTypes.func.isRequired,
         placeholder: PropTypes.string,
         value: PropTypes.string,
     };
 
+    componentDidUpdate(prevProps) {
+        if (prevProps.value !== this.props.value) {
+            this.setState({ value: this.props.value });
+        }
+    }
+
     startSearch = () => {
-        this.props.onSearch(this.props.value || "", false);
+        this.props.onSearch(this.state.value, true);
+    };
+
+    valueCleared = value => {
+        this.setState({ value });
+        this.props.onSearch(value, true);
     };
 
     valueChanged = value => {
+        this.setState({ value });
         this.props.onSearch(value);
     };
 
@@ -27,9 +46,10 @@ class SearchField extends Component {
             <div className="search-field">
                 <div className="search-field__input">
                     <Input
+                        onClear={this.valueCleared}
                         onChange={this.valueChanged}
                         placeholder={this.props.placeholder}
-                        value={this.props.value || ""}
+                        value={this.state.value || ""}
                     />
                 </div>
                 <div className="search-field__action">
