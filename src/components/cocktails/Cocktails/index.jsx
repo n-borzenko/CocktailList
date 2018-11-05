@@ -7,7 +7,7 @@ import Cocktail from "../Cocktail";
 import "./Cocktails.css";
 
 const CELL_HEIGHT_SMALL = 320;
-const CELL_HEIGHT_LARGE = 442;
+const CELL_HEIGHT_LARGE = 450;
 const CELL_WIDTH = 256;
 const MARGIN = 8;
 
@@ -55,7 +55,6 @@ class Cocktails extends Component {
                 : CELL_HEIGHT_SMALL + 2 * MARGIN;
         const position =
             index === -1 ? 0 : Math.floor(index / columnsCount) * rowHeight;
-
         return {
             columnsCount: columnsCount,
             scrollTo: { scrollTop: position, scrollLeft: 0 },

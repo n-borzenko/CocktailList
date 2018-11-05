@@ -15,16 +15,16 @@ let timer = null;
 const queryToURL = query => {
     const parameters =
         query && query.length
-            ? qs.stringify({
+            ? `?${qs.stringify({
                   query,
-              })
+              })}`
             : "";
-    return { pathname: locations.search, search: `?${parameters}` };
+    return { pathname: locations.search, search: parameters };
 };
 
 const filterToURL = filter => {
-    const parameters = filter ? qs.stringify(filter) : "";
-    return { pathname: locations.searchByFilter, search: `?${parameters}` };
+    const parameters = filter ? `?${qs.stringify(filter)}` : "";
+    return { pathname: locations.searchByFilter, search: parameters };
 };
 
 const performRequest = async (dispatch, type, data) => {
