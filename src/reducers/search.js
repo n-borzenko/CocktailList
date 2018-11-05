@@ -27,13 +27,17 @@ export default (state = initialState, action) => {
                 },
             };
         case types.SEARCH_COMPLETED:
-            const { results = [] } = action.payload;
+            const { results } = action.payload;
+            const sortedResults =
+                results && results.length
+                    ? results.sort((item1, item2) =>
+                          item1.strDrink.localeCompare(item2.strDrink)
+                      )
+                    : [];
             return {
                 ...state,
                 response: {
-                    results: results.sort((item1, item2) =>
-                        item1.strDrink.localeCompare(item2.strDrink)
-                    ),
+                    results: sortedResults,
                 },
             };
         default:
