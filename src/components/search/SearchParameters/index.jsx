@@ -6,6 +6,7 @@ import Subheader from "../../common/Subheader";
 import ButtonGroup from "../../common/ButtonGroup";
 import SearchField from "../../common/SearchField";
 import FiltersParameters from "../FiltersParameters";
+import { createSearchTitle } from "../../../helpers/title";
 
 import {
     searchByQuery,
@@ -100,6 +101,7 @@ class SearchParameters extends Component {
         if (this.props.location.search !== prevProps.location.search) {
             this.props.searchByURL(this.props.location);
         }
+        createSearchTitle(this.props.request);
     }
 }
 

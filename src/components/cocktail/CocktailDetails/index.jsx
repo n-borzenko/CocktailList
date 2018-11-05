@@ -7,6 +7,7 @@ import Icon from "../../common/Icon";
 import Card from "../../common/Card";
 import CocktailData from "../CocktailData";
 import { loadCocktailDetails } from "../../../actions/cocktail";
+import { createCocktailTitle } from "../../../helpers/title";
 
 import "./CocktailDetails.css";
 
@@ -61,6 +62,10 @@ class CocktailDetails extends Component {
                 </div>
             </div>
         );
+    }
+
+    componentDidUpdate() {
+        createCocktailTitle(this.props.value ? this.props.value.strDrink : "");
     }
 }
 

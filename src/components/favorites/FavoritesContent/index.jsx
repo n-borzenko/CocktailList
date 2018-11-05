@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 
 import CocktailDetails from "../../cocktail/CocktailDetails";
 import locations from "../../../constants/locations";
+import { createFavoritesTitle } from "../../../helpers/title";
 
 import "./FavoritesContent.css";
 
@@ -23,6 +24,10 @@ class FavoritesContent extends Component {
                 </Switch>
             </div>
         );
+    }
+
+    componentDidMount() {
+        createFavoritesTitle();
     }
 }
 
