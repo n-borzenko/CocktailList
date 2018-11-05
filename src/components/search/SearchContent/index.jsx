@@ -6,7 +6,7 @@ import Cocktails from "../../cocktails/Cocktails";
 import CocktailDetails from "../../cocktail/CocktailDetails";
 import { searchTypes } from "../../../constants/search";
 import locations from "../../../constants/locations";
-import { stateToSearchURL } from "../../../actions/search";
+import { stateToSearchURL, returnToURL } from "../../../actions/search";
 
 import "./SearchContent.css";
 
@@ -14,7 +14,16 @@ const PADDING_HEIGHT = 24;
 
 class SearchContent extends Component {
     renderCocktailDetails = () => {
-        return <CocktailDetails />;
+        return (
+            <CocktailDetails
+                returnToURL={this.returnToURL}
+                results={this.props.results}
+            />
+        );
+    };
+
+    returnToURL = () => {
+        this.props.returnToURL(stateToSearchURL(this.props.request));
     };
 
     linkCreator = id => {
@@ -34,6 +43,7 @@ class SearchContent extends Component {
                         : Cocktails.sizes.large
                 }
                 linkCreator={id => this.linkCreator(id)}
+                from={this.props.cocktail ? this.props.cocktail.idDrink : null}
             />
         );
     };
@@ -56,8 +66,12 @@ class SearchContent extends Component {
     }
 }
 
-export default connect(state => ({
-    request: state.search.request,
-    results: state.search.response.results,
-    location: state.router.location,
-}))(SearchContent);
+export default connect(
+    state => ({
+        request: state.search.request,
+        results: state.search.response.results,
+        location: state.router.location,
+        cocktail: state.cocktail.value,
+    }),
+    { returnToURL }
+)(SearchContent);

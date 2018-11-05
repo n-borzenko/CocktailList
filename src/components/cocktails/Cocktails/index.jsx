@@ -23,6 +23,7 @@ class Cocktails extends Component {
         linkCreator: PropTypes.func.isRequired,
         width: PropTypes.number.isRequired,
         height: PropTypes.number.isRequired,
+        from: PropTypes.string,
     };
 
     static defaultProps = {
@@ -31,11 +32,34 @@ class Cocktails extends Component {
         height: 0,
     };
 
+    gridRef = React.createRef();
+
     state = {};
 
+    componentDidMount = () => {
+        this.gridRef.current &&
+            this.gridRef.current.scrollToPosition(this.state.scrollTo);
+    };
+
     static getDerivedStateFromProps(props) {
+        const columnsCount = Math.floor(
+            props.width / (CELL_WIDTH + 2 * MARGIN)
+        );
+        const index =
+            props.from && props.values
+                ? props.values.findIndex(item => item.idDrink === props.from)
+                : -1;
+        const rowHeight =
+            props.size === Cocktails.sizes.large
+                ? CELL_HEIGHT_LARGE + 2 * MARGIN
+                : CELL_HEIGHT_SMALL + 2 * MARGIN;
+        const position =
+            index === -1 ? 0 : Math.floor(index / columnsCount) * rowHeight;
+
         return {
-            columnsCount: Math.floor(props.width / (CELL_WIDTH + 2 * MARGIN)),
+            columnsCount: columnsCount,
+            scrollTo: { scrollTop: position, scrollLeft: 0 },
+            rowHeight,
         };
     }
 
@@ -93,13 +117,10 @@ class Cocktails extends Component {
                     this.props.values.length / this.state.columnsCount
                 )}
                 columnWidth={this.props.width / this.state.columnsCount}
-                rowHeight={
-                    this.props.size === Cocktails.sizes.large
-                        ? CELL_HEIGHT_LARGE + 2 * MARGIN
-                        : CELL_HEIGHT_SMALL + 2 * MARGIN
-                }
+                rowHeight={this.state.rowHeight}
                 height={this.props.height}
                 width={this.props.width}
+                ref={this.gridRef}
             />
         );
     }

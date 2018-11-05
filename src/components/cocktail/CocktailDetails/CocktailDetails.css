@@ -1,17 +1,20 @@
 .cocktail-details {
-    padding: 24px;
+    padding: 0 24px;
     display: flex;
     justify-content: center;
     min-height: 100%;
     flex-wrap: wrap;
+    height: 100%;
 }
 @media (min-width: 700px) {
     .cocktail-details {
-        padding: 24px 64px;
+        padding: 0 64px;
     }
 }
 
 .cocktail-details__card {
     flex: 1 1 auto;
     max-width: 700px;
+    position: relative;
+    height: 100%;
 }

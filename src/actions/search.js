@@ -19,10 +19,7 @@ const queryToURL = query => {
                   query,
               })
             : "";
-    return {
-        pathname: locations.search,
-        search: `?${parameters}`,
-    };
+    return { pathname: locations.search, search: `?${parameters}` };
 };
 
 const filterToURL = filter => {
@@ -77,6 +74,10 @@ const performSearch = (dispatch, type, data, useDelay = false) => {
     } else {
         performRequest(dispatch, type, data);
     }
+};
+
+export const returnToURL = URL => dispatch => {
+    dispatch(push(URL));
 };
 
 export const stateToSearchURL = state => {
