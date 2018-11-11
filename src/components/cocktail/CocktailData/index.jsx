@@ -17,14 +17,8 @@ class CocktailData extends Component {
             strDrink: PropTypes.string.isRequired,
             strInstructions: PropTypes.string.isRequired,
         }),
-    };
-
-    state = {
-        favorite: false,
-    };
-
-    toggleFavorite = () => {
-        this.setState({ favorite: !this.state.favorite });
+        favorite: PropTypes.bool.isRequired,
+        toggleFavorite: PropTypes.func.isRequired,
     };
 
     renderHeader = () => {
@@ -49,8 +43,8 @@ class CocktailData extends Component {
                     </div>
 
                     <div className="cocktail-data__favorites">
-                        <Button onClick={this.toggleFavorite} stretched>
-                            {this.state.favorite
+                        <Button onClick={this.props.toggleFavorite} stretched>
+                            {this.props.favorite
                                 ? "Remove from favorites"
                                 : "Add to favorites"}
                         </Button>

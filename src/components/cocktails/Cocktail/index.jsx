@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
@@ -10,19 +10,18 @@ import Summary from "../../cocktail/Summary";
 
 import "./Cocktail.css";
 
-class Cocktail extends Component {
+class Cocktail extends PureComponent {
     static propTypes = {
         value: PropTypes.object.isRequired,
         to: PropTypes.string.isRequired,
-    };
-
-    state = {
-        favorite: false,
+        toggleFavorite: PropTypes.func.isRequired,
+        favorite: PropTypes.bool.isRequired,
     };
 
     toggleFavorite = event => {
         event.preventDefault();
-        this.setState({ favorite: !this.state.favorite });
+        const { value } = this.props;
+        this.props.toggleFavorite(!this.props.favorite, value.idDrink, value);
     };
 
     renderTitle = () => {
@@ -37,7 +36,7 @@ class Cocktail extends Component {
                     >
                         <Icon
                             type={
-                                this.state.favorite
+                                this.props.favorite
                                     ? Icon.types.favoritesFilled
                                     : Icon.types.favorites
                             }

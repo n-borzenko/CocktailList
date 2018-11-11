@@ -10,9 +10,10 @@ export const getFromStorage = (key, defaultValue = null) => {
     try {
         let value = localStorage[key];
         value = value ? JSON.parse(value) : null;
-        return value || typeof defaultValue === "function"
-            ? defaultValue()
-            : defaultValue;
+        return (
+            value ||
+            (typeof defaultValue === "function" ? defaultValue() : defaultValue)
+        );
     } catch (error) {
         console.error(error);
     }

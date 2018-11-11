@@ -7,6 +7,10 @@ import CocktailDetails from "../../cocktail/CocktailDetails";
 import { searchTypes } from "../../../constants/search";
 import locations from "../../../constants/locations";
 import { stateToSearchURL } from "../../../actions/search";
+import {
+    addToFavorites,
+    removeFromFavorites,
+} from "../../../actions/favorites";
 
 import "./SearchContent.css";
 
@@ -40,6 +44,16 @@ class SearchContent extends Component {
         return `${locations.searchCocktail}/${id}${parameters}`;
     };
 
+    toggleFavorite = (favorite, id, value = null) => {
+        if (favorite) {
+            const data =
+                this.props.request.type === searchTypes.filter ? null : value;
+            this.props.addToFavorites(id, data);
+        } else {
+            this.props.removeFromFavorites(id);
+        }
+    };
+
     renderCocktails = () => {
         return (
             <Cocktails
@@ -53,6 +67,8 @@ class SearchContent extends Component {
                 }
                 linkCreator={id => this.linkCreator(id)}
                 from={this.props.cocktail ? this.props.cocktail.idDrink : null}
+                favorites={this.props.favorites}
+                toggleFavorite={this.toggleFavorite}
             />
         );
     };
@@ -75,9 +91,13 @@ class SearchContent extends Component {
     }
 }
 
-export default connect(state => ({
-    request: state.search.request,
-    results: state.search.response.results,
-    location: state.router.location,
-    cocktail: state.cocktail.value,
-}))(SearchContent);
+export default connect(
+    state => ({
+        request: state.search.request,
+        results: state.search.response.results,
+        location: state.router.location,
+        cocktail: state.cocktail.value,
+        favorites: state.favorites.ids,
+    }),
+    { addToFavorites, removeFromFavorites }
+)(SearchContent);

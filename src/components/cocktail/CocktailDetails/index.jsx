@@ -8,6 +8,10 @@ import Card from "../../common/Card";
 import CocktailData from "../CocktailData";
 import { loadCocktailDetails, moveToURL } from "../../../actions/cocktail";
 import { createCocktailTitle } from "../../../helpers/title";
+import {
+    addToFavorites,
+    removeFromFavorites,
+} from "../../../actions/favorites";
 
 import "./CocktailDetails.css";
 
@@ -21,16 +25,26 @@ class CocktailDetails extends Component {
     state = { left: null, right: null };
 
     static getDerivedStateFromProps(props) {
+        const id = props.location.pathname.substring(
+            props.location.pathname.lastIndexOf("/") + 1
+        );
         return {
-            id: props.location.pathname.substring(
-                props.location.pathname.lastIndexOf("/") + 1
-            ),
+            id,
+            favorite: props.favorites.includes(id),
         };
     }
 
     componentDidMount() {
         this.props.loadCocktailDetails(this.state.id);
     }
+
+    toggleFavorite = () => {
+        if (this.state.favorite) {
+            this.props.removeFromFavorites(this.state.id);
+        } else {
+            this.props.addToFavorites(this.state.id, this.props.value);
+        }
+    };
 
     renderLeftButton = () => {
         const onClick = this.state.left
@@ -73,12 +87,15 @@ class CocktailDetails extends Component {
             <div className="cocktail-details">
                 <div className="cocktail-details__card">
                     <Card
-                        // key={this.state.id}
                         renderLeftButton={this.renderLeftButton}
                         renderRightButton={this.renderRightButton}
                         renderCloseButton={this.renderCloseButton}
                     >
-                        <CocktailData value={this.props.value} />
+                        <CocktailData
+                            value={this.props.value}
+                            favorite={this.state.favorite}
+                            toggleFavorite={this.toggleFavorite}
+                        />
                     </Card>
                 </div>
             </div>
@@ -121,6 +138,7 @@ export default connect(
     state => ({
         value: state.cocktail.value,
         location: state.router.location,
+        favorites: state.favorites.ids,
     }),
-    { loadCocktailDetails, moveToURL }
+    { loadCocktailDetails, moveToURL, addToFavorites, removeFromFavorites }
 )(CocktailDetails);

@@ -23,10 +23,6 @@ export const addToFavorites = (id, value = null) => async dispatch => {
             },
         });
     } catch (error) {
-        if (axios.isCancel(error)) {
-            console.log("cancelled");
-            return;
-        }
         console.error(error);
     }
 };

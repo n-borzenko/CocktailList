@@ -24,6 +24,8 @@ class Cocktails extends Component {
         width: PropTypes.number.isRequired,
         height: PropTypes.number.isRequired,
         from: PropTypes.string,
+        favorites: PropTypes.arrayOf(PropTypes.string).isRequired,
+        toggleFavorite: PropTypes.func.isRequired,
     };
 
     static defaultProps = {
@@ -82,6 +84,8 @@ class Cocktails extends Component {
                 <Cocktail
                     value={cocktail}
                     to={this.props.linkCreator(cocktail.idDrink)}
+                    toggleFavorite={this.props.toggleFavorite}
+                    favorite={this.props.favorites.includes(cocktail.idDrink)}
                 />
             );
         return (
@@ -120,6 +124,7 @@ class Cocktails extends Component {
                 height={this.props.height}
                 width={this.props.width}
                 ref={this.gridRef}
+                favorites={this.props.favorites}
             />
         );
     }
