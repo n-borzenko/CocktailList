@@ -41,7 +41,7 @@ const performRequest = async (dispatch, type, data) => {
             console.log("cancelled");
             return;
         }
-        console.log(error);
+        console.error(error);
     }
 };
 

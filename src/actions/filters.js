@@ -42,6 +42,6 @@ export const getFiltersList = () => async (dispatch, getState) => {
             },
         });
     } catch (error) {
-        console.log(error);
+        console.error(error);
     }
 };
