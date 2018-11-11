@@ -19,12 +19,12 @@ const queryToURL = query => {
                   query,
               })}`
             : "";
-    return { pathname: locations.search, search: parameters };
+    return { pathname: locations.search, search: parameters || "" };
 };
 
 const filterToURL = filter => {
     const parameters = filter ? `?${qs.stringify(filter)}` : "";
-    return { pathname: locations.searchByFilter, search: parameters };
+    return { pathname: locations.searchByFilter, search: parameters || "" };
 };
 
 const performRequest = async (dispatch, type, data) => {

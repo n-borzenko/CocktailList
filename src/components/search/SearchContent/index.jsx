@@ -32,7 +32,7 @@ class SearchContent extends Component {
     };
 
     locationCreator = id => {
-        const parameters = stateToSearchURL(this.props.request).search || "";
+        const parameters = stateToSearchURL(this.props.request).search;
         return {
             pathname: `${locations.searchCocktail}/${id}`,
             search: parameters,
@@ -40,7 +40,7 @@ class SearchContent extends Component {
     };
 
     linkCreator = id => {
-        const parameters = stateToSearchURL(this.props.request).search || "";
+        const parameters = stateToSearchURL(this.props.request).search;
         return `${locations.searchCocktail}/${id}${parameters}`;
     };
 

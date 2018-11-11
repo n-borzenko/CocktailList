@@ -41,6 +41,14 @@ class App extends Component {
         window.removeEventListener("resize", this.resizeHandler);
     }
 
+    renderSearchContent = () => (
+        <SearchContent width={this.state.width} height={this.state.height} />
+    );
+
+    renderFavoritesContent = () => (
+        <FavoritesContent width={this.state.width} height={this.state.height} />
+    );
+
     render() {
         return (
             <ConnectedRouter history={history}>
@@ -58,16 +66,11 @@ class App extends Component {
                         <Switch>
                             <Route
                                 path={locations.search}
-                                render={() => (
-                                    <SearchContent
-                                        width={this.state.width}
-                                        height={this.state.height}
-                                    />
-                                )}
+                                render={this.renderSearchContent}
                             />
                             <Route
                                 path={locations.favorites}
-                                component={FavoritesContent}
+                                render={this.renderFavoritesContent}
                             />
                             <Route
                                 path={locations.random}
