@@ -97,7 +97,7 @@ export default connect(
         results: state.search.response.results,
         location: state.router.location,
         cocktail: state.cocktail.value,
-        favorites: state.favorites.ids,
+        favorites: state.favorites,
     }),
     { addToFavorites, removeFromFavorites }
 )(SearchContent);

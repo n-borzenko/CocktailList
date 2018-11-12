@@ -57,6 +57,12 @@ export default (state = initialState, action) => {
                 values,
             };
         }
+        case types.FAVORITES_ACTUALIZE: {
+            const { ids, values } = action.payload;
+            const newValues = values ? values : state.values;
+            const newIds = ids ? ids : state.ids;
+            return { ids: sortItems(newIds, newValues), values: newValues };
+        }
         default:
             return state;
     }

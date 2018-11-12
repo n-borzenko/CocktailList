@@ -24,7 +24,10 @@ class Cocktails extends Component {
         width: PropTypes.number.isRequired,
         height: PropTypes.number.isRequired,
         from: PropTypes.string,
-        favorites: PropTypes.arrayOf(PropTypes.string).isRequired,
+        favorites: PropTypes.shape({
+            ids: PropTypes.arrayOf(PropTypes.string).isRequired,
+            values: PropTypes.object.isRequired,
+        }).isRequired,
         toggleFavorite: PropTypes.func.isRequired,
     };
 
@@ -85,7 +88,9 @@ class Cocktails extends Component {
                     value={cocktail}
                     to={this.props.linkCreator(cocktail.idDrink)}
                     toggleFavorite={this.props.toggleFavorite}
-                    favorite={this.props.favorites.includes(cocktail.idDrink)}
+                    favorite={this.props.favorites.ids.includes(
+                        cocktail.idDrink
+                    )}
                 />
             );
         return (

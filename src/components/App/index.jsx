@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { ConnectedRouter } from "connected-react-router";
+import { connect } from "react-redux";
 
 import { history } from "../../store";
 import LoadingBar from "../common/LoadingBar";
@@ -13,6 +14,7 @@ import IngredientsContent from "../ingredients/IngredientsContent";
 import NotFound from "../common/NotFound";
 import locations from "../../constants/locations";
 import { POPUP_ID } from "../../constants/views";
+import { actualizeFavorites } from "../../actions/favorites";
 
 import "./App.css";
 
@@ -32,13 +34,21 @@ class App extends Component {
         this.containerRef.current.classList.remove("app__content_hidden");
     };
 
+    actualizeFavorites = event => {
+        if (window.localStorage && event.storageArea === window.localStorage) {
+            this.props.actualizeFavorites(event.key);
+        }
+    };
+
     componentDidMount() {
         this.resizeHandler();
         window.addEventListener("resize", this.resizeHandler);
+        window.addEventListener("storage", this.actualizeFavorites);
     }
 
     componentWillUnmount() {
         window.removeEventListener("resize", this.resizeHandler);
+        window.removeEventListener("storage", this.actualizeFavorites);
     }
 
     renderSearchContent = () => (
@@ -97,4 +107,7 @@ class App extends Component {
     }
 }
 
-export default App;
+export default connect(
+    null,
+    { actualizeFavorites }
+)(App);

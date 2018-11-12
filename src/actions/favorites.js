@@ -35,3 +35,10 @@ export const removeFromFavorites = id => dispatch => {
         },
     });
 };
+
+export const actualizeFavorites = key => dispatch => {
+    dispatch({
+        type: types.FAVORITES_ACTUALIZE,
+        payload: { key },
+    });
+};

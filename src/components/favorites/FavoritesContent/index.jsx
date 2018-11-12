@@ -59,9 +59,7 @@ class FavoritesContent extends Component {
             state.prevFavorites.favorites !== props.favorites
         ) {
             const { ids, values } = props.favorites;
-            const data = ids
-                .map(item => values[item])
-                .filter(item => item !== null);
+            const data = ids.map(item => values[item]).filter(item => item);
             newState = {
                 ...newState,
                 prevFavorites: props.favorites,
@@ -116,7 +114,7 @@ class FavoritesContent extends Component {
                 size={Cocktails.sizes.large}
                 linkCreator={id => this.linkCreator(id)}
                 from={this.props.cocktail ? this.props.cocktail.idDrink : null}
-                favorites={this.props.favorites.ids}
+                favorites={this.props.favorites}
                 toggleFavorite={this.toggleFavorite}
             />
         );
