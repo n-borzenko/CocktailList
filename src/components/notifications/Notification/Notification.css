@@ -1,0 +1,49 @@
+@import "../../../variables.css";
+
+.notification {
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 1);
+    max-width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 32px;
+    padding: 0 8px;
+    margin-top: 16px;
+    color: black;
+    border: none;
+    font-size: var(--text-size-control);
+    line-height: var(--text-line-height-control);
+    font-weight: var(--text-weight-control);
+}
+@media (min-width: 700px) {
+    .notification {
+        margin-top: 8px;
+    }
+}
+
+.notification:disabled {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+.notification:hover {
+    background: rgba(255, 255, 255, 0.8);
+}
+
+.notification:active {
+    background: rgba(255, 255, 255, 0.6);
+}
+
+.notification__message {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.notification__icon {
+    display: block;
+    width: calc(30px * 0.6);
+    height: calc(30px * 0.6);
+    margin: calc(32px * 0.2);
+    margin-left: 8px;
+}

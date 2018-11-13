@@ -1,5 +1,6 @@
 import types, { filterTypes } from "../constants/filters";
 import { filterRequest } from "../api";
+import { showError } from "./notifications";
 
 export const getFiltersList = () => async (dispatch, getState) => {
     let filters = getState().filters;
@@ -42,6 +43,6 @@ export const getFiltersList = () => async (dispatch, getState) => {
             },
         });
     } catch (error) {
-        console.error(error);
+        dispatch(showError("Oops, something went wrong"));
     }
 };

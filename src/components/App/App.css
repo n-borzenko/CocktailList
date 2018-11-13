@@ -20,6 +20,22 @@
     pointer-events: none;
 }
 
+.app__notifications {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 10;
+    width: 100%;
+}
+
+@media (min-width: 700px) {
+    .app__notifications {
+        width: auto;
+        left: 304px;
+        max-width: calc(100% - 304px);
+    }
+}
+
 .app__settings {
     width: 100%;
     overflow: scroll;

@@ -9,6 +9,7 @@ import loading from "../reducers/loading";
 import filters from "../reducers/filters";
 import cocktail from "../reducers/cocktail";
 import favorites from "../reducers/favorites";
+import notifications from "../reducers/notifications";
 
 export const history = createBrowserHistory();
 const rootReducer = combineReducers({
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
     filters,
     cocktail,
     favorites,
+    notifications,
 });
 
 const store = createStore(

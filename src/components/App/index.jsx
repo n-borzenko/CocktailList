@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import { history } from "../../store";
 import LoadingBar from "../common/LoadingBar";
 import BackgroundImage from "../common/BackgroundImage";
+import Notifications from "../notifications/Notifications";
 import SettingsBar from "../SettingsBar";
 import SearchContent from "../search/SearchContent";
 import FavoritesContent from "../favorites/FavoritesContent";
@@ -67,6 +68,10 @@ class App extends Component {
 
                     <div className="app__loading-bar">
                         <LoadingBar />
+                    </div>
+
+                    <div className="app__notifications">
+                        <Notifications />
                     </div>
 
                     <div className="app__settings">

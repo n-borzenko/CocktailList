@@ -1,5 +1,6 @@
 import types from "../constants/favorites";
 import { cocktailRequest } from "../api";
+import { showError, showMessage } from "./notifications";
 
 export const addToFavorites = (id, value = null) => async dispatch => {
     dispatch({
@@ -23,7 +24,7 @@ export const addToFavorites = (id, value = null) => async dispatch => {
             },
         });
     } catch (error) {
-        console.error(error);
+        dispatch(showError("Oops, something went wrong"));
     }
 };
 
@@ -76,7 +77,7 @@ export const updateFavorites = () => async (dispatch, getState) => {
             },
         });
     } catch (error) {
-        console.error(error);
+        dispatch(showError("Oops, something went wrong"));
     }
 };
 
@@ -108,9 +109,13 @@ export const checkForFavoritesUpdates = () => async (dispatch, getState) => {
                         values: newValues,
                     },
                 });
+                dispatch(showMessage("Favorites successfully updated"));
+                return;
             }
         } catch (error) {
-            console.error(error);
+            dispatch(showError("Oops, something went wrong"));
+            return;
         }
     }
+    dispatch(showMessage("Favorites have already been updated"));
 };

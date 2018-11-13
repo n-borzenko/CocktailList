@@ -7,6 +7,7 @@ import { searchRequest } from "../api";
 import locations from "../constants/locations";
 import { getFiltersList } from "./filters";
 import { filterTypes } from "../constants/filters";
+import { showError } from "./notifications";
 
 const SEARCH_DELAY = 500;
 
@@ -38,10 +39,9 @@ const performRequest = async (dispatch, type, data) => {
         });
     } catch (error) {
         if (axios.isCancel(error)) {
-            console.log("cancelled");
             return;
         }
-        console.error(error);
+        dispatch(showError("Oops, something went wrong"));
     }
 };
 

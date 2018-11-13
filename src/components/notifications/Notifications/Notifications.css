@@ -1,0 +1,12 @@
+.notifications {
+    padding: 0 16px 16px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    max-width: 100%;
+}
+
+.notifications__item {
+    flex: 100%;
+    max-width: 100%;
+}

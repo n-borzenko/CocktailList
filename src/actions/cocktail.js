@@ -4,6 +4,7 @@ import { push } from "connected-react-router";
 import types from "../constants/cocktail";
 import { searchTypes } from "../constants/search";
 import { cocktailRequest } from "../api";
+import { showError } from "./notifications";
 
 export const loadCocktailDetails = id => async (dispatch, getState) => {
     dispatch({
@@ -35,10 +36,9 @@ export const loadCocktailDetails = id => async (dispatch, getState) => {
         });
     } catch (error) {
         if (axios.isCancel(error)) {
-            console.log("cancelled");
             return;
         }
-        console.error(error);
+        dispatch(showError("Oops, something went wrong"));
     }
 };
 
