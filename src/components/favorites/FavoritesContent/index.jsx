@@ -1,19 +1,24 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { Switch, Route } from "react-router-dom";
 import { connect } from "react-redux";
 
 import Cocktails from "../../cocktails/Cocktails";
 import CocktailDetails from "../../cocktail/CocktailDetails";
+import Button from "../../common/Button";
 import locations from "../../../constants/locations";
 import { createFavoritesTitle } from "../../../helpers/title";
 import {
     addToFavorites,
     removeFromFavorites,
+    clearFavorites,
+    updateFavorites,
+    checkForFavoritesUpdates,
 } from "../../../actions/favorites";
 
 import "./FavoritesContent.css";
 
-const PADDING_HEIGHT = 24;
+const PADDING_HEIGHT = 16;
+const BUTTONS_HEIGHT = 48;
 
 class FavoritesContent extends Component {
     renderCocktailDetails = () => {
@@ -35,6 +40,7 @@ class FavoritesContent extends Component {
 
     componentDidMount() {
         this.createTitle();
+        this.props.updateFavorites();
     }
 
     componentDidUpdate() {
@@ -107,16 +113,34 @@ class FavoritesContent extends Component {
 
     renderCocktails = () => {
         return (
-            <Cocktails
-                width={this.props.width}
-                height={this.props.height - PADDING_HEIGHT * 2}
-                values={this.state.values}
-                size={Cocktails.sizes.large}
-                linkCreator={id => this.linkCreator(id)}
-                from={this.props.cocktail ? this.props.cocktail.idDrink : null}
-                favorites={this.props.favorites}
-                toggleFavorite={this.toggleFavorite}
-            />
+            <Fragment>
+                <div className="favorites-content__buttons">
+                    <div className="favorites-content__button">
+                        <Button onClick={this.props.checkForFavoritesUpdates}>
+                            Check for updates
+                        </Button>
+                    </div>
+                    <div className="favorites-content__button">
+                        <Button onClick={this.props.clearFavorites}>
+                            Remove all
+                        </Button>
+                    </div>
+                </div>
+                <Cocktails
+                    width={this.props.width}
+                    height={
+                        this.props.height - PADDING_HEIGHT * 2 - BUTTONS_HEIGHT
+                    }
+                    values={this.state.values}
+                    size={Cocktails.sizes.large}
+                    linkCreator={id => this.linkCreator(id)}
+                    from={
+                        this.props.cocktail ? this.props.cocktail.idDrink : null
+                    }
+                    favorites={this.props.favorites}
+                    toggleFavorite={this.toggleFavorite}
+                />
+            </Fragment>
         );
     };
 
@@ -144,5 +168,11 @@ export default connect(
         cocktail: state.cocktail.value,
         favorites: state.favorites,
     }),
-    { addToFavorites, removeFromFavorites }
+    {
+        addToFavorites,
+        removeFromFavorites,
+        clearFavorites,
+        updateFavorites,
+        checkForFavoritesUpdates,
+    }
 )(FavoritesContent);

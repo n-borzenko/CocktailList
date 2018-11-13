@@ -42,26 +42,33 @@ export default (state = initialState, action) => {
         case types.FAVORITES_APPEND: {
             const { id, value } = action.payload;
             const values = { ...state.values, [id]: value };
-            return {
-                ids: sortItems([...state.ids], values),
-                values,
-            };
+            return { ids: sortItems([...state.ids], values), values };
         }
         case types.FAVORITES_REMOVE: {
             const { id } = action.payload;
             const values = { ...state.values };
             delete values[id];
             const ids = state.ids.filter(current => current !== id);
-            return {
-                ids,
-                values,
-            };
+            return { ids, values };
         }
         case types.FAVORITES_ACTUALIZE: {
             const { ids, values } = action.payload;
             const newValues = values ? values : state.values;
             const newIds = ids ? ids : state.ids;
-            return { ids: sortItems(newIds, newValues), values: newValues };
+            return {
+                ids: sortItems(newIds, newValues),
+                values: newValues,
+            };
+        }
+        case types.FAVORITES_CLEAR:
+            return { ids: [], values: {} };
+        case types.FAVORITES_UPDATE: {
+            const newValues = action.payload.values.reduce((obj, value) => {
+                obj[value.idDrink] = value;
+                return obj;
+            }, {});
+            const values = { ...state.values, ...newValues };
+            return { ids: sortItems([...state.ids], values), values };
         }
         default:
             return state;

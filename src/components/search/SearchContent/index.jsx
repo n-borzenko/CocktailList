@@ -14,7 +14,7 @@ import {
 
 import "./SearchContent.css";
 
-const PADDING_HEIGHT = 24;
+const PADDING_HEIGHT = 16;
 
 class SearchContent extends Component {
     renderCocktailDetails = () => {
