@@ -4,6 +4,7 @@ import { createBrowserHistory } from "history";
 import { connectRouter, routerMiddleware } from "connected-react-router";
 
 import favoritesMiddleware from "../middleware/favorites";
+import cocktailsMiddleware from "../middleware/cocktails";
 import search from "../reducers/search";
 import loading from "../reducers/loading";
 import filters from "../reducers/filters";
@@ -23,7 +24,12 @@ const rootReducer = combineReducers({
 
 const store = createStore(
     connectRouter(history)(rootReducer),
-    applyMiddleware(routerMiddleware(history), thunk, favoritesMiddleware)
+    applyMiddleware(
+        routerMiddleware(history),
+        thunk,
+        favoritesMiddleware,
+        cocktailsMiddleware
+    )
 );
 
 export default store;
