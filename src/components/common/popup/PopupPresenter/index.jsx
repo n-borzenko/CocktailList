@@ -13,12 +13,6 @@ class PopupPresenter extends Component {
             .isRequired,
     };
 
-    checkWidth = () => {
-        if (this.props.showPopup && window.innerWidth >= MOBILE_MAX_WIDTH) {
-            this.props.closePopup();
-        }
-    };
-
     componentDidMount() {
         window.addEventListener("resize", this.checkWidth);
     }
@@ -26,6 +20,12 @@ class PopupPresenter extends Component {
     componentWillUnmount() {
         window.removeEventListener("resize", this.checkWidth);
     }
+
+    checkWidth = () => {
+        if (this.props.showPopup && window.innerWidth >= MOBILE_MAX_WIDTH) {
+            this.props.closePopup();
+        }
+    };
 
     render() {
         return !this.props.showPopup ? null : (

@@ -41,11 +41,6 @@ class Cocktails extends Component {
 
     state = {};
 
-    componentDidMount = () => {
-        this.gridRef.current &&
-            this.gridRef.current.scrollToPosition(this.state.scrollTo);
-    };
-
     static getDerivedStateFromProps(props) {
         const columnsCount = Math.floor(
             props.width / (CELL_WIDTH + 2 * MARGIN)
@@ -66,6 +61,11 @@ class Cocktails extends Component {
             rowHeight,
         };
     }
+
+    componentDidMount = () => {
+        this.gridRef.current &&
+            this.gridRef.current.scrollToPosition(this.state.scrollTo);
+    };
 
     cellRenderer = ({
         columnIndex,

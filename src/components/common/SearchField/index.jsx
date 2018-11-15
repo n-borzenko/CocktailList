@@ -8,18 +8,18 @@ import Icon from "../Icon";
 import "./SearchField.css";
 
 class SearchField extends Component {
+    static propTypes = {
+        onSearch: PropTypes.func.isRequired,
+        placeholder: PropTypes.string,
+        value: PropTypes.string,
+    };
+
     constructor(props) {
         super(props);
         this.state = {
             value: props.value,
         };
     }
-
-    static propTypes = {
-        onSearch: PropTypes.func.isRequired,
-        placeholder: PropTypes.string,
-        value: PropTypes.string,
-    };
 
     componentDidUpdate(prevProps) {
         if (prevProps.value !== this.props.value) {

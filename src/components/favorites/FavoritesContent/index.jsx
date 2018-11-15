@@ -21,31 +21,12 @@ const PADDING_HEIGHT = 16;
 const BUTTONS_HEIGHT = 48;
 
 class FavoritesContent extends Component {
-    renderCocktailDetails = () => {
-        return (
-            <CocktailDetails
-                getBackURL={this.getBackURL}
-                results={this.state.currentResults}
-                locationCreator={this.locationCreator}
-            />
-        );
-    };
-
     state = {
         prevLocation: null,
         prevFavorites: null,
         values: [],
         currentResults: [],
     };
-
-    componentDidMount() {
-        this.createTitle();
-        this.props.updateFavorites();
-    }
-
-    componentDidUpdate() {
-        this.createTitle();
-    }
 
     static getDerivedStateFromProps(props, state) {
         const appendResults =
@@ -82,6 +63,15 @@ class FavoritesContent extends Component {
         return Object.keys(newState).length ? newState : null;
     }
 
+    componentDidMount() {
+        this.createTitle();
+        this.props.updateFavorites();
+    }
+
+    componentDidUpdate() {
+        this.createTitle();
+    }
+
     createTitle = () => {
         if (this.props.location.pathname !== locations.favoritesCocktail) {
             createFavoritesTitle();
@@ -109,6 +99,16 @@ class FavoritesContent extends Component {
         } else {
             this.props.removeFromFavorites(id);
         }
+    };
+
+    renderCocktailDetails = () => {
+        return (
+            <CocktailDetails
+                getBackURL={this.getBackURL}
+                results={this.state.currentResults}
+                locationCreator={this.locationCreator}
+            />
+        );
     };
 
     renderCocktails = () => {

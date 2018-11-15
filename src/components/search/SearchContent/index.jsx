@@ -17,16 +17,6 @@ import "./SearchContent.css";
 const PADDING_HEIGHT = 16;
 
 class SearchContent extends Component {
-    renderCocktailDetails = () => {
-        return (
-            <CocktailDetails
-                getBackURL={this.getBackURL}
-                results={this.props.results}
-                locationCreator={this.locationCreator}
-            />
-        );
-    };
-
     getBackURL = () => {
         return stateToSearchURL(this.props.request);
     };
@@ -52,6 +42,16 @@ class SearchContent extends Component {
         } else {
             this.props.removeFromFavorites(id);
         }
+    };
+
+    renderCocktailDetails = () => {
+        return (
+            <CocktailDetails
+                getBackURL={this.getBackURL}
+                results={this.props.results}
+                locationCreator={this.locationCreator}
+            />
+        );
     };
 
     renderCocktails = () => {

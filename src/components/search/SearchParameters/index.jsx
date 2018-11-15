@@ -27,6 +27,13 @@ class SearchParameters extends Component {
         this.props.searchByURL(this.props.location);
     }
 
+    componentDidUpdate(prevProps) {
+        if (this.props.location.search !== prevProps.location.search) {
+            this.props.searchByURL(this.props.location);
+        }
+        createSearchTitle(this.props.request);
+    }
+
     changeMode = index => {
         index === 0
             ? this.props.searchByQuery(this.props.request.query)
@@ -37,6 +44,10 @@ class SearchParameters extends Component {
         this.props.searchByQuery(query, immediately);
     };
 
+    selectFilter = filter => {
+        this.props.searchByFilter(filter);
+    };
+
     renderSearchField = () => {
         return (
             <SearchField
@@ -45,10 +56,6 @@ class SearchParameters extends Component {
                 value={this.props.request.query}
             />
         );
-    };
-
-    selectFilter = filter => {
-        this.props.searchByFilter(filter);
     };
 
     renderFiltersParameters = () => {
@@ -95,13 +102,6 @@ class SearchParameters extends Component {
                 />
             </Switch>
         );
-    }
-
-    componentDidUpdate(prevProps) {
-        if (this.props.location.search !== prevProps.location.search) {
-            this.props.searchByURL(this.props.location);
-        }
-        createSearchTitle(this.props.request);
     }
 }
 

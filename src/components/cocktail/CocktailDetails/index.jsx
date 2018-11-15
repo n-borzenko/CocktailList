@@ -41,6 +41,36 @@ class CocktailDetails extends Component {
         createCocktailTitle(this.props.value ? this.props.value.strDrink : "");
     }
 
+    componentDidUpdate(prevProps) {
+        if (this.props.location !== prevProps.location) {
+            this.props.loadCocktailDetails(this.state.id);
+        }
+        if (
+            this.props.value !== prevProps.value ||
+            this.props.results !== prevProps.results
+        ) {
+            this.createLinks();
+        }
+        createCocktailTitle(this.props.value ? this.props.value.strDrink : "");
+    }
+
+    createLinks = () => {
+        const { results, locationCreator } = this.props;
+        const index = results.findIndex(item => item.idDrink === this.state.id);
+        this.setState(state => {
+            if (index > 0) {
+                return { left: locationCreator(results[index - 1].idDrink) };
+            }
+            return { left: null };
+        });
+        this.setState(state => {
+            if (index < results.length - 1 && index >= 0) {
+                return { right: locationCreator(results[index + 1].idDrink) };
+            }
+            return { right: null };
+        });
+    };
+
     toggleFavorite = () => {
         if (this.state.favorite) {
             this.props.removeFromFavorites(this.state.id);
@@ -51,6 +81,14 @@ class CocktailDetails extends Component {
 
     showPrevious = () => {
         this.props.push(this.state.left);
+    };
+
+    showNext = () => {
+        this.props.push(this.state.right);
+    };
+
+    closeCocktailDetails = () => {
+        this.props.push(this.props.getBackURL());
     };
 
     renderLeftButton = () => {
@@ -64,20 +102,12 @@ class CocktailDetails extends Component {
         );
     };
 
-    showNext = () => {
-        this.props.push(this.state.right);
-    };
-
     renderRightButton = () => {
         return (
             <ActionButton disabled={!this.state.right} onClick={this.showNext}>
                 <Icon type={Icon.types.arrowRight} />
             </ActionButton>
         );
-    };
-
-    closeCocktailDetails = () => {
-        this.props.push(this.props.getBackURL());
     };
 
     renderCloseButton = () => {
@@ -106,36 +136,6 @@ class CocktailDetails extends Component {
                 </div>
             </div>
         );
-    }
-
-    createLinks = () => {
-        const { results, locationCreator } = this.props;
-        const index = results.findIndex(item => item.idDrink === this.state.id);
-        this.setState(state => {
-            if (index > 0) {
-                return { left: locationCreator(results[index - 1].idDrink) };
-            }
-            return { left: null };
-        });
-        this.setState(state => {
-            if (index < results.length - 1 && index >= 0) {
-                return { right: locationCreator(results[index + 1].idDrink) };
-            }
-            return { right: null };
-        });
-    };
-
-    componentDidUpdate(prevProps) {
-        if (this.props.location !== prevProps.location) {
-            this.props.loadCocktailDetails(this.state.id);
-        }
-        if (
-            this.props.value !== prevProps.value ||
-            this.props.results !== prevProps.results
-        ) {
-            this.createLinks();
-        }
-        createCocktailTitle(this.props.value ? this.props.value.strDrink : "");
     }
 }
 

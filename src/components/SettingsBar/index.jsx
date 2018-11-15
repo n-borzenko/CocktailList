@@ -22,6 +22,14 @@ class SettingsBar extends Component {
         showPopup: false,
     };
 
+    openPopup = () => {
+        this.setState({ showPopup: true });
+    };
+
+    closePopup = () => {
+        this.setState({ showPopup: false });
+    };
+
     renderHeader = title => {
         return (
             <MainHeader
@@ -30,14 +38,6 @@ class SettingsBar extends Component {
                 onClick={this.openPopup}
             />
         );
-    };
-
-    openPopup = () => {
-        this.setState({ showPopup: true });
-    };
-
-    closePopup = () => {
-        this.setState({ showPopup: false });
     };
 
     renderPopup = () => {

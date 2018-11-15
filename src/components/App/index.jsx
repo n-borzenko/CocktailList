@@ -26,6 +26,17 @@ class App extends Component {
         height: 0,
     };
 
+    componentDidMount() {
+        this.resizeHandler();
+        window.addEventListener("resize", this.resizeHandler);
+        window.addEventListener("storage", this.actualizeFavorites);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener("resize", this.resizeHandler);
+        window.removeEventListener("storage", this.actualizeFavorites);
+    }
+
     resizeHandler = () => {
         this.setState({
             width: this.containerRef.current.clientWidth,
@@ -38,17 +49,6 @@ class App extends Component {
             this.props.actualizeFavorites(event.key);
         }
     };
-
-    componentDidMount() {
-        this.resizeHandler();
-        window.addEventListener("resize", this.resizeHandler);
-        window.addEventListener("storage", this.actualizeFavorites);
-    }
-
-    componentWillUnmount() {
-        window.removeEventListener("resize", this.resizeHandler);
-        window.removeEventListener("storage", this.actualizeFavorites);
-    }
 
     renderSearchContent = () => (
         <SearchContent width={this.state.width} height={this.state.height} />
