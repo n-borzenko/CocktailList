@@ -16,8 +16,9 @@ class Summary extends Component {
         }).isRequired,
     };
 
-    constructor(props) {
-        super(props);
+    state = {};
+
+    static getDerivedStateFromProps(props) {
         const summary = [];
         if (props.value.strCategory) {
             summary.push({
@@ -43,7 +44,10 @@ class Summary extends Component {
                 name: props.value.strIBA,
             });
         }
-        this.state = { summary };
+
+        return {
+            summary,
+        };
     }
 
     render() {

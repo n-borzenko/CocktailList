@@ -42,23 +42,28 @@ class ingredientsList extends Component {
                     this.props.value[item[0]] &&
                     this.props.value[item[0]].length > 0
             )
-            .map(item => (
-                <div className="ingredients-list__item" key={item[0]}>
-                    <div className="ingredients-list__picture">
-                        <Picture
-                            source={ingredientImage(this.props.value[item[0]])}
-                        />
-                    </div>
-                    <div className="ingredients-list__data">
-                        <div className="ingredients-list__text">
-                            <Name>{this.props.value[item[0]]}</Name>
+            .map(item => {
+                const [ingredient, measure] = item;
+                return (
+                    <div className="ingredients-list__item" key={ingredient}>
+                        <div className="ingredients-list__picture">
+                            <Picture
+                                source={ingredientImage(
+                                    this.props.value[ingredient]
+                                )}
+                            />
                         </div>
-                        <div className="ingredients-list__text">
-                            <Text>{this.props.value[item[1]]}</Text>
+                        <div className="ingredients-list__data">
+                            <div className="ingredients-list__text">
+                                <Name>{this.props.value[ingredient]}</Name>
+                            </div>
+                            <div className="ingredients-list__text">
+                                <Text>{this.props.value[measure]}</Text>
+                            </div>
                         </div>
                     </div>
-                </div>
-            ));
+                );
+            });
     };
 
     render() {

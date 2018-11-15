@@ -27,12 +27,10 @@ class App extends Component {
     };
 
     resizeHandler = () => {
-        this.containerRef.current.classList.add("app__content_hidden");
         this.setState({
             width: this.containerRef.current.clientWidth,
             height: this.containerRef.current.clientHeight,
         });
-        this.containerRef.current.classList.remove("app__content_hidden");
     };
 
     actualizeFavorites = event => {

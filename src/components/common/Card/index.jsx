@@ -13,25 +13,23 @@ class Card extends Component {
     static propTypes = {
         children: PropTypes.oneOfType([PropTypes.element, PropTypes.string])
             .isRequired,
-        renderLeftButton: PropTypes.func,
-        renderRightButton: PropTypes.func,
-        renderCloseButton: PropTypes.func,
+        leftButton: PropTypes.element,
+        rightButton: PropTypes.element,
+        closeButton: PropTypes.element,
     };
 
-    renderButton = renderFunction => {
-        return renderFunction ? (
-            <div className="card__button">{renderFunction()}</div>
-        ) : null;
+    renderButton = button => {
+        return button ? <div className="card__button">{button}</div> : null;
     };
 
     renderMobileButtons = () => {
         return (
             <div className="card__buttons">
                 <div className="card__navigation">
-                    {this.renderButton(this.props.renderLeftButton)}
-                    {this.renderButton(this.props.renderRightButton)}
+                    {this.renderButton(this.props.leftButton)}
+                    {this.renderButton(this.props.rightButton)}
                 </div>
-                {this.renderButton(this.props.renderCloseButton)}
+                {this.renderButton(this.props.closeButton)}
             </div>
         );
     };
@@ -40,12 +38,12 @@ class Card extends Component {
         return (
             <Fragment>
                 <div className="card__close">
-                    {this.renderButton(this.props.renderCloseButton)}
+                    {this.renderButton(this.props.closeButton)}
                 </div>
                 <div className="card__arrows">
-                    {this.renderButton(this.props.renderLeftButton)}
+                    {this.renderButton(this.props.leftButton)}
                     <div className="card__right-arrow">
-                        {this.renderButton(this.props.renderRightButton)}
+                        {this.renderButton(this.props.rightButton)}
                     </div>
                 </div>
             </Fragment>

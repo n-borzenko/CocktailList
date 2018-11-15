@@ -27,9 +27,13 @@ class SettingsBar extends Component {
             <MainHeader
                 type={MainHeader.types.logo}
                 compactTitle={title}
-                onClick={() => this.setState({ showPopup: true })}
+                onClick={this.openPopup}
             />
         );
+    };
+
+    openPopup = () => {
+        this.setState({ showPopup: true });
     };
 
     closePopup = () => {

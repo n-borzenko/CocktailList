@@ -19,6 +19,10 @@ class FiltersParameters extends Component {
         this.setState({ showPopup: false });
     };
 
+    openPopup = () => {
+        this.setState({ showPopup: true });
+    };
+
     renderPopupContent = () => {
         return (
             <PopupPresenter
@@ -37,14 +41,7 @@ class FiltersParameters extends Component {
             <div className="filters-parameters">
                 {this.renderPopupContent()}
                 <div className="filters-parameters__button">
-                    <Button
-                        stretched
-                        onClick={() =>
-                            this.setState({
-                                showPopup: true,
-                            })
-                        }
-                    >
+                    <Button stretched onClick={this.openPopup}>
                         Select filter
                     </Button>
                 </div>
