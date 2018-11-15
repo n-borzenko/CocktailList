@@ -28,7 +28,14 @@ class SearchParameters extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (this.props.location.search !== prevProps.location.search) {
+        if (
+            this.props.location.search !== prevProps.location.search ||
+            (this.props.location.pathname === locations.search &&
+                prevProps.location.pathname === locations.searchByFilter) ||
+            (this.props.location.pathname === locations.searchByFilter &&
+                this.props.request.type === searchTypes.query &&
+                !this.props.location.search)
+        ) {
             this.props.searchByURL(this.props.location);
         }
         createSearchTitle(this.props.request);
@@ -36,7 +43,7 @@ class SearchParameters extends Component {
 
     changeMode = index => {
         index === 0
-            ? this.props.searchByQuery(this.props.request.query)
+            ? this.props.searchByQuery(this.props.request.query, true)
             : this.props.searchByFilter(this.props.request.filter);
     };
 

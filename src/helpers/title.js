@@ -11,7 +11,7 @@ export const createSearchTitle = request => {
     let parameters = "";
     if (request.type === searchTypes.filter && request.filter) {
         parameters = `${request.filter.name} ${DELIMITER} `;
-    } else if (request.query) {
+    } else if (request.type === searchTypes.query && request.query) {
         parameters = `${request.query} ${DELIMITER} `;
     }
     setTitle(`${parameters}Search`);
