@@ -22,54 +22,54 @@ const BUTTONS_HEIGHT = 48;
 
 class FavoritesContent extends Component {
     state = {
-        prevLocation: null,
-        prevFavorites: null,
         values: [],
         currentResults: [],
     };
 
-    static getDerivedStateFromProps(props, state) {
-        const appendResults =
-            (!state.prevLocation && locations.favoritesCocktail) ||
-            (state.prevLocation.pathname === locations.favorites &&
-                props.location.pathname.startsWith(
-                    locations.favoritesCocktail
-                ));
-
-        let newState = {};
-        if (!state.prevLocation || state.prevLocation !== props.location) {
-            newState.prevLocation = props.location;
-        }
-
-        if (
-            !state.prevFavorites ||
-            state.prevFavorites.favorites !== props.favorites
-        ) {
-            const { ids, values } = props.favorites;
-            const data = ids.map(item => values[item]).filter(item => item);
-            newState = {
-                ...newState,
-                prevFavorites: props.favorites,
-                values: data,
-            };
-            if (appendResults) {
-                newState.currentResults = newState.values;
-            }
-        } else {
-            if (appendResults) {
-                newState.currentResults = state.values;
-            }
-        }
-        return Object.keys(newState).length ? newState : null;
-    }
-
     componentDidMount() {
         this.createTitle();
         this.props.loadMissingValues();
+
+        const { ids, values } = this.props.favorites;
+        const data = ids.map(item => values[item]).filter(item => item);
+        this.setState({
+            values: data,
+            currentResults: data,
+        });
     }
 
-    componentDidUpdate() {
+    componentDidUpdate(prevProps) {
         this.createTitle();
+
+        // create array of cocktails
+        if (this.props.favorites !== prevProps.favorites) {
+            const { ids, values } = this.props.favorites;
+            const data = ids.map(item => values[item]).filter(item => item);
+            this.setState({
+                values: data,
+            });
+
+            // change list for cocktail details, if it is not visible
+            if (
+                !this.props.location.pathname.startsWith(
+                    locations.favoritesCocktail
+                )
+            ) {
+                this.setState({
+                    currentResults: data,
+                });
+            }
+        } else if (
+            prevProps.location.pathname.startsWith(
+                locations.favoritesCocktail
+            ) &&
+            this.props.location.pathname === locations.favorites
+        ) {
+            // update list for cocktail details, if it was just closed
+            this.setState(state => ({
+                currentResults: state.values,
+            }));
+        }
     }
 
     createTitle = () => {
