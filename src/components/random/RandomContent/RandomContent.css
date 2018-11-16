@@ -1,0 +1,59 @@
+.random-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+}
+
+.random-content__cards {
+    position: relative;
+    width: 200px;
+    height: 300px;
+}
+
+.random-content__card {
+    width: 100%;
+    height: 100%;
+    border: 1px solid white;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    position: absolute;
+    overflow: hidden;
+    will-change: transform;
+}
+
+.random-content__background {
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-image: url("./resources/random.png");
+
+    width: 100vw;
+    height: 100vh;
+    top: calc(-50vh + 112px);
+    /* (-72px/2 + 300px/2) = (114px) */
+    left: calc(-50vw + 98px);
+    position: absolute;
+    z-index: -1;
+}
+@media (min-width: 700px) {
+    .random-content__background {
+        top: calc(-50vh + 148px);
+        left: calc(-50vw - 54px);
+        /* (-304px/2 + 200px/2) = (-52px) */
+    }
+}
+
+.random-content__card_animated:hover {
+    transform: rotate(20deg) translate(150px, -20px);
+    opacity: 0;
+    transition: 4s ease-in;
+}
+
+.random-content__card_animated:hover .random-content__background {
+    transform: rotate(-20deg) translate(-150px, 20px);
+    /* opacity: 0.5; */
+    transition: 4s ease-in;
+}
