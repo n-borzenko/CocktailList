@@ -14,8 +14,13 @@ class Cocktail extends PureComponent {
     static propTypes = {
         value: PropTypes.object.isRequired,
         to: PropTypes.string.isRequired,
-        toggleFavorite: PropTypes.func.isRequired,
-        favorite: PropTypes.bool.isRequired,
+        skipFavorites: PropTypes.bool.isRequired,
+        toggleFavorite: PropTypes.func,
+        favorite: PropTypes.bool,
+    };
+
+    static defaultProps = {
+        skipFavorites: false,
     };
 
     toggleFavorite = event => {
@@ -24,25 +29,25 @@ class Cocktail extends PureComponent {
         this.props.toggleFavorite(!this.props.favorite, value.idDrink, value);
     };
 
-    renderTitle = () => {
+    renderFavorite = () => {
+        if (this.props.skipFavorites) {
+            return null;
+        }
         return (
-            <span className="cocktail__title">
-                <Title truncate>{this.props.value.strDrink}</Title>
-                <span className="cocktail__star">
-                    <ActionButton
-                        size={ActionButton.sizes.full}
-                        style={ActionButton.styles.transparent}
-                        onClick={this.toggleFavorite}
-                    >
-                        <Icon
-                            type={
-                                this.props.favorite
-                                    ? Icon.types.favoritesFilled
-                                    : Icon.types.favorites
-                            }
-                        />
-                    </ActionButton>
-                </span>
+            <span className="cocktail__star">
+                <ActionButton
+                    size={ActionButton.sizes.full}
+                    style={ActionButton.styles.transparent}
+                    onClick={this.toggleFavorite}
+                >
+                    <Icon
+                        type={
+                            this.props.favorite
+                                ? Icon.types.favoritesFilled
+                                : Icon.types.favorites
+                        }
+                    />
+                </ActionButton>
             </span>
         );
     };
@@ -55,7 +60,10 @@ class Cocktail extends PureComponent {
                         <Picture source={this.props.value.strDrinkThumb} />
                     </span>
                     <span className="cocktail__info">
-                        {this.renderTitle()}
+                        <span className="cocktail__title">
+                            <Title truncate>{this.props.value.strDrink}</Title>
+                            {this.renderFavorite()}
+                        </span>
                         <Summary value={this.props.value} />
                     </span>
                 </span>

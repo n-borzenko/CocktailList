@@ -21,6 +21,15 @@ class CocktailDetails extends Component {
         getBackURL: PropTypes.func.isRequired,
         results: PropTypes.array.isRequired,
         locationCreator: PropTypes.func.isRequired,
+        skipArrows: PropTypes.bool.isRequired,
+        skipFavorites: PropTypes.bool.isRequired,
+    };
+
+    static defaultProps = {
+        results: [],
+        locationCreator: () => null,
+        skipArrows: false,
+        skipFavorites: false,
     };
 
     state = { left: null, right: null };
@@ -92,22 +101,22 @@ class CocktailDetails extends Component {
     };
 
     renderLeftButton = () => {
-        return (
+        return !this.props.skipArrows ? (
             <ActionButton
                 disabled={!this.state.left}
                 onClick={this.showPrevious}
             >
                 <Icon type={Icon.types.arrowLeft} />
             </ActionButton>
-        );
+        ) : null;
     };
 
     renderRightButton = () => {
-        return (
+        return !this.props.skipArrows ? (
             <ActionButton disabled={!this.state.right} onClick={this.showNext}>
                 <Icon type={Icon.types.arrowRight} />
             </ActionButton>
-        );
+        ) : null;
     };
 
     renderCloseButton = () => {
@@ -131,6 +140,7 @@ class CocktailDetails extends Component {
                             value={this.props.value}
                             favorite={this.state.favorite}
                             toggleFavorite={this.toggleFavorite}
+                            skipFavorites={this.props.skipFavorites}
                         />
                     </Card>
                 </div>

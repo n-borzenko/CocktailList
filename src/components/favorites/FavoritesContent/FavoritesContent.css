@@ -4,6 +4,7 @@
     position: absolute;
     height: 100%;
     padding: 16px 0;
+    overflow: scroll;
 }
 
 .favorites-content__buttons {

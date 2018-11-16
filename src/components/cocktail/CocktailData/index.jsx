@@ -19,6 +19,22 @@ class CocktailData extends Component {
         }),
         favorite: PropTypes.bool.isRequired,
         toggleFavorite: PropTypes.func.isRequired,
+        skipFavorites: PropTypes.bool.isRequired,
+    };
+
+    renderFavorite = () => {
+        if (this.props.skipFavorites) {
+            return null;
+        }
+        return (
+            <div className="cocktail-data__favorites">
+                <Button onClick={this.props.toggleFavorite} stretched>
+                    {this.props.favorite
+                        ? "Remove from favorites"
+                        : "Add to favorites"}
+                </Button>
+            </div>
+        );
     };
 
     renderHeader = () => {
@@ -41,14 +57,7 @@ class CocktailData extends Component {
                         </div>
                         <Summary value={this.props.value} />
                     </div>
-
-                    <div className="cocktail-data__favorites">
-                        <Button onClick={this.props.toggleFavorite} stretched>
-                            {this.props.favorite
-                                ? "Remove from favorites"
-                                : "Add to favorites"}
-                        </Button>
-                    </div>
+                    {this.renderFavorite()}
                 </div>
             </div>
         );
