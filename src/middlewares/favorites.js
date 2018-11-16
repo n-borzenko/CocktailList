@@ -1,7 +1,7 @@
 import { setToStorage, getFromStorage } from "../helpers/storage";
 import types, { favoritesKeys } from "../constants/favorites";
 
-const favoritesMiddleware = ({ getState }) => next => action => {
+export const actualizeFavorites = () => next => action => {
     if (action.type === types.FAVORITES_ACTUALIZE) {
         if (action.payload.key === favoritesKeys.ids) {
             const ids = getFromStorage(favoritesKeys.ids, []);
@@ -15,7 +15,13 @@ const favoritesMiddleware = ({ getState }) => next => action => {
         }
         return;
     }
+    return next(action);
+};
 
+export const storeFavorites = ({ getState }) => next => action => {
+    if (action.type === types.FAVORITES_ACTUALIZE) {
+        return next(action);
+    }
     const oldState = getState();
     const result = next(action);
     const state = getState();
@@ -30,5 +36,3 @@ const favoritesMiddleware = ({ getState }) => next => action => {
     }
     return result;
 };
-
-export default favoritesMiddleware;

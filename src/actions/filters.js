@@ -43,6 +43,6 @@ export const getFiltersList = () => async (dispatch, getState) => {
             },
         });
     } catch (error) {
-        dispatch(showError("Oops, something went wrong"));
+        dispatch(showError());
     }
 };

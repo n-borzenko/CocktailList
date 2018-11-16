@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { connect } from "react-redux";
 
 import { removeNotification } from "../../../actions/notifications";
@@ -6,24 +6,20 @@ import Notification from "../Notification";
 
 import "./Notifications.css";
 
-class Notifications extends Component {
-    render() {
-        return (
-            <div className="notifications">
-                {this.props.notifications.map(notification => (
-                    <div className="notifications__item" key={notification.id}>
-                        <Notification
-                            onClick={() =>
-                                this.props.removeNotification(notification.id)
-                            }
-                        >
-                            {notification.message}
-                        </Notification>
-                    </div>
-                ))}
-            </div>
-        );
-    }
+function Notifications({ notifications, removeNotification }) {
+    return (
+        <div className="notifications">
+            {notifications.map(notification => (
+                <div className="notifications__item" key={notification.id}>
+                    <Notification
+                        remove={() => removeNotification(notification.id)}
+                    >
+                        {notification.message}
+                    </Notification>
+                </div>
+            ))}
+        </div>
+    );
 }
 
 export default connect(

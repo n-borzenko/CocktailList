@@ -10,7 +10,9 @@ export const showMessage = message => dispatch => {
     });
 };
 
-export const showError = message => dispatch => {
+export const showError = (
+    message = "Oops, something went wrong"
+) => dispatch => {
     dispatch({
         type: types.NOTIFICATIONS_ADD,
         payload: {

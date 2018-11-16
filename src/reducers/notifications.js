@@ -6,9 +6,7 @@ export default (state = initialState, action) => {
     switch (action.type) {
         case types.NOTIFICATIONS_ADD: {
             const messages = [...state.messages];
-            const id = messages.length
-                ? messages.reduce((max, item) => Math.max(max, item.id), 0) + 1
-                : 1;
+            const id = Math.max(...messages.map(message => message.id), 0) + 1;
             messages.push({
                 ...action.payload,
                 id,

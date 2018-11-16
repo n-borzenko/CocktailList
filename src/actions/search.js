@@ -41,7 +41,7 @@ const performRequest = async (dispatch, type, data) => {
         if (axios.isCancel(error)) {
             return;
         }
-        dispatch(showError("Oops, something went wrong"));
+        dispatch(showError());
     }
 };
 

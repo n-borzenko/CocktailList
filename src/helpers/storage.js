@@ -3,6 +3,7 @@ export const setToStorage = (key, value) => {
         localStorage.setItem(key, JSON.stringify(value));
     } catch (error) {
         console.error(error);
+        return null;
     }
 };
 
@@ -16,5 +17,8 @@ export const getFromStorage = (key, defaultValue = null) => {
         );
     } catch (error) {
         console.error(error);
+        return typeof defaultValue === "function"
+            ? defaultValue()
+            : defaultValue;
     }
 };

@@ -45,7 +45,7 @@ class App extends Component {
     };
 
     actualizeFavorites = event => {
-        if (window.localStorage && event.storageArea === window.localStorage) {
+        if (event.storageArea === window.localStorage) {
             this.props.actualizeFavorites(event.key);
         }
     };
@@ -66,10 +66,6 @@ class App extends Component {
 
                     <div className="app__loading-bar">
                         <LoadingBar />
-                    </div>
-
-                    <div className="app__notifications">
-                        <Notifications />
                     </div>
 
                     <div className="app__settings">
@@ -104,6 +100,10 @@ class App extends Component {
                     </div>
 
                     <div className="app__popup" id={POPUP_ID} />
+
+                    <div className="app__notifications">
+                        <Notifications />
+                    </div>
                 </div>
             </ConnectedRouter>
         );

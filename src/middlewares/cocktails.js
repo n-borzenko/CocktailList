@@ -21,7 +21,9 @@ const shortLocation = pathname => {
     }
 };
 
-const cocktailsMiddleware = ({ getState, dispatch }) => next => action => {
+// cocktail is used to scroll the list of cocktails
+// when the main location is changed, cocktail should be cleared
+export const clearCocktails = ({ getState, dispatch }) => next => action => {
     const oldLocation = getState().router.location.pathname;
     const result = next(action);
     const state = getState();
@@ -37,5 +39,3 @@ const cocktailsMiddleware = ({ getState, dispatch }) => next => action => {
     }
     return result;
 };
-
-export default cocktailsMiddleware;

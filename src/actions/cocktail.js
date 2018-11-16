@@ -37,6 +37,6 @@ export const loadCocktailDetails = id => async (dispatch, getState) => {
         if (axios.isCancel(error)) {
             return;
         }
-        dispatch(showError("Oops, something went wrong"));
+        dispatch(showError());
     }
 };

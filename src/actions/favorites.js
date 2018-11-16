@@ -24,7 +24,7 @@ export const addToFavorites = (id, value = null) => async dispatch => {
             },
         });
     } catch (error) {
-        dispatch(showError("Oops, something went wrong"));
+        dispatch(showError());
     }
 };
 
@@ -50,7 +50,7 @@ export const clearFavorites = () => dispatch => {
     });
 };
 
-export const updateFavorites = () => async (dispatch, getState) => {
+export const loadMissingValues = () => async (dispatch, getState) => {
     const { ids, values } = getState().favorites;
     const requests = ids
         .filter(id => !values[id])
@@ -63,6 +63,7 @@ export const updateFavorites = () => async (dispatch, getState) => {
         const results = (await Promise.all(requests)).map(
             result => result.data.drinks[0]
         );
+        // must be filtered because favorites may change during query execution
         const newIds = getState().favorites.ids;
         const newValues = results.filter(value =>
             newIds.includes(value.idDrink)
@@ -77,11 +78,11 @@ export const updateFavorites = () => async (dispatch, getState) => {
             },
         });
     } catch (error) {
-        dispatch(showError("Oops, something went wrong"));
+        dispatch(showError());
     }
 };
 
-export const checkForFavoritesUpdates = () => async (dispatch, getState) => {
+export const updateOutdatedValues = () => async (dispatch, getState) => {
     const oldIds = getState().favorites.ids;
     const requests = oldIds.map(id => cocktailRequest(id));
 
@@ -90,6 +91,8 @@ export const checkForFavoritesUpdates = () => async (dispatch, getState) => {
             const results = (await Promise.all(requests)).map(
                 result => result.data.drinks[0]
             );
+            // must be filtered because favorites may change during query execution
+            // only values that have changes are updated
             const { ids, values } = getState().favorites;
             const newValues = results.filter(value => {
                 const id = value.idDrink;
@@ -113,7 +116,7 @@ export const checkForFavoritesUpdates = () => async (dispatch, getState) => {
                 return;
             }
         } catch (error) {
-            dispatch(showError("Oops, something went wrong"));
+            dispatch(showError());
             return;
         }
     }

@@ -11,8 +11,8 @@ import {
     addToFavorites,
     removeFromFavorites,
     clearFavorites,
-    updateFavorites,
-    checkForFavoritesUpdates,
+    loadMissingValues,
+    updateOutdatedValues,
 } from "../../../actions/favorites";
 
 import "./FavoritesContent.css";
@@ -65,7 +65,7 @@ class FavoritesContent extends Component {
 
     componentDidMount() {
         this.createTitle();
-        this.props.updateFavorites();
+        this.props.loadMissingValues();
     }
 
     componentDidUpdate() {
@@ -116,7 +116,7 @@ class FavoritesContent extends Component {
             <Fragment>
                 <div className="favorites-content__buttons">
                     <div className="favorites-content__button">
-                        <Button onClick={this.props.checkForFavoritesUpdates}>
+                        <Button onClick={this.props.updateOutdatedValues}>
                             Check for updates
                         </Button>
                     </div>
@@ -172,7 +172,7 @@ export default connect(
         addToFavorites,
         removeFromFavorites,
         clearFavorites,
-        updateFavorites,
-        checkForFavoritesUpdates,
+        loadMissingValues,
+        updateOutdatedValues,
     }
 )(FavoritesContent);
