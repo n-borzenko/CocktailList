@@ -56,15 +56,19 @@ class Cocktail extends PureComponent {
         return (
             <Link to={this.props.to} className="cocktail-link">
                 <span className="cocktail">
-                    <span className="cocktail__picture">
-                        <Picture source={this.props.value.strDrinkThumb} />
-                    </span>
-                    <span className="cocktail__info">
-                        <span className="cocktail__title">
-                            <Title truncate>{this.props.value.strDrink}</Title>
-                            {this.renderFavorite()}
+                    <span className="cocktail__content">
+                        <span className="cocktail__picture">
+                            <Picture source={this.props.value.strDrinkThumb} />
                         </span>
-                        <Summary value={this.props.value} />
+                        <span className="cocktail__info">
+                            <span className="cocktail__title">
+                                <Title truncate>
+                                    {this.props.value.strDrink}
+                                </Title>
+                                {this.renderFavorite()}
+                            </span>
+                            <Summary value={this.props.value} />
+                        </span>
                     </span>
                 </span>
             </Link>

@@ -1,0 +1,96 @@
+.random-cards {
+    width: 256px;
+    height: 542px;
+    position: relative;
+}
+
+.random-cards__card {
+    border-radius: 20px;
+    position: absolute;
+    width: 256px;
+    height: 450px;
+}
+
+.random-cards__reaction {
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    z-index: 1;
+    bottom: 16px;
+}
+
+.random-cards__reaction_like {
+    right: 16px;
+}
+
+.random-cards__reaction_dislike {
+    left: 16px;
+}
+
+.random-cards__icon {
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    bottom: -76px;
+    will-change: transform, width, height, opacity;
+}
+
+.random-cards__icon_like {
+    right: 16px;
+    opacity: 0;
+}
+
+.random-cards__icon_dislike {
+    left: 16px;
+    opacity: 0;
+}
+
+@keyframes dislike {
+    0% {
+        opacity: 1;
+        width: 60px;
+        height: 60px;
+        transform: translate(0, 0);
+    }
+    100% {
+        opacity: 1;
+        width: 150px;
+        height: 150px;
+        transform: translate(37px, -323px);
+    }
+}
+
+@keyframes like {
+    0% {
+        opacity: 1;
+        width: 60px;
+        height: 60px;
+        transform: translate(0, 0);
+    }
+    100% {
+        opacity: 1;
+        width: 150px;
+        height: 150px;
+        transform: translate(-37px, -323px);
+    }
+}
+
+.dislike-animation-enter-active {
+    animation: dislike 2s ease-in forwards;
+}
+.dislike-animation-enter-done {
+    opacity: 1;
+    width: 150px;
+    height: 150px;
+    transform: translate(37px, -323px);
+}
+
+.like-animation-enter-active {
+    animation: like 2s ease-in forwards;
+}
+.like-animation-enter-done {
+    opacity: 1;
+    width: 150px;
+    height: 150px;
+    transform: translate(-37px, -323px);
+}

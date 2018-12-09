@@ -2,10 +2,10 @@
     border: 1px solid white;
     border-radius: 20px;
     background: rgba(255, 255, 255, 0.1);
-    overflow: hidden;
     display: flex;
     flex-direction: column;
     height: 100%;
+    width: 100%;
     padding: 1px;
 }
 
@@ -28,6 +28,13 @@
     display: block;
     width: 100%;
     height: 100%;
+}
+
+.cocktail__content {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 20px;
 }
 
 .cocktail__picture {

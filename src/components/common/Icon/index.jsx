@@ -23,6 +23,7 @@ class Icon extends Component {
         starFilled: "star_filled",
         favorites: "favorites",
         favoritesFilled: "favorites_filled",
+        dislike: "dislike",
     };
 
     static colors = {

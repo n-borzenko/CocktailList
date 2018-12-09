@@ -3,8 +3,11 @@
     width: 100%;
     position: absolute;
     flex: 1 0 auto;
-    padding: 16px 0;
     overflow: scroll;
+}
+
+.random-content__details {
+    padding: 16px 0;
 }
 
 .random-content__board {
@@ -13,54 +16,6 @@
     justify-content: center;
     min-height: 100%;
     width: 100%;
-}
-
-.random-content__cards {
-    position: relative;
-    width: 256px;
-    height: 450px;
-}
-
-@keyframes disappearing {
-    0% {
-        transform: rotate(0deg) translate(0, 0);
-        opacity: 1;
-    }
-    90% {
-        transform: rotate(20deg) translate(150px, -20px);
-        opacity: 1;
-    }
-    100% {
-        transform: rotate(20deg) translate(150px, -20px);
-        opacity: 0;
-    }
-}
-
-.random-card:hover {
-    /* transform: rotate(20deg) translate(150px, -20px);
-    opacity: 0;
-    transition: 4s ease-in; */
-    animation: disappearing 4s ease-in forwards;
-}
-
-@keyframes disappearing-background {
-    0% {
-        transform: rotate(0deg) translate(0, 0);
-        opacity: 1;
-    }
-    90% {
-        transform: rotate(-20deg) translate(-150px, 20px);
-        opacity: 1;
-    }
-    100% {
-        transform: rotate(-20deg) translate(-150px, 20px);
-        opacity: 1;
-    }
-}
-
-.random-card:hover .random-card__background {
-    /* transform: rotate(-20deg) translate(-150px, 20px);
-    /* opacity: 0.5; */
-    /*transition: 4s ease-in; */
-    animation: disappearing-background 4s ease-in forwards;
+    overflow: hidden;
+    padding: 16px;
 }

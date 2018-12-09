@@ -6,7 +6,7 @@ import { createRandomTitle } from "../../../helpers/title";
 import { addToFavorites } from "../../../actions/favorites";
 import locations from "../../../constants/locations";
 import CocktailDetails from "../../cocktail/CocktailDetails";
-import RandomCard from "../RandomCard";
+import RandomCards from "../RandomCards";
 import Cocktail from "../../cocktails/Cocktail";
 
 import "./RandomContent.css";
@@ -26,11 +26,13 @@ class RandomContent extends Component {
 
     renderCocktailDetails = () => {
         return (
-            <CocktailDetails
-                getBackURL={this.getBackURL}
-                skipArrows
-                skipFavorites
-            />
+            <div className="random-content__details">
+                <CocktailDetails
+                    getBackURL={this.getBackURL}
+                    skipArrows
+                    skipFavorites
+                />
+            </div>
         );
     };
 
@@ -38,15 +40,13 @@ class RandomContent extends Component {
         const value = this.props.favorites.values[this.props.favorites.ids[0]];
         return (
             <div className="random-content__board">
-                <div className="random-content__cards">
-                    <RandomCard>
-                        <Cocktail
-                            value={value}
-                            to={this.linkCreator(value.idDrink)}
-                            skipFavorites
-                        />
-                    </RandomCard>
-                </div>
+                <RandomCards>
+                    <Cocktail
+                        value={value}
+                        to={this.linkCreator(value.idDrink)}
+                        skipFavorites
+                    />
+                </RandomCards>
             </div>
         );
     };
