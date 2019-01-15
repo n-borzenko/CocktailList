@@ -1,0 +1,7 @@
+const RANDOM_RECEIVED = "RANDOM_RECEIVED";
+const RANDOM_CLEAR = "RANDOM_CLEAR";
+
+export default {
+    RANDOM_RECEIVED,
+    RANDOM_CLEAR,
+};

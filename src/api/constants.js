@@ -23,6 +23,10 @@ const configs = {
         method: methods.get,
         url: "/lookup.php",
     },
+    random: {
+        method: methods.get,
+        url: "/random.php",
+    },
 };
 
 export default {

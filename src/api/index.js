@@ -64,3 +64,13 @@ export const cocktailRequest = async id => {
         cancellationCocktailToken = null;
     }
 };
+
+export const randomRequest = async () => {
+    const config = { ...api.configs.random };
+    try {
+        const result = await loader.request(config);
+        return result;
+    } catch (error) {
+        throw error;
+    }
+};

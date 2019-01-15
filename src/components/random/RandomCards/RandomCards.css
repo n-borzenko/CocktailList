@@ -5,6 +5,7 @@
 }
 
 .random-cards__card {
+    opacity: 0;
     border-radius: 20px;
     position: absolute;
     width: 256px;
@@ -75,8 +76,26 @@
     }
 }
 
+@keyframes card-in {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes card-out {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
 .dislike-animation-enter-active {
-    animation: dislike 2s ease-in forwards;
+    animation: dislike 0.5s ease-in forwards;
 }
 .dislike-animation-enter-done {
     opacity: 1;
@@ -86,11 +105,25 @@
 }
 
 .like-animation-enter-active {
-    animation: like 2s ease-in forwards;
+    animation: like 0.5s ease-in forwards;
 }
 .like-animation-enter-done {
     opacity: 1;
     width: 150px;
     height: 150px;
     transform: translate(-37px, -323px);
+}
+
+.card-animation-enter-active {
+    animation: card-in 0.5s ease-in forwards;
+}
+.card-animation-enter-done {
+    opacity: 1;
+}
+
+.card-animation-exit-active {
+    animation: card-out 0.5s ease-in forwards;
+}
+.card-animation-exit-done {
+    opacity: 0;
 }

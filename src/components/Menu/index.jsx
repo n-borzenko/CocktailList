@@ -6,6 +6,7 @@ import MenuLink from "../common/MenuLink";
 import menuItems from "../../constants/menu";
 import locations from "../../constants/locations";
 import { stateToSearchURL } from "../../actions/search";
+import { stateToRandomURL } from "../../actions/random";
 
 import "./Menu.css";
 
@@ -28,7 +29,7 @@ class Menu extends Component {
             },
             {
                 name: menuItems.random,
-                location: () => locations.random,
+                location: () => stateToRandomURL(this.props.random),
             },
             {
                 name: menuItems.ingredients,
@@ -59,6 +60,7 @@ class Menu extends Component {
 
 export default connect(state => ({
     search: state.search,
+    random: state.random,
     filters: state.filters,
     location: state.router.location,
 }))(Menu);

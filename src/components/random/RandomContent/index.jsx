@@ -3,11 +3,10 @@ import { Switch, Route } from "react-router-dom";
 import { connect } from "react-redux";
 
 import { createRandomTitle } from "../../../helpers/title";
-import { addToFavorites } from "../../../actions/favorites";
+import { detailsToRandomURL } from "../../../actions/random";
 import locations from "../../../constants/locations";
 import CocktailDetails from "../../cocktail/CocktailDetails";
-import RandomCards from "../RandomCards";
-import Cocktail from "../../cocktails/Cocktail";
+import RandomBoard from "../RandomBoard";
 
 import "./RandomContent.css";
 
@@ -16,12 +15,8 @@ class RandomContent extends Component {
         createRandomTitle();
     }
 
-    linkCreator = id => {
-        return `${locations.randomCocktail}/${id}`;
-    };
-
     getBackURL = () => {
-        return { pathname: locations.random, search: "" };
+        return detailsToRandomURL(this.props.location);
     };
 
     renderCocktailDetails = () => {
@@ -37,16 +32,9 @@ class RandomContent extends Component {
     };
 
     renderRandom = () => {
-        const value = this.props.favorites.values[this.props.favorites.ids[0]];
         return (
             <div className="random-content__board">
-                <RandomCards>
-                    <Cocktail
-                        value={value}
-                        to={this.linkCreator(value.idDrink)}
-                        skipFavorites
-                    />
-                </RandomCards>
+                <RandomBoard />
             </div>
         );
     };
@@ -66,10 +54,6 @@ class RandomContent extends Component {
     }
 }
 
-export default connect(
-    state => ({
-        favorites: state.favorites,
-        location: state.router.location,
-    }),
-    { addToFavorites }
-)(RandomContent);
+export default connect(state => ({
+    location: state.router.location,
+}))(RandomContent);

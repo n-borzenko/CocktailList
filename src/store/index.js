@@ -10,6 +10,7 @@ import loading from "../reducers/loading";
 import filters from "../reducers/filters";
 import cocktail from "../reducers/cocktail";
 import favorites from "../reducers/favorites";
+import random from "../reducers/random";
 import notifications from "../reducers/notifications";
 
 export const history = createBrowserHistory();
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
     filters,
     cocktail,
     favorites,
+    random,
     notifications,
 });
 
