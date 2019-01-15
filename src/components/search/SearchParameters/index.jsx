@@ -28,11 +28,28 @@ class SearchParameters extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (this.props.location !== prevProps.location) {
+        if (
+            this.props.location !== prevProps.location &&
+            this.checkUpdateForSearch(prevProps)
+        ) {
             this.props.searchByURL(this.props.location);
         }
         createSearchTitle(this.props.request);
     }
+
+    checkUpdateForSearch = prevProps => {
+        const newLocation = this.props.location;
+        const oldLocation = prevProps.location;
+
+        if (newLocation.search !== oldLocation.search) {
+            return true;
+        }
+
+        return (
+            !oldLocation.pathname.startsWith(locations.searchCocktail) &&
+            !newLocation.pathname.startsWith(locations.searchCocktail)
+        );
+    };
 
     changeMode = index => {
         index === 0

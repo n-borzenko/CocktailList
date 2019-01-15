@@ -67,6 +67,11 @@ class Cocktails extends Component {
             this.gridRef.current.scrollToPosition(this.state.scrollTo);
     };
 
+    componentDidUpdate = () => {
+        this.gridRef.current &&
+            this.gridRef.current.scrollToPosition(this.state.scrollTo);
+    };
+
     cellRenderer = ({
         columnIndex,
         key,
