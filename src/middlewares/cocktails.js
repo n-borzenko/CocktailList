@@ -1,3 +1,5 @@
+import qs from "qs";
+
 import types from "../constants/cocktail";
 import locations from "../constants/locations";
 
@@ -21,20 +23,59 @@ const shortLocation = pathname => {
     }
 };
 
+const shortLocationChanged = (oldLocation, newLocation) => {
+    const oldShort = shortLocation(oldLocation.pathname);
+    const newShort = shortLocation(newLocation.pathname);
+
+    // clear if main location is changed
+    if (oldShort !== newShort) {
+        return true;
+    }
+
+    // don't clear if main location is same
+    if (oldShort !== locations.search) {
+        return false;
+    }
+
+    // clear if search type has changed
+    let oldSearch;
+    if (cocktailLocation(oldLocation.pathname)) {
+        const parameters =
+            oldLocation && oldLocation.search && oldLocation.search.length > 1
+                ? qs.parse(oldLocation.search.substr(1))
+                : null;
+        oldSearch =
+            parameters && parameters.type && parameters.name
+                ? locations.searchByFilter
+                : locations.search;
+    } else {
+        oldSearch = oldLocation.pathname.startsWith(locations.searchByFilter)
+            ? locations.searchByFilter
+            : locations.search;
+    }
+
+    if (oldSearch === locations.searchByFilter) {
+        return !newLocation.pathname.startsWith(locations.searchByFilter);
+    } else {
+        return newLocation.pathname.startsWith(locations.searchByFilter);
+    }
+};
+
 // cocktail is used to scroll the list of cocktails
 // when the main location is changed, cocktail should be cleared
 export const clearCocktails = ({ getState, dispatch }) => next => action => {
-    const oldLocation = getState().router.location.pathname;
+    const oldLocation = getState().router.location;
     const result = next(action);
     const state = getState();
-    const newLocation = state.router.location.pathname;
+    const newLocation = state.router.location;
 
     if (
-        oldLocation !== newLocation &&
+        oldLocation.pathname !== newLocation.pathname &&
         state.cocktail.value &&
-        !cocktailLocation(newLocation) &&
-        shortLocation(oldLocation) !== shortLocation(newLocation)
+        !cocktailLocation(newLocation.pathname) &&
+        shortLocationChanged(oldLocation, newLocation)
     ) {
+        console.log("CLEAR");
         dispatch({ type: types.COCKTAIL_CLEAR });
     }
     return result;
