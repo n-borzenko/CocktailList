@@ -30,8 +30,8 @@ const store = createStore(
         routerMiddleware(history),
         thunk,
         storeFavorites,
-        actualizeFavorites,
-        clearCocktails
+        actualizeFavorites
+        // clearCocktails
     )
 );
 
