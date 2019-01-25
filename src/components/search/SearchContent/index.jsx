@@ -6,6 +6,7 @@ import Cocktails from "../../cocktails/Cocktails";
 import CocktailDetails from "../../cocktail/CocktailDetails";
 import { searchTypes } from "../../../constants/search";
 import locations from "../../../constants/locations";
+import { areaFromLocation } from "../../../helpers/areas";
 import { stateToSearchURL } from "../../../actions/search";
 import {
     addToFavorites,
@@ -17,6 +18,24 @@ import "./SearchContent.css";
 const PADDING_HEIGHT = 16;
 
 class SearchContent extends Component {
+    state = {
+        scrollId: null,
+    };
+
+    componentDidUpdate() {
+        const area = areaFromLocation(this.props.location);
+        const lastItem = this.props.lastItems[area.area];
+        let scrollId = null;
+        if (lastItem && area.query === lastItem.query && lastItem.id) {
+            scrollId = lastItem.id;
+        }
+        if (scrollId !== this.state.scrollId) {
+            this.setState({
+                scrollId,
+            });
+        }
+    }
+
     getBackURL = () => {
         return stateToSearchURL(this.props.request);
     };
@@ -66,7 +85,7 @@ class SearchContent extends Component {
                         : Cocktails.sizes.large
                 }
                 linkCreator={id => this.linkCreator(id)}
-                from={this.props.cocktail ? this.props.cocktail.idDrink : null}
+                from={this.state.scrollId}
                 favorites={this.props.favorites}
                 toggleFavorite={this.toggleFavorite}
             />
@@ -96,7 +115,7 @@ export default connect(
         request: state.search.request,
         results: state.search.response.results,
         location: state.router.location,
-        cocktail: state.details.current.cocktail,
+        lastItems: state.details.history,
         favorites: state.favorites,
     }),
     { addToFavorites, removeFromFavorites }

@@ -7,8 +7,18 @@ import { cocktailRequest } from "../api";
 import { showError } from "./notifications";
 import locations from "../constants/locations";
 
+const historyLocations = new Set([
+    locations.search,
+    locations.searchByFilter,
+    locations.favorites,
+    locations.ingredients,
+]);
+
 const addToHistory = (id, location, dispatch) => {
     const { area, query } = areaFromLocation(location);
+    if (!historyLocations.has(area)) {
+        return;
+    }
     dispatch({
         type: types.DETAILS_HISTORY,
         payload: {

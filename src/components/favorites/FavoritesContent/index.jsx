@@ -112,6 +112,10 @@ class FavoritesContent extends Component {
     };
 
     renderCocktails = () => {
+        const id =
+            this.props.lastItem && this.props.lastItem.id
+                ? this.props.lastItem.id
+                : null;
         return (
             <Fragment>
                 <div className="favorites-content__buttons">
@@ -134,9 +138,7 @@ class FavoritesContent extends Component {
                     values={this.state.values}
                     size={Cocktails.sizes.large}
                     linkCreator={id => this.linkCreator(id)}
-                    from={
-                        this.props.cocktail ? this.props.cocktail.idDrink : null
-                    }
+                    from={id}
                     favorites={this.props.favorites}
                     toggleFavorite={this.toggleFavorite}
                 />
@@ -165,7 +167,7 @@ class FavoritesContent extends Component {
 export default connect(
     state => ({
         location: state.router.location,
-        cocktail: state.details.current.cocktail,
+        lastItem: state.details.history[locations.favorites],
         favorites: state.favorites,
     }),
     {
