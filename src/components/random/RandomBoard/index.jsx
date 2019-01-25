@@ -13,6 +13,7 @@ import RandomCards from "../RandomCards";
 import Cocktail from "../../cocktails/Cocktail";
 import AnimatedIcon from "../../common/AnimatedIcon";
 import Icon from "../../common/Icon";
+import { createRandomTitle } from "../../../helpers/title";
 
 import "./RandomBoard.css";
 
@@ -29,20 +30,24 @@ class RandomBoard extends Component {
         const id = this.getIdFromLocation();
         this.requestUpdates(id);
         this.checkUpdates(id);
+        createRandomTitle();
     }
 
     componentDidUpdate(prevProps) {
         console.log(`#### did update`);
         if (prevProps !== this.props) {
-            console.log(prevProps);
-            console.log(this.props);
+            //console.log(prevProps);
+            //console.log(this.props);
         }
 
         const id = this.getIdFromLocation();
+        const oldId = this.getIdFromLocation(prevProps.location);
+        console.log(`oldId: ${oldId}`);
+        console.log(`newId: ${id}`);
         if (
             prevProps.location.pathname === this.props.location.pathname &&
-            this.getIdFromLocation(prevProps.location) !== null &&
-            id === null
+            oldId !== null &&
+            (id === null || id !== oldId)
         ) {
             console.log("REQUEST updates");
             this.requestUpdates(id);
@@ -66,6 +71,7 @@ class RandomBoard extends Component {
                 value: null,
             });
         }
+        createRandomTitle();
     };
 
     checkUpdates = id => {
@@ -76,6 +82,7 @@ class RandomBoard extends Component {
                 this.setState({
                     value,
                 });
+                createRandomTitle(value.strDrink);
             }
         }
     };

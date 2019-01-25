@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
 import { connect } from "react-redux";
 
-import { createRandomTitle } from "../../../helpers/title";
 import { detailsToRandomURL } from "../../../actions/random";
 import locations from "../../../constants/locations";
 import CocktailDetails from "../../cocktail/CocktailDetails";
@@ -11,10 +10,6 @@ import RandomBoard from "../RandomBoard";
 import "./RandomContent.css";
 
 class RandomContent extends Component {
-    componentDidMount() {
-        createRandomTitle();
-    }
-
     getBackURL = () => {
         return detailsToRandomURL(this.props.location);
     };

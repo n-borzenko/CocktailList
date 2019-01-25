@@ -21,8 +21,9 @@ export const createFavoritesTitle = () => {
     setTitle(`Favorites`);
 };
 
-export const createRandomTitle = () => {
-    setTitle(`Random`);
+export const createRandomTitle = (name = null) => {
+    let parameters = name ? `${name} ${DELIMITER} ` : "";
+    setTitle(`${parameters}Random`);
 };
 
 export const createIngredientsTitle = () => {
