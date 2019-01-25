@@ -165,7 +165,7 @@ class FavoritesContent extends Component {
 export default connect(
     state => ({
         location: state.router.location,
-        cocktail: state.cocktail.value,
+        cocktail: state.details.current.cocktail,
         favorites: state.favorites,
     }),
     {

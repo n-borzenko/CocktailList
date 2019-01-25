@@ -1,6 +1,6 @@
 import qs from "qs";
 
-import types from "../constants/cocktail";
+import types from "../constants/details";
 import locations from "../constants/locations";
 
 const cocktailLocation = pathname => {

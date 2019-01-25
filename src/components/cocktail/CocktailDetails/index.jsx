@@ -7,7 +7,7 @@ import ActionButton from "../../common/ActionButton";
 import Icon from "../../common/Icon";
 import Card from "../../common/Card";
 import CocktailData from "../CocktailData";
-import { loadCocktailDetails } from "../../../actions/cocktail";
+import { loadCocktailDetails } from "../../../actions/details";
 import { createCocktailTitle } from "../../../helpers/title";
 import {
     addToFavorites,
@@ -151,7 +151,7 @@ class CocktailDetails extends Component {
 
 export default connect(
     state => ({
-        value: state.cocktail.value,
+        value: state.details.current.cocktail,
         location: state.router.location,
         favorites: state.favorites.ids,
     }),

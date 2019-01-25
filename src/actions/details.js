@@ -1,10 +1,24 @@
 import axios from "axios";
 
-import types from "../constants/cocktail";
+import types from "../constants/details";
+import { areaFromLocation } from "../helpers/areas";
 import { searchTypes } from "../constants/search";
 import { cocktailRequest } from "../api";
 import { showError } from "./notifications";
 import locations from "../constants/locations";
+
+const addToHistory = (id, location, dispatch) => {
+    const { area, query } = areaFromLocation(location);
+    dispatch({
+        type: types.DETAILS_HISTORY,
+        payload: {
+            [area]: {
+                id,
+                query,
+            },
+        },
+    });
+};
 
 const findCocktailInSearch = (id, search) => {
     if (search.request.type === searchTypes.query) {
@@ -25,9 +39,11 @@ const findCocktailInValues = (id, list) => {
 
 export const loadCocktailDetails = id => async (dispatch, getState) => {
     dispatch({
-        type: types.COCKTAIL_CLEAR,
+        type: types.DETAILS_CLEAR,
     });
     const state = getState();
+    addToHistory(id, state.router.location, dispatch);
+
     const location = state.router.location.pathname;
     let cocktail = null;
     if (location.startsWith(locations.search)) {
@@ -40,9 +56,9 @@ export const loadCocktailDetails = id => async (dispatch, getState) => {
 
     if (cocktail) {
         dispatch({
-            type: types.COCKTAIL_RECEIVED,
+            type: types.DETAILS_RECEIVED,
             payload: {
-                value: cocktail,
+                cocktail,
             },
         });
         return;
@@ -51,9 +67,9 @@ export const loadCocktailDetails = id => async (dispatch, getState) => {
     try {
         const result = await cocktailRequest(id);
         dispatch({
-            type: types.COCKTAIL_RECEIVED,
+            type: types.DETAILS_RECEIVED,
             payload: {
-                value: result.data.drinks[0],
+                cocktail: result.data.drinks[0],
             },
         });
     } catch (error) {

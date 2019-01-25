@@ -2,7 +2,7 @@ import qs from "qs";
 
 import locations from "../constants/locations";
 
-const cocktailLocation = pathname => {
+export const detailsLocation = pathname => {
     return (
         pathname.startsWith(locations.searchCocktail) ||
         pathname.startsWith(locations.favoritesCocktail) ||
@@ -11,7 +11,7 @@ const cocktailLocation = pathname => {
 };
 
 export const areaFromLocation = location => {
-    const cocktailPathname = cocktailLocation(location.pathname);
+    const cocktailPathname = detailsLocation(location.pathname);
     let pathname = null;
     let query = null;
 

@@ -2,13 +2,14 @@ import { combineReducers, createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import { createBrowserHistory } from "history";
 import { connectRouter, routerMiddleware } from "connected-react-router";
+import logger from "redux-logger";
 
 import { actualizeFavorites, storeFavorites } from "../middlewares/favorites";
 import { clearCocktails } from "../middlewares/cocktails";
 import search from "../reducers/search";
 import loading from "../reducers/loading";
 import filters from "../reducers/filters";
-import cocktail from "../reducers/cocktail";
+import details from "../reducers/details";
 import favorites from "../reducers/favorites";
 import random from "../reducers/random";
 import notifications from "../reducers/notifications";
@@ -18,7 +19,7 @@ const rootReducer = combineReducers({
     search,
     loading,
     filters,
-    cocktail,
+    details,
     favorites,
     random,
     notifications,
@@ -30,7 +31,8 @@ const store = createStore(
         routerMiddleware(history),
         thunk,
         storeFavorites,
-        actualizeFavorites
+        actualizeFavorites,
+        logger
         // clearCocktails
     )
 );
