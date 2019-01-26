@@ -6,12 +6,13 @@ export const detailsLocation = pathname => {
     return (
         pathname.startsWith(locations.searchCocktail) ||
         pathname.startsWith(locations.favoritesCocktail) ||
-        pathname.startsWith(locations.randomCocktail)
+        pathname.startsWith(locations.randomCocktail) ||
+        pathname.startsWith(locations.ingredientsDetails)
     );
 };
 
 export const areaFromLocation = location => {
-    const cocktailPathname = detailsLocation(location.pathname);
+    const detailsPathname = detailsLocation(location.pathname);
     let pathname = null;
     let query = null;
 
@@ -27,7 +28,7 @@ export const areaFromLocation = location => {
     if (pathname) {
         return {
             area: pathname,
-            isDetails: cocktailPathname,
+            isDetails: detailsPathname,
             query,
         };
     }
@@ -40,7 +41,7 @@ export const areaFromLocation = location => {
             : null;
 
     pathname = location.pathname;
-    if (cocktailPathname) {
+    if (detailsPathname) {
         pathname =
             parameters && parameters.type && parameters.name
                 ? locations.searchByFilter
@@ -66,7 +67,7 @@ export const areaFromLocation = location => {
 
     return {
         area: pathname,
-        isDetails: cocktailPathname,
+        isDetails: detailsPathname,
         query,
     };
 };

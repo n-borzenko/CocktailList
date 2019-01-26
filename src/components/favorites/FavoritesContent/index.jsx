@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { Switch, Route } from "react-router-dom";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
 import Cocktails from "../../cocktails/Cocktails";
 import CocktailDetails from "../../cocktail/CocktailDetails";
@@ -21,6 +22,16 @@ const PADDING_HEIGHT = 16;
 const BUTTONS_HEIGHT = 48;
 
 class FavoritesContent extends Component {
+    static propTypes = {
+        width: PropTypes.number.isRequired,
+        height: PropTypes.number.isRequired,
+    };
+
+    static defaultProps = {
+        width: 0,
+        height: 0,
+    };
+
     state = {
         values: [],
         currentResults: [],

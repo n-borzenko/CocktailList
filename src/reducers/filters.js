@@ -10,14 +10,7 @@ const initialState = {
 export default (state = initialState, action) => {
     switch (action.type) {
         case types.FILTERS_RECEIVED:
-            const { category, glass, alcoholic, ingredient } = action.payload;
-            return {
-                ...state,
-                category,
-                glass,
-                alcoholic,
-                ingredient,
-            };
+            return { ...state, ...action.payload };
         default:
             return state;
     }

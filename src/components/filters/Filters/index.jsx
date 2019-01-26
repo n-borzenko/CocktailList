@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
 import FiltersCluster from "../FiltersCluster";
-import { getFiltersList } from "../../../actions/filters";
 
 import "./Filters.css";
 
@@ -11,10 +10,6 @@ class Filters extends Component {
     static propTypes = {
         selectFilter: PropTypes.func,
     };
-
-    componentDidMount() {
-        this.props.getFiltersList();
-    }
 
     selectFilter = (type, name) => {
         this.props.selectFilter({ type, name });
@@ -43,7 +38,7 @@ class Filters extends Component {
     }
 }
 
-export default connect(
-    state => ({ filters: state.filters, current: state.search.request.filter }),
-    { getFiltersList }
-)(Filters);
+export default connect(state => ({
+    filters: state.filters,
+    current: state.search.request.filter,
+}))(Filters);

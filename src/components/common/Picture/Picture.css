@@ -9,6 +9,12 @@
     justify-content: center;
 }
 
+.picture_medium {
+    width: 80%;
+    height: 80%;
+    background-position: center center;
+}
+
 .picture__spinner {
     display: block;
     width: 30px;

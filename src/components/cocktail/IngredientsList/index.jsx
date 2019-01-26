@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import Picture from "../../common/Picture";
 import Name from "../../common/Name";
 import Text from "../../common/Text";
-import { ingredientImage } from "../../../api/images";
+import { ingredientImageSmall } from "../../../api/images";
 
 import "./IngredientsList.css";
 
@@ -48,7 +48,7 @@ class ingredientsList extends Component {
                     <div className="ingredients-list__item" key={ingredient}>
                         <div className="ingredients-list__picture">
                             <Picture
-                                source={ingredientImage(
+                                source={ingredientImageSmall(
                                     this.props.value[ingredient]
                                 )}
                             />

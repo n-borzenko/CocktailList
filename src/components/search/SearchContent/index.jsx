@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
 import Cocktails from "../../cocktails/Cocktails";
 import CocktailDetails from "../../cocktail/CocktailDetails";
@@ -18,6 +19,16 @@ import "./SearchContent.css";
 const PADDING_HEIGHT = 16;
 
 class SearchContent extends Component {
+    static propTypes = {
+        width: PropTypes.number.isRequired,
+        height: PropTypes.number.isRequired,
+    };
+
+    static defaultProps = {
+        width: 0,
+        height: 0,
+    };
+
     state = {
         scrollId: null,
     };

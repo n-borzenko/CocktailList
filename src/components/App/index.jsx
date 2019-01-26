@@ -58,6 +58,13 @@ class App extends Component {
         <FavoritesContent width={this.state.width} height={this.state.height} />
     );
 
+    renderIngredientsContent = () => (
+        <IngredientsContent
+            width={this.state.width}
+            height={this.state.height}
+        />
+    );
+
     render() {
         return (
             <ConnectedRouter history={history}>
@@ -87,7 +94,7 @@ class App extends Component {
                             />
                             <Route
                                 path={locations.ingredients}
-                                component={IngredientsContent}
+                                render={this.renderIngredientsContent}
                             />
                             <Route
                                 path="/"

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import classNames from "classnames";
 
 import AnimatedIcon from "../AnimatedIcon";
 import Icon from "../Icon";
@@ -7,8 +8,18 @@ import Icon from "../Icon";
 import "./Picture.css";
 
 class Picture extends Component {
+    static sizes = {
+        medium: "medium",
+        default: "default",
+    };
+
     static propTypes = {
         source: PropTypes.string.isRequired,
+        size: PropTypes.oneOf(Object.values(Picture.sizes)).isRequired,
+    };
+
+    static defaultProps = {
+        size: Picture.sizes.default,
     };
 
     constructor(props) {
@@ -46,8 +57,12 @@ class Picture extends Component {
         const style = this.state.loaded
             ? { backgroundImage: `url("${this.props.source}")` }
             : null;
+        const className = classNames("picture", {
+            [`picture_${this.props.size}`]:
+                this.props.size !== Picture.sizes.default,
+        });
         return (
-            <span className="picture" style={style}>
+            <span className={className} style={style}>
                 {this.renderSpinner()}
             </span>
         );
