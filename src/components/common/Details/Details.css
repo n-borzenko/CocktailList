@@ -1,4 +1,4 @@
-.cocktail-details {
+.details {
     padding: 0 24px;
     display: flex;
     justify-content: center;
@@ -7,12 +7,12 @@
     height: 100%;
 }
 @media (min-width: 700px) {
-    .cocktail-details {
+    .details {
         padding: 0 64px;
     }
 }
 
-.cocktail-details__card {
+.details__card {
     flex: 1 1 auto;
     max-width: 700px;
     position: relative;

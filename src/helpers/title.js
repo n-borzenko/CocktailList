@@ -30,6 +30,11 @@ export const createIngredientsTitle = () => {
     setTitle(`Ingredients`);
 };
 
+export const createIngredientTitle = name => {
+    let parameters = name ? `${name} ${DELIMITER} ` : "";
+    setTitle(`${parameters}Ingredient details`);
+};
+
 const setTitle = title => {
     document.title = `${title} ${DELIMITER} CocktailList`;
 };

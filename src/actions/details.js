@@ -89,3 +89,46 @@ export const loadCocktailDetails = id => async (dispatch, getState) => {
         dispatch(showError());
     }
 };
+
+export const loadIngredientDetails = id => async (dispatch, getState) => {
+    dispatch({
+        type: types.DETAILS_CLEAR,
+    });
+    const state = getState();
+    addToHistory(id, state.router.location, dispatch);
+
+    // const location = state.router.location.pathname;
+    // let cocktail = null;
+    // if (location.startsWith(locations.search)) {
+    //     cocktail = findCocktailInSearch(id, state.search);
+    // } else if (location.startsWith(locations.favorites)) {
+    //     cocktail = findCocktailInValues(id, state.favorites);
+    // } else if (location.startsWith(locations.random)) {
+    //     cocktail = findCocktailInValues(id, state.random);
+    // }
+
+    // if (cocktail) {
+    //     dispatch({
+    //         type: types.DETAILS_RECEIVED,
+    //         payload: {
+    //             cocktail,
+    //         },
+    //     });
+    //     return;
+    // }
+
+    // try {
+    //     const result = await cocktailRequest(id);
+    //     dispatch({
+    //         type: types.DETAILS_RECEIVED,
+    //         payload: {
+    //             cocktail: result.data.drinks[0],
+    //         },
+    //     });
+    // } catch (error) {
+    //     if (axios.isCancel(error)) {
+    //         return;
+    //     }
+    //     dispatch(showError());
+    // }
+};

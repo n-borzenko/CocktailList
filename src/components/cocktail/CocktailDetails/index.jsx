@@ -1,11 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { push } from "connected-react-router";
 
-import ActionButton from "../../common/ActionButton";
-import Icon from "../../common/Icon";
-import Card from "../../common/Card";
 import CocktailData from "../CocktailData";
 import { loadCocktailDetails } from "../../../actions/details";
 import { createCocktailTitle } from "../../../helpers/title";
@@ -13,8 +9,7 @@ import {
     addToFavorites,
     removeFromFavorites,
 } from "../../../actions/favorites";
-
-import "./CocktailDetails.css";
+import Details from "../../common/Details";
 
 class CocktailDetails extends Component {
     static propTypes = {
@@ -88,63 +83,21 @@ class CocktailDetails extends Component {
         }
     };
 
-    showPrevious = () => {
-        this.props.push(this.state.left);
-    };
-
-    showNext = () => {
-        this.props.push(this.state.right);
-    };
-
-    closeCocktailDetails = () => {
-        this.props.push(this.props.getBackURL());
-    };
-
-    renderLeftButton = () => {
-        return !this.props.skipArrows ? (
-            <ActionButton
-                disabled={!this.state.left}
-                onClick={this.showPrevious}
-            >
-                <Icon type={Icon.types.arrowLeft} />
-            </ActionButton>
-        ) : null;
-    };
-
-    renderRightButton = () => {
-        return !this.props.skipArrows ? (
-            <ActionButton disabled={!this.state.right} onClick={this.showNext}>
-                <Icon type={Icon.types.arrowRight} />
-            </ActionButton>
-        ) : null;
-    };
-
-    renderCloseButton = () => {
-        return (
-            <ActionButton onClick={this.closeCocktailDetails}>
-                <Icon type={Icon.types.remove} />
-            </ActionButton>
-        );
-    };
-
     render() {
         return (
-            <div className="cocktail-details">
-                <div className="cocktail-details__card">
-                    <Card
-                        leftButton={this.renderLeftButton()}
-                        rightButton={this.renderRightButton()}
-                        closeButton={this.renderCloseButton()}
-                    >
-                        <CocktailData
-                            value={this.props.value}
-                            favorite={this.state.favorite}
-                            toggleFavorite={this.toggleFavorite}
-                            skipFavorites={this.props.skipFavorites}
-                        />
-                    </Card>
-                </div>
-            </div>
+            <Details
+                getBackURL={this.props.getBackURL}
+                previousURL={this.state.left}
+                nextURL={this.state.right}
+                skipArrows={this.props.skipArrows}
+            >
+                <CocktailData
+                    value={this.props.value}
+                    favorite={this.state.favorite}
+                    toggleFavorite={this.toggleFavorite}
+                    skipFavorites={this.props.skipFavorites}
+                />
+            </Details>
         );
     }
 }
@@ -155,5 +108,5 @@ export default connect(
         location: state.router.location,
         favorites: state.favorites.ids,
     }),
-    { loadCocktailDetails, addToFavorites, removeFromFavorites, push }
+    { loadCocktailDetails, addToFavorites, removeFromFavorites }
 )(CocktailDetails);
