@@ -16,7 +16,6 @@
     width: 60px;
     height: 60px;
     position: absolute;
-    z-index: 1;
     bottom: 16px;
 }
 
@@ -26,6 +25,10 @@
 
 .random-cards__reaction_dislike {
     left: 16px;
+}
+
+.random-cards__reaction_next {
+    left: calc(50% - 30px);
 }
 
 .random-cards__icon {

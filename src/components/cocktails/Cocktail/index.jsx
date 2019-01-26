@@ -15,12 +15,14 @@ class Cocktail extends PureComponent {
         value: PropTypes.object.isRequired,
         to: PropTypes.string.isRequired,
         skipFavorites: PropTypes.bool.isRequired,
+        disableFavorites: PropTypes.bool.isRequired,
         toggleFavorite: PropTypes.func,
         favorite: PropTypes.bool,
     };
 
     static defaultProps = {
         skipFavorites: false,
+        disableFavorites: false,
     };
 
     toggleFavorite = event => {
@@ -39,6 +41,7 @@ class Cocktail extends PureComponent {
                     size={ActionButton.sizes.full}
                     style={ActionButton.styles.transparent}
                     onClick={this.toggleFavorite}
+                    disabled={this.props.disableFavorites}
                 >
                     <Icon
                         type={

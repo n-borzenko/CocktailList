@@ -26,7 +26,6 @@ class RandomBoard extends Component {
     }
 
     componentDidMount() {
-        console.log("REQUEST updates");
         const id = this.getIdFromLocation();
         this.requestUpdates(id);
         this.checkUpdates(id);
@@ -34,36 +33,23 @@ class RandomBoard extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        console.log(`#### did update`);
-        if (prevProps !== this.props) {
-            //console.log(prevProps);
-            //console.log(this.props);
-        }
-
         const id = this.getIdFromLocation();
         const oldId = this.getIdFromLocation(prevProps.location);
-        console.log(`oldId: ${oldId}`);
-        console.log(`newId: ${id}`);
         if (
             prevProps.location.pathname === this.props.location.pathname &&
             oldId !== null &&
             (id === null || id !== oldId)
         ) {
-            console.log("REQUEST updates");
             this.requestUpdates(id);
         } else {
-            console.log("CHECK FOR updates");
             this.checkUpdates(id);
         }
     }
 
     requestUpdates = id => {
-        console.log(id);
         if (this.props.location.search && id) {
             if (!this.props.random.values[id]) {
                 this.props.loadRandomCocktailDetails(id);
-            } else {
-                console.log("NOT REQUESTED");
             }
         } else {
             this.props.loadRandomCocktail();
@@ -78,7 +64,6 @@ class RandomBoard extends Component {
         if (id && this.props.random.id === id && this.props.random.values[id]) {
             const value = this.props.random.values[id];
             if (this.state.value !== value) {
-                console.log("UPDATING local state");
                 this.setState({
                     value,
                 });
@@ -95,7 +80,11 @@ class RandomBoard extends Component {
         return parameters && parameters.id ? parameters.id : null;
     };
 
-    addReaction = () => {
+    addReaction = like => {
+        if (like) {
+            const { value } = this.state;
+            this.props.addToFavorites(value.idDrink, value);
+        }
         this.props.push(locations.random);
     };
 
@@ -103,13 +92,21 @@ class RandomBoard extends Component {
         return `${locations.randomCocktail}/${id}`;
     };
 
-    renderCocktail = () => {
+    isFavorite = () => {
+        return (
+            this.state.value !== null &&
+            this.props.favorites.includes(this.state.value.idDrink)
+        );
+    };
+
+    renderCocktail = isFavorite => {
         const value = this.state.value;
         return (
             <Cocktail
                 value={value}
                 to={this.linkCreator(value.idDrink)}
-                skipFavorites
+                skipFavorites={!isFavorite}
+                disableFavorites={isFavorite}
             />
         );
     };
@@ -130,11 +127,12 @@ class RandomBoard extends Component {
     };
 
     render() {
+        const isFavorite = this.isFavorite();
         return (
             <div className="random-board">
-                <RandomCards reaction={this.addReaction}>
+                <RandomCards reaction={this.addReaction} favorite={isFavorite}>
                     {this.state.value
-                        ? this.renderCocktail()
+                        ? this.renderCocktail(isFavorite)
                         : this.renderStub()}
                 </RandomCards>
             </div>
