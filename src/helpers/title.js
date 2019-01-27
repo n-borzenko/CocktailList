@@ -35,6 +35,10 @@ export const createIngredientTitle = name => {
     setTitle(`${parameters}Ingredient details`);
 };
 
+export const createAboutTitle = () => {
+    setTitle(`About`);
+};
+
 const setTitle = title => {
     document.title = `${title} ${DELIMITER} CocktailList`;
 };

@@ -12,6 +12,7 @@ import SearchContent from "../search/SearchContent";
 import FavoritesContent from "../favorites/FavoritesContent";
 import RandomContent from "../random/RandomContent";
 import IngredientsContent from "../ingredients/IngredientsContent";
+import AboutContent from "../about/AboutContent";
 import NotFound from "../common/NotFound";
 import locations from "../../constants/locations";
 import { POPUP_ID } from "../../constants/views";
@@ -95,6 +96,10 @@ class App extends Component {
                             <Route
                                 path={locations.ingredients}
                                 render={this.renderIngredientsContent}
+                            />
+                            <Route
+                                path={locations.about}
+                                component={AboutContent}
                             />
                             <Route
                                 path="/"

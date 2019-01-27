@@ -35,6 +35,10 @@ class Menu extends Component {
                 name: menuItems.ingredients,
                 location: () => locations.ingredients,
             },
+            {
+                name: menuItems.about,
+                location: () => locations.about,
+            },
         ],
     };
 

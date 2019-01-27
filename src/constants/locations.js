@@ -8,6 +8,7 @@ const locations = {
     randomCocktail: "/random/cocktail",
     ingredients: "/ingredients",
     ingredientsDetails: "/ingredients/details",
+    about: "/about",
 };
 
 export default locations;

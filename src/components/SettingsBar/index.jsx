@@ -18,6 +18,7 @@ class SettingsBar extends Component {
             [locations.favorites]: menuItems.favorites,
             [locations.random]: menuItems.random,
             [locations.ingredients]: menuItems.ingredients,
+            [locations.about]: menuItems.about,
         },
         showPopup: false,
     };
