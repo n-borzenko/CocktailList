@@ -5,6 +5,7 @@ import qs from "qs";
 import PropTypes from "prop-types";
 
 import Ingredients from "../Ingredients";
+import IngredientDetails from "../IngredientDetails";
 import locations from "../../../constants/locations";
 import { getIngredientsList } from "../../../actions/filters";
 import { createIngredientsTitle } from "../../../helpers/title";
@@ -37,14 +38,21 @@ class IngredientsContent extends Component {
         return `${locations.ingredientsDetails}?${qs.stringify({ name })}`;
     };
 
-    renderIngredientsDetails = () => {
-        return null;
+    locationCreator = name => {
+        return {
+            pathname: `${locations.ingredientsDetails}`,
+            search: `?${qs.stringify({ name })}`,
+        };
+    };
 
-        // <CocktailDetails
-        //     getBackURL={this.getBackURL}
-        //     results={this.state.currentResults}
-        //     locationCreator={this.locationCreator}
-        // />
+    renderIngredientsDetails = () => {
+        return (
+            <IngredientDetails
+                getBackURL={this.getBackURL}
+                results={this.props.ingredients}
+                locationCreator={this.locationCreator}
+            />
+        );
     };
 
     renderIngredients = () => {

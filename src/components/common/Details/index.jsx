@@ -9,17 +9,20 @@ import Card from "../Card";
 
 import "./Details.css";
 
+const urlShape = PropTypes.shape({
+    pathname: PropTypes.string.isRequired,
+    search: PropTypes.string.isRequired,
+});
+
 class Details extends Component {
     static propTypes = {
         getBackURL: PropTypes.func.isRequired,
-        previousURL: PropTypes.string.isRequired,
-        nextURL: PropTypes.string.isRequired,
+        previousURL: urlShape,
+        nextURL: urlShape,
         skipArrows: PropTypes.bool.isRequired,
     };
 
     static defaultProps = {
-        previousURL: null,
-        nextURL: null,
         skipArrows: false,
     };
 

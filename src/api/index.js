@@ -65,6 +65,16 @@ export const cocktailRequest = async id => {
     }
 };
 
+export const ingredientRequest = async id => {
+    const config = { ...api.configs.ingredient, params: { i: id } };
+    try {
+        const result = await loader.request(config);
+        return result;
+    } catch (error) {
+        throw error;
+    }
+};
+
 export const randomRequest = async () => {
     const config = { ...api.configs.random };
     try {

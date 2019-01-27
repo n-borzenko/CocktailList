@@ -1,3 +1,9 @@
+export const ingredientImageLarge = name => {
+    return `https://www.thecocktaildb.com/images/ingredients/${encodeURIComponent(
+        name
+    )}.png`;
+};
+
 export const ingredientImageMeduim = name => {
     return `https://www.thecocktaildb.com/images/ingredients/${encodeURIComponent(
         name

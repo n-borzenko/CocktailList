@@ -34,7 +34,6 @@ export const loadRandomCocktail = () => async (dispatch, getState) => {
         }
         dispatch({ type: types.RANDOM_RECEIVED, payload });
 
-        console.log(getState().router.location.pathname);
         if (getState().router.location.pathname === locations.random) {
             dispatch(
                 replace(
@@ -52,8 +51,6 @@ export const loadRandomCocktail = () => async (dispatch, getState) => {
 
 export const loadRandomCocktailDetails = id => async (dispatch, getState) => {
     if (getState().random.values[id]) {
-        console.log(getState().random.values[id]);
-        console.log("exist");
         return;
     }
     try {

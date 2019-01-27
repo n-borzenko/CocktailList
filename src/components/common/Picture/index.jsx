@@ -15,6 +15,7 @@ class Picture extends Component {
 
     static propTypes = {
         source: PropTypes.string.isRequired,
+        additionalSource: PropTypes.string,
         size: PropTypes.oneOf(Object.values(Picture.sizes)).isRequired,
     };
 
@@ -24,14 +25,27 @@ class Picture extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { loaded: false };
+        this.state = { source: null };
 
+        let counter = 0;
         const image = new Image();
         image.onload = () => {
             if (this.unmounted) {
                 return;
             }
-            this.setState({ loaded: true });
+            this.setState({
+                source: counter
+                    ? this.props.additionalSource
+                    : this.props.source,
+            });
+        };
+        image.onerror = () => {
+            if (this.unmounted) {
+                return;
+            }
+            if (counter++ < 1 && props.additionalSource) {
+                image.src = props.additionalSource;
+            }
         };
         image.src = props.source;
     }
@@ -41,7 +55,7 @@ class Picture extends Component {
     }
 
     renderSpinner = () => {
-        if (this.state.loaded) {
+        if (this.state.source) {
             return null;
         }
         return (
@@ -54,8 +68,8 @@ class Picture extends Component {
     };
 
     render() {
-        const style = this.state.loaded
-            ? { backgroundImage: `url("${this.props.source}")` }
+        const style = this.state.source
+            ? { backgroundImage: `url("${this.state.source}")` }
             : null;
         const className = classNames("picture", {
             [`picture_${this.props.size}`]:

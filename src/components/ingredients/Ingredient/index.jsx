@@ -4,7 +4,10 @@ import { Link } from "react-router-dom";
 
 import Picture from "../../common/Picture";
 import Title from "../../common/Title";
-import { ingredientImageMeduim } from "../../../api/images";
+import {
+    ingredientImageMeduim,
+    ingredientImageSmall,
+} from "../../../api/images";
 
 import "./Ingredient.css";
 
@@ -23,6 +26,9 @@ class Ingredient extends PureComponent {
                             <Picture
                                 size={Picture.sizes.medium}
                                 source={ingredientImageMeduim(this.props.value)}
+                                additionalSource={ingredientImageSmall(
+                                    this.props.value
+                                )}
                             />
                         </span>
                         <span className="ingredient__info">

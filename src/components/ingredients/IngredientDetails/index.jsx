@@ -23,13 +23,13 @@ class IngredientDetails extends Component {
     state = { left: null, right: null };
 
     static getDerivedStateFromProps(props) {
-        const location = props.router.location;
+        const { location } = props;
         const parameters =
             location && location.search && location.search.length > 1
                 ? qs.parse(location.search.substr(1))
                 : null;
         const id =
-            parameters && parameters.hasOwnProperty(name) && parameters.name
+            parameters && parameters.hasOwnProperty("name") && parameters.name
                 ? parameters.name
                 : null;
         return {
@@ -38,7 +38,7 @@ class IngredientDetails extends Component {
     }
 
     componentDidMount() {
-        this.props.loadIngredientsDetails(this.state.id);
+        this.props.loadIngredientDetails(this.state.id);
         this.createLinks();
         createIngredientTitle(
             this.props.value ? this.props.value.strIngredient : ""
@@ -47,7 +47,7 @@ class IngredientDetails extends Component {
 
     componentDidUpdate(prevProps) {
         if (this.props.location !== prevProps.location) {
-            this.props.loadIngredientsDetails(this.state.id);
+            this.props.loadIngredientDetails(this.state.id);
         }
         if (
             this.props.value !== prevProps.value ||

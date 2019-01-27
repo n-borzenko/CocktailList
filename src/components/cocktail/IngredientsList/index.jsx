@@ -1,10 +1,13 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
+import qs from "qs";
 
 import Picture from "../../common/Picture";
 import Name from "../../common/Name";
 import Text from "../../common/Text";
 import { ingredientImageSmall } from "../../../api/images";
+import locations from "../../../constants/locations";
 
 import "./IngredientsList.css";
 
@@ -35,6 +38,10 @@ class ingredientsList extends Component {
         ).isRequired,
     };
 
+    linkCreator = name => {
+        return `${locations.ingredientsDetails}?${qs.stringify({ name })}`;
+    };
+
     renderValues = () => {
         return ingredientsList.allData
             .filter(
@@ -45,23 +52,29 @@ class ingredientsList extends Component {
             .map(item => {
                 const [ingredient, measure] = item;
                 return (
-                    <div className="ingredients-list__item" key={ingredient}>
-                        <div className="ingredients-list__picture">
-                            <Picture
-                                source={ingredientImageSmall(
-                                    this.props.value[ingredient]
-                                )}
-                            />
-                        </div>
-                        <div className="ingredients-list__data">
-                            <div className="ingredients-list__text">
-                                <Name>{this.props.value[ingredient]}</Name>
-                            </div>
-                            <div className="ingredients-list__text">
-                                <Text>{this.props.value[measure]}</Text>
-                            </div>
-                        </div>
-                    </div>
+                    <Link
+                        to={this.linkCreator(this.props.value[ingredient])}
+                        className="ingredients-list__link"
+                        key={ingredient}
+                    >
+                        <span className="ingredients-list__item">
+                            <span className="ingredients-list__picture">
+                                <Picture
+                                    source={ingredientImageSmall(
+                                        this.props.value[ingredient]
+                                    )}
+                                />
+                            </span>
+                            <span className="ingredients-list__data">
+                                <span className="ingredients-list__text">
+                                    <Name>{this.props.value[ingredient]}</Name>
+                                </span>
+                                <span className="ingredients-list__text">
+                                    <Text>{this.props.value[measure]}</Text>
+                                </span>
+                            </span>
+                        </span>
+                    </Link>
                 );
             });
     };

@@ -27,6 +27,10 @@ const configs = {
         method: methods.get,
         url: "/random.php",
     },
+    ingredient: {
+        method: methods.get,
+        url: "/search.php",
+    },
 };
 
 export default {
