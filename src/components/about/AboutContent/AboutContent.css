@@ -1,0 +1,41 @@
+@import "../../../variables.css";
+
+.about-content {
+    width: 100%;
+    flex: 1 0 auto;
+    position: absolute;
+    height: 100%;
+    padding: 24px 16px;
+    overflow: scroll;
+}
+
+.about-content__section {
+    margin: 32px 0;
+}
+.about-content__section:first-child {
+    margin: 0 0 32px;
+}
+.about-content__section:last-child {
+    margin: 32px 0 0;
+}
+
+.about-content__text,
+.about-content__list {
+    margin: 8px 0;
+}
+
+.about-content__nowrap {
+    white-space: nowrap;
+}
+
+.about-content__link,
+.about-content__link:visited {
+    font-weight: var(--text-weight);
+    line-height: var(--text-line-height);
+    font-size: var(--text-size);
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.about-content__link:hover {
+    color: rgba(255, 255, 255, 1);
+}
