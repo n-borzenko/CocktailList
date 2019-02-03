@@ -61,7 +61,10 @@ class Cocktail extends PureComponent {
                 <span className="cocktail">
                     <span className="cocktail__content">
                         <span className="cocktail__picture">
-                            <Picture source={this.props.value.strDrinkThumb} />
+                            <Picture
+                                key={this.props.value.strDrinkThumb}
+                                source={this.props.value.strDrinkThumb}
+                            />
                         </span>
                         <span className="cocktail__info">
                             <span className="cocktail__title">
