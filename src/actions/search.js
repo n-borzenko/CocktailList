@@ -121,6 +121,7 @@ export const searchByURL = location => async (dispatch, getState) => {
             !filters.glass.length ||
             !filters.alcoholic.length
         ) {
+            performSearch(dispatch, searchTypes.filter, null);
             await dispatch(getFiltersList());
             filters = getState().filters;
         }
