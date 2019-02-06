@@ -44,19 +44,24 @@ class Ingredients extends Component {
         this.scrollToId(this.props.from);
     };
 
-    componentDidUpdate = () => {
-        this.scrollToId(this.props.from);
-    };
-
     scrollToId = id => {
         if (id) {
             const index =
                 id && this.props.values
-                    ? this.props.values.findIndex(item => item.idDrink === id)
+                    ? this.props.values.findIndex(item => item === id)
                     : -1;
             const { columnsCount, rowHeight } = this.state;
-            const position =
+            let position =
                 index === -1 ? 0 : Math.floor(index / columnsCount) * rowHeight;
+            const rowCount = Math.ceil(
+                this.props.values.length / this.state.columnsCount
+            );
+            const totalHeight = rowCount * rowHeight;
+            position =
+                position > totalHeight - this.props.height
+                    ? totalHeight - this.props.height
+                    : position;
+
             this.gridRef.current &&
                 this.gridRef.current.scrollToPosition({
                     scrollTop: position,

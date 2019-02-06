@@ -108,7 +108,7 @@ export const loadIngredientDetails = id => async (dispatch, getState) => {
 
 export const clearDetailsHistory = () => (dispatch, getState) => {
     const area = areaFromLocation(getState().router.location);
-    if (!historyLocations.has(area)) {
+    if (!historyLocations.has(area.area)) {
         return;
     }
     dispatch({
