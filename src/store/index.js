@@ -5,7 +5,7 @@ import { connectRouter, routerMiddleware } from "connected-react-router";
 import logger from "redux-logger";
 
 import { actualizeFavorites, storeFavorites } from "../middlewares/favorites";
-import { clearSearchDetailsHistory } from "../middlewares/details";
+import { clearDetailsHistory } from "../middlewares/details";
 import search from "../reducers/search";
 import loading from "../reducers/loading";
 import filters from "../reducers/filters";
@@ -32,7 +32,7 @@ const store = createStore(
         thunk,
         storeFavorites,
         actualizeFavorites,
-        clearSearchDetailsHistory,
+        clearDetailsHistory,
         logger
     )
 );

@@ -9,6 +9,7 @@ import IngredientDetails from "../IngredientDetails";
 import locations from "../../../constants/locations";
 import { getIngredientsList } from "../../../actions/filters";
 import { createIngredientsTitle } from "../../../helpers/title";
+import { clearDetailsHistory } from "../../../actions/details";
 
 import "./IngredientsContent.css";
 
@@ -67,6 +68,7 @@ class IngredientsContent extends Component {
                 values={this.props.ingredients}
                 linkCreator={id => this.linkCreator(id)}
                 from={id}
+                clearScroll={this.props.clearDetailsHistory}
             />
         );
     };
@@ -97,5 +99,6 @@ export default connect(
     }),
     {
         getIngredientsList,
+        clearDetailsHistory,
     }
 )(IngredientsContent);

@@ -17,6 +17,7 @@ class Ingredients extends Component {
         width: PropTypes.number.isRequired,
         height: PropTypes.number.isRequired,
         from: PropTypes.string,
+        clearScroll: PropTypes.func.isRequired,
     };
 
     static defaultProps = {
@@ -32,28 +33,37 @@ class Ingredients extends Component {
         const columnsCount = Math.floor(
             props.width / (CELL_WIDTH + 2 * MARGIN)
         );
-        const index =
-            props.from && props.values
-                ? props.values.findIndex(item => item === props.from)
-                : -1;
         const rowHeight = CELL_HEIGHT + 2 * MARGIN;
-        const position =
-            index === -1 ? 0 : Math.floor(index / columnsCount) * rowHeight;
         return {
             columnsCount: columnsCount,
-            scrollTo: { scrollTop: position, scrollLeft: 0 },
             rowHeight,
         };
     }
 
     componentDidMount = () => {
-        this.gridRef.current &&
-            this.gridRef.current.scrollToPosition(this.state.scrollTo);
+        this.scrollToId(this.props.from);
     };
 
     componentDidUpdate = () => {
-        this.gridRef.current &&
-            this.gridRef.current.scrollToPosition(this.state.scrollTo);
+        this.scrollToId(this.props.from);
+    };
+
+    scrollToId = id => {
+        if (id) {
+            const index =
+                id && this.props.values
+                    ? this.props.values.findIndex(item => item.idDrink === id)
+                    : -1;
+            const { columnsCount, rowHeight } = this.state;
+            const position =
+                index === -1 ? 0 : Math.floor(index / columnsCount) * rowHeight;
+            this.gridRef.current &&
+                this.gridRef.current.scrollToPosition({
+                    scrollTop: position,
+                    scrollLeft: 0,
+                });
+            this.props.clearScroll();
+        }
     };
 
     cellRenderer = ({

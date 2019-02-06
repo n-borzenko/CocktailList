@@ -1,30 +1,34 @@
 import types from "../constants/details";
-import locations from "../constants/locations";
+import { historyLocations } from "../constants/locations";
 import { areaFromLocation } from "../helpers/areas";
 
-// details history is used to scroll the list of cocktails
-// when the search request is changed, cocktail should be cleared
-export const clearSearchDetailsHistory = ({
+// details history is used to scroll the list of cocktails or ingredients
+export const clearDetailsHistory = ({
     getState,
     dispatch,
 }) => next => action => {
+    if (action.type === types.DETAILS_HISTORY) {
+        return next(action);
+    }
+    const oldState = getState();
+    const oldArea = areaFromLocation(oldState.router.location);
     const result = next(action);
-    const state = getState();
-    const newArea = areaFromLocation(state.router.location);
+    const newState = getState();
+    const newArea = areaFromLocation(newState.router.location);
 
     if (
-        newArea.area === locations.search ||
-        newArea.area === locations.searchByFilter
+        oldState.details.history[oldArea.area] &&
+        historyLocations.has(oldArea.area) &&
+        (oldArea.area !== newArea.area ||
+            oldArea.query !== newArea.query ||
+            !oldArea.isDetails)
     ) {
-        const lastItem = state.details.history[newArea.area];
-        if (lastItem && lastItem.query !== newArea.query) {
-            dispatch({
-                type: types.DETAILS_HISTORY,
-                payload: {
-                    [newArea.area]: null,
-                },
-            });
-        }
+        dispatch({
+            type: types.DETAILS_HISTORY,
+            payload: {
+                [oldArea.area]: null,
+            },
+        });
     }
     return result;
 };

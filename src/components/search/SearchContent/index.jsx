@@ -9,6 +9,7 @@ import { searchTypes } from "../../../constants/search";
 import locations from "../../../constants/locations";
 import { areaFromLocation } from "../../../helpers/areas";
 import { stateToSearchURL } from "../../../actions/search";
+import { clearDetailsHistory } from "../../../actions/details";
 import {
     addToFavorites,
     removeFromFavorites,
@@ -99,6 +100,7 @@ class SearchContent extends Component {
                 from={this.state.scrollId}
                 favorites={this.props.favorites}
                 toggleFavorite={this.toggleFavorite}
+                clearScroll={this.props.clearDetailsHistory}
             />
         );
     };
@@ -129,5 +131,5 @@ export default connect(
         lastItems: state.details.history,
         favorites: state.favorites,
     }),
-    { addToFavorites, removeFromFavorites }
+    { addToFavorites, removeFromFavorites, clearDetailsHistory }
 )(SearchContent);

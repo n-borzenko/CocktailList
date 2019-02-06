@@ -8,6 +8,7 @@ import CocktailDetails from "../../cocktail/CocktailDetails";
 import Button from "../../common/Button";
 import locations from "../../../constants/locations";
 import { createFavoritesTitle } from "../../../helpers/title";
+import { clearDetailsHistory } from "../../../actions/details";
 import {
     addToFavorites,
     removeFromFavorites,
@@ -152,6 +153,7 @@ class FavoritesContent extends Component {
                     from={id}
                     favorites={this.props.favorites}
                     toggleFavorite={this.toggleFavorite}
+                    clearScroll={this.props.clearDetailsHistory}
                 />
             </Fragment>
         );
@@ -187,5 +189,6 @@ export default connect(
         clearFavorites,
         loadMissingValues,
         updateOutdatedValues,
+        clearDetailsHistory,
     }
 )(FavoritesContent);

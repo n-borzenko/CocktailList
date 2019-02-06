@@ -5,14 +5,7 @@ import { areaFromLocation } from "../helpers/areas";
 import { searchTypes } from "../constants/search";
 import { cocktailRequest, ingredientRequest } from "../api";
 import { showError } from "./notifications";
-import locations from "../constants/locations";
-
-const historyLocations = new Set([
-    locations.search,
-    locations.searchByFilter,
-    locations.favorites,
-    locations.ingredients,
-]);
+import locations, { historyLocations } from "../constants/locations";
 
 const addToHistory = (id, location, dispatch) => {
     const { area, query } = areaFromLocation(location);
@@ -111,4 +104,17 @@ export const loadIngredientDetails = id => async (dispatch, getState) => {
         }
         dispatch(showError());
     }
+};
+
+export const clearDetailsHistory = () => (dispatch, getState) => {
+    const area = areaFromLocation(getState().router.location);
+    if (!historyLocations.has(area)) {
+        return;
+    }
+    dispatch({
+        type: types.DETAILS_HISTORY,
+        payload: {
+            [area.area]: null,
+        },
+    });
 };

@@ -29,6 +29,7 @@ class Cocktails extends Component {
             values: PropTypes.object.isRequired,
         }).isRequired,
         toggleFavorite: PropTypes.func.isRequired,
+        clearScroll: PropTypes.func.isRequired,
     };
 
     static defaultProps = {
@@ -45,31 +46,41 @@ class Cocktails extends Component {
         const columnsCount = Math.floor(
             props.width / (CELL_WIDTH + 2 * MARGIN)
         );
-        const index =
-            props.from && props.values
-                ? props.values.findIndex(item => item.idDrink === props.from)
-                : -1;
         const rowHeight =
             props.size === Cocktails.sizes.large
                 ? CELL_HEIGHT_LARGE + 2 * MARGIN
                 : CELL_HEIGHT_SMALL + 2 * MARGIN;
-        const position =
-            index === -1 ? 0 : Math.floor(index / columnsCount) * rowHeight;
+
         return {
             columnsCount: columnsCount,
-            scrollTo: { scrollTop: position, scrollLeft: 0 },
             rowHeight,
         };
     }
 
     componentDidMount = () => {
-        this.gridRef.current &&
-            this.gridRef.current.scrollToPosition(this.state.scrollTo);
+        this.scrollToId(this.props.from);
     };
 
     componentDidUpdate = () => {
-        this.gridRef.current &&
-            this.gridRef.current.scrollToPosition(this.state.scrollTo);
+        this.scrollToId(this.props.from);
+    };
+
+    scrollToId = id => {
+        if (id) {
+            const index =
+                id && this.props.values
+                    ? this.props.values.findIndex(item => item.idDrink === id)
+                    : -1;
+            const { columnsCount, rowHeight } = this.state;
+            const position =
+                index === -1 ? 0 : Math.floor(index / columnsCount) * rowHeight;
+            this.gridRef.current &&
+                this.gridRef.current.scrollToPosition({
+                    scrollTop: position,
+                    scrollLeft: 0,
+                });
+            this.props.clearScroll();
+        }
     };
 
     cellRenderer = ({

@@ -12,3 +12,10 @@ const locations = {
 };
 
 export default locations;
+
+export const historyLocations = new Set([
+    locations.search,
+    locations.searchByFilter,
+    locations.favorites,
+    locations.ingredients,
+]);
