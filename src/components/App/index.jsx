@@ -38,6 +38,16 @@ class App extends Component {
         window.removeEventListener("storage", this.actualizeFavorites);
     }
 
+    checkSize = () => {
+        const { clientWidth, clientHeight } = this.containerRef.current;
+        if (
+            clientWidth !== this.state.width ||
+            clientHeight !== this.state.height
+        ) {
+            this.resizeHandler();
+        }
+    };
+
     resizeHandler = () => {
         this.setState({
             width: this.containerRef.current.clientWidth,
@@ -55,9 +65,14 @@ class App extends Component {
         <SearchContent width={this.state.width} height={this.state.height} />
     );
 
-    renderFavoritesContent = () => (
-        <FavoritesContent width={this.state.width} height={this.state.height} />
-    );
+    renderFavoritesContent = () => {
+        return (
+            <FavoritesContent
+                width={this.state.width}
+                height={this.state.height}
+            />
+        );
+    };
 
     renderIngredientsContent = () => (
         <IngredientsContent
@@ -77,7 +92,7 @@ class App extends Component {
                     </div>
 
                     <div className="app__settings">
-                        <SettingsBar />
+                        <SettingsBar checkSize={this.checkSize} />
                     </div>
                     <div className="app__content" ref={this.containerRef}>
                         <Switch>

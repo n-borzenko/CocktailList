@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
+import PropTypes from "prop-types";
 
 import MainHeader from "../common/MainHeader";
 import Menu from "../Menu";
@@ -12,6 +13,10 @@ import locations from "../../constants/locations";
 import "./SettingsBar.css";
 
 class SettingsBar extends Component {
+    static propTypes = {
+        checkSize: PropTypes.func.isRequired,
+    };
+
     state = {
         items: {
             [locations.search]: menuItems.search,
@@ -22,6 +27,10 @@ class SettingsBar extends Component {
         },
         showPopup: false,
     };
+
+    componentDidUpdate() {
+        this.props.checkSize();
+    }
 
     openPopup = () => {
         this.setState({ showPopup: true });
