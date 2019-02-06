@@ -32,6 +32,15 @@
     background-image: url("./resources/search_light.svg");
 }
 
+.icon_edit {
+    background-position: left;
+    background-image: url("./resources/edit.svg");
+}
+
+.icon_edit.icon_light {
+    background-image: url("./resources/edit_light.svg");
+}
+
 .icon_spinner {
     background-image: url("./resources/spinner.svg");
 }

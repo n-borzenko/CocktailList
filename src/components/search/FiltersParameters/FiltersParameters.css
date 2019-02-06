@@ -1,8 +1,8 @@
-.filters-parameters__button {
+.filters-parameters__selector {
     display: block;
 }
 @media (min-width: 700px) {
-    .filters-parameters__button {
+    .filters-parameters__selector {
         display: none;
     }
 }

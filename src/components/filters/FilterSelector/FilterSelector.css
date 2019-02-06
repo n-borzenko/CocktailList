@@ -1,0 +1,48 @@
+@import "../../../variables.css";
+
+.filter-selector {
+    display: flex;
+    max-width: 100%;
+}
+.filter-selector__title {
+    display: flex;
+    align-items: center;
+    height: 32px;
+    border-radius: 16px;
+    border: 1px solid white;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 0px 8px;
+    flex: 1 0 auto;
+    max-width: calc(100% - 48px);
+}
+
+.filter-selector__title_category {
+    background: rgba(247, 57, 217, 0.1);
+}
+
+.filter-selector__title_glass {
+    background: rgba(57, 133, 247, 0.1);
+}
+
+.filter-selector__title_alcoholic {
+    background: rgba(247, 183, 57, 0.1);
+}
+
+.filter-selector__title_ingredient {
+    background: rgba(57, 247, 99, 0.1);
+}
+
+.filter-selector__text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: var(--text-size-control);
+    line-height: var(--text-line-height-control);
+    font-weight: var(--text-weight-control);
+}
+
+.filter-selector__icon {
+    margin-left: 16px;
+    width: 32px;
+    height: 32px;
+}

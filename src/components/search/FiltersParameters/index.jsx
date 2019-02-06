@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
 
-import Button from "../../common/Button";
 import Filters from "../../filters/Filters";
+import FilterSelector from "../../filters/FilterSelector";
 import PopupContent from "../../common/popup/PopupContent";
 import PopupPresenter from "../../common/popup/PopupPresenter";
 
@@ -14,6 +15,15 @@ class FiltersParameters extends Component {
     };
 
     state = { showPopup: false };
+
+    componentDidUpdate(prevProps) {
+        if (
+            this.state.showPopup &&
+            prevProps.location !== this.props.location
+        ) {
+            this.setState({ showPopup: false });
+        }
+    }
 
     closePopup = () => {
         this.setState({ showPopup: false });
@@ -40,10 +50,11 @@ class FiltersParameters extends Component {
         return (
             <div className="filters-parameters">
                 {this.renderPopupContent()}
-                <div className="filters-parameters__button">
-                    <Button stretched onClick={this.openPopup}>
-                        Select filter
-                    </Button>
+                <div className="filters-parameters__selector">
+                    <FilterSelector
+                        onSelect={this.openPopup}
+                        filter={this.props.filter}
+                    />
                 </div>
                 <div className="filters-parameters__values">
                     <Filters selectFilter={this.props.selectFilter} />
@@ -53,4 +64,7 @@ class FiltersParameters extends Component {
     }
 }
 
-export default FiltersParameters;
+export default connect(state => ({
+    location: state.router.location,
+    filter: state.search.request.filter,
+}))(FiltersParameters);
