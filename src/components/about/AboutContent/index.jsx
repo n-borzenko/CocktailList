@@ -100,7 +100,8 @@ class AboutContent extends Component {
             <div className="about-content__section">
                 <Title>Author</Title>
                 <p className="about-content__text">
-                    This site is made by Natalia Borzenko.
+                    This site is made for educational purposes by Natalia
+                    Borzenko.
                 </p>
                 <p className="about-content__text">
                     You can contact me using e-mail:{" "}

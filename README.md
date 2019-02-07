@@ -2,6 +2,8 @@
 
 This project is a website providing cocktails recipes.
 
+You can visit it using [this link](http://cocktaillist.nborzenko.ru/).
+
 It was created using [Create React App](https://facebook.github.io/create-react-app/).
 
 This project uses data provided by [TheCocktailDB](https://www.thecocktaildb.com/).
