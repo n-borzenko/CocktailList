@@ -61,6 +61,12 @@ class Cocktails extends Component {
         this.scrollToId(this.props.from);
     };
 
+    componentDidUpdate(prevProps) {
+        if (this.props.height !== prevProps.height && prevProps.from) {
+            this.scrollToId(prevProps.from);
+        }
+    }
+
     scrollToId = id => {
         if (id) {
             const index =
@@ -75,10 +81,12 @@ class Cocktails extends Component {
                 this.props.values.length / this.state.columnsCount
             );
             const totalHeight = rowCount * rowHeight;
-            position =
-                position > totalHeight - this.props.height
-                    ? totalHeight - this.props.height
-                    : position;
+            if (
+                position > totalHeight - this.props.height &&
+                totalHeight > rowHeight
+            ) {
+                position = totalHeight - this.props.height;
+            }
 
             this.gridRef.current &&
                 this.gridRef.current.scrollToPosition({
