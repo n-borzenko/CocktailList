@@ -20,6 +20,7 @@ class CocktailData extends Component {
         favorite: PropTypes.bool.isRequired,
         toggleFavorite: PropTypes.func.isRequired,
         skipFavorites: PropTypes.bool.isRequired,
+        parametersCreator: PropTypes.func.isRequired,
     };
 
     renderFavorite = () => {
@@ -82,7 +83,10 @@ class CocktailData extends Component {
                     <div className="cocktail-data__title">
                         <Title>Ingredients</Title>
                     </div>
-                    <IngredientsList value={this.props.value} />
+                    <IngredientsList
+                        value={this.props.value}
+                        parametersCreator={this.props.parametersCreator}
+                    />
                 </div>
             </div>
         );

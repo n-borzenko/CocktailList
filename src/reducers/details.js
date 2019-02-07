@@ -16,7 +16,7 @@ const current = (state = currentInitialState, action) => {
                 ...action.payload,
             };
         case types.DETAILS_CLEAR:
-            return currentInitialState;
+            return { ...state, ...action.payload };
         default:
             return state;
     }

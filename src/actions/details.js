@@ -43,6 +43,9 @@ const findCocktailInValues = (id, list) => {
 export const loadCocktailDetails = id => async (dispatch, getState) => {
     dispatch({
         type: types.DETAILS_CLEAR,
+        payload: {
+            cocktail: null,
+        },
     });
     const state = getState();
     addToHistory(id, state.router.location, dispatch);
@@ -86,6 +89,9 @@ export const loadCocktailDetails = id => async (dispatch, getState) => {
 export const loadIngredientDetails = id => async (dispatch, getState) => {
     dispatch({
         type: types.DETAILS_CLEAR,
+        payload: {
+            ingredient: null,
+        },
     });
     const state = getState();
     addToHistory(id, state.router.location, dispatch);

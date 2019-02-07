@@ -9,7 +9,10 @@ import IngredientDetails from "../IngredientDetails";
 import locations from "../../../constants/locations";
 import { getIngredientsList } from "../../../actions/filters";
 import { createIngredientsTitle } from "../../../helpers/title";
-import { clearDetailsHistory } from "../../../actions/details";
+import {
+    clearDetailsHistory,
+    loadCocktailDetails,
+} from "../../../actions/details";
 
 import "./IngredientsContent.css";
 
@@ -26,31 +29,109 @@ class IngredientsContent extends Component {
         height: 0,
     };
 
+    state = {
+        useCocktail: false,
+    };
+
     componentDidMount() {
-        this.props.getIngredientsList();
+        const parameters = qs.parse(this.props.location.search);
+        if (
+            parameters &&
+            parameters.hasOwnProperty("id") &&
+            parameters.id &&
+            parameters.id.length
+        ) {
+            if (
+                !this.props.cocktail ||
+                this.props.cocktail.idDrink !== parameters.id
+            ) {
+                this.props.loadCocktailDetails(parameters.id);
+            }
+            this.setState({ useCocktail: true });
+        } else {
+            this.props.getIngredientsList();
+        }
         createIngredientsTitle();
     }
 
     getBackURL = () => {
-        return { pathname: locations.ingredients, search: "" };
+        let pathname = locations.ingredients;
+        let search = "";
+        const parameters = qs.parse(this.props.location.search);
+        if (
+            parameters &&
+            parameters.hasOwnProperty("id") &&
+            parameters.id &&
+            parameters.id.length
+        ) {
+            if (
+                parameters.hasOwnProperty("area") &&
+                parameters.area &&
+                parameters.area.length
+            ) {
+                switch (parameters.area) {
+                    case "favorites":
+                        pathname = `${locations.favoritesCocktail}/${
+                            parameters.id
+                        }`;
+                        break;
+                    case "random":
+                        pathname = `${locations.randomCocktail}/${
+                            parameters.id
+                        }`;
+                        break;
+                    default:
+                        pathname = `${locations.searchCocktail}/${
+                            parameters.id
+                        }`;
+                }
+                const { query, type, name } = parameters;
+                const newParameters = qs.stringify({ query, type, name });
+                if (newParameters && newParameters.length) {
+                    search = `?${newParameters}`;
+                }
+            }
+        }
+        return { pathname, search };
     };
 
-    linkCreator = name => {
-        return `${locations.ingredientsDetails}?${qs.stringify({ name })}`;
+    linkCreator = title => {
+        return `${locations.ingredientsDetails}?${qs.stringify({ title })}`;
     };
 
-    locationCreator = name => {
+    locationCreator = title => {
+        const parameters = qs.parse(this.props.location.search.substring(1));
         return {
             pathname: `${locations.ingredientsDetails}`,
-            search: `?${qs.stringify({ name })}`,
+            search: `?${qs.stringify({ ...parameters, title })}`,
         };
+    };
+
+    createResultsFromCocktail = () => {
+        const results = [];
+        const { cocktail } = this.props;
+        if (!cocktail) {
+            return results;
+        }
+        let i = 1;
+        while (cocktail.hasOwnProperty(`strIngredient${i}`)) {
+            const name = cocktail[`strIngredient${i++}`];
+            if (name && name.length) {
+                results.push(name);
+            }
+        }
+        return results;
     };
 
     renderIngredientsDetails = () => {
         return (
             <IngredientDetails
                 getBackURL={this.getBackURL}
-                results={this.props.ingredients}
+                results={
+                    this.state.useCocktail
+                        ? this.createResultsFromCocktail()
+                        : this.props.ingredients
+                }
                 locationCreator={this.locationCreator}
             />
         );
@@ -96,9 +177,11 @@ export default connect(
         location: state.router.location,
         lastItem: state.details.history[locations.ingredients],
         ingredients: state.filters.ingredient,
+        cocktail: state.details.current.cocktail,
     }),
     {
         getIngredientsList,
         clearDetailsHistory,
+        loadCocktailDetails,
     }
 )(IngredientsContent);

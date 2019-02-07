@@ -23,27 +23,30 @@ import "./IngredientsList.css";
 // so, we have to check type of all 30 object properties
 // using PropTypes and skip empty props in render
 
-class ingredientsList extends Component {
+class IngredientsList extends Component {
     static allData = new Array(15)
         .fill(0)
         .map((item, i) => [`strIngredient${i + 1}`, `strMeasure${i + 1}`]);
 
     static propTypes = {
         value: PropTypes.shape(
-            ingredientsList.allData.reduce((shape, item) => {
+            IngredientsList.allData.reduce((shape, item) => {
                 shape[item[0]] = PropTypes.string;
                 shape[item[1]] = PropTypes.string;
                 return shape;
             }, {})
         ).isRequired,
+        parametersCreator: PropTypes.func.isRequired,
     };
 
-    linkCreator = name => {
-        return `${locations.ingredientsDetails}?${qs.stringify({ name })}`;
+    linkCreator = title => {
+        return `${locations.ingredientsDetails}?${qs.stringify({
+            title,
+        })}&${this.props.parametersCreator()}`;
     };
 
     renderValues = () => {
-        return ingredientsList.allData
+        return IngredientsList.allData
             .filter(
                 item =>
                     this.props.value[item[0]] &&
@@ -84,4 +87,4 @@ class ingredientsList extends Component {
     }
 }
 
-export default ingredientsList;
+export default IngredientsList;

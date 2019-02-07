@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import CocktailData from "../CocktailData";
 import { loadCocktailDetails } from "../../../actions/details";
 import { createCocktailTitle } from "../../../helpers/title";
+import { areaFromLocation } from "../../../helpers/areas";
 import {
     addToFavorites,
     removeFromFavorites,
@@ -83,6 +84,17 @@ class CocktailDetails extends Component {
         }
     };
 
+    createIngredientsBackParameters = () => {
+        const area = areaFromLocation(this.props.location);
+        const areaIndex = area.area.indexOf("/", 1);
+        const areaName =
+            areaIndex > 0
+                ? area.area.substring(1, areaIndex)
+                : area.area.substring(1);
+        const result = `area=${areaName}&id=${this.state.id}`;
+        return area.query ? result + `&${area.query}` : result;
+    };
+
     render() {
         return (
             <Details
@@ -96,6 +108,7 @@ class CocktailDetails extends Component {
                     favorite={this.state.favorite}
                     toggleFavorite={this.toggleFavorite}
                     skipFavorites={this.props.skipFavorites}
+                    parametersCreator={this.createIngredientsBackParameters}
                 />
             </Details>
         );
