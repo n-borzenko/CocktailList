@@ -28,10 +28,7 @@ class IngredientDetails extends Component {
             location && location.search && location.search.length > 1
                 ? qs.parse(location.search.substr(1))
                 : null;
-        const id =
-            parameters && parameters.hasOwnProperty("title") && parameters.title
-                ? parameters.title
-                : null;
+        const id = parameters && parameters.title ? parameters.title : null;
         return {
             id,
         };

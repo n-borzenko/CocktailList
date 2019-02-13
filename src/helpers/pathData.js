@@ -11,12 +11,12 @@ export const detailsLocation = pathname => {
     );
 };
 
-export const areaFromLocation = location => {
+export const pathDataFromLocation = location => {
     const detailsPathname = detailsLocation(location.pathname);
     let pathname = null;
     let query = null;
 
-    // not search areas
+    // "/favorites", "/random", "/ingredients" paths
     if (location.pathname.startsWith(locations.favorites)) {
         pathname = locations.favorites;
     } else if (location.pathname.startsWith(locations.random)) {
@@ -26,14 +26,10 @@ export const areaFromLocation = location => {
     }
 
     if (pathname) {
-        return {
-            area: pathname,
-            isDetails: detailsPathname,
-            query,
-        };
+        return { shortPath: pathname, isDetails: detailsPathname, query };
     }
 
-    // search area
+    // "/search" paths
 
     const parameters =
         location && location.search && location.search.length > 1
@@ -50,7 +46,9 @@ export const areaFromLocation = location => {
 
     if (pathname === locations.search) {
         if (parameters && parameters.query && parameters.query.length) {
-            query = qs.stringify({ query: parameters.query });
+            query = qs.stringify({
+                query: parameters.query,
+            });
         }
     } else if (pathname === locations.searchByFilter) {
         if (
@@ -61,13 +59,12 @@ export const areaFromLocation = location => {
             parameters.name.length
         ) {
             const { type, name } = parameters;
-            query = qs.stringify({ type, name });
+            query = qs.stringify({
+                type,
+                name,
+            });
         }
     }
 
-    return {
-        area: pathname,
-        isDetails: detailsPathname,
-        query,
-    };
+    return { shortPath: pathname, isDetails: detailsPathname, query };
 };

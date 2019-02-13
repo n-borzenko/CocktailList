@@ -1,6 +1,6 @@
 import types from "../constants/details";
 import { historyLocations } from "../constants/locations";
-import { areaFromLocation } from "../helpers/areas";
+import { pathDataFromLocation } from "../helpers/pathData";
 
 // details history is used to scroll the list of cocktails or ingredients
 export const clearDetailsHistory = ({
@@ -11,22 +11,22 @@ export const clearDetailsHistory = ({
         return next(action);
     }
     const oldState = getState();
-    const oldArea = areaFromLocation(oldState.router.location);
+    const oldPath = pathDataFromLocation(oldState.router.location);
     const result = next(action);
     const newState = getState();
-    const newArea = areaFromLocation(newState.router.location);
+    const newPath = pathDataFromLocation(newState.router.location);
 
     if (
-        oldState.details.history[oldArea.area] &&
-        historyLocations.has(oldArea.area) &&
-        (oldArea.area !== newArea.area ||
-            oldArea.query !== newArea.query ||
-            !oldArea.isDetails)
+        oldState.details.history[oldPath.shortPath] &&
+        historyLocations.has(oldPath.shortPath) &&
+        (oldPath.shortPath !== newPath.shortPath ||
+            oldPath.query !== newPath.query ||
+            !oldPath.isDetails)
     ) {
         dispatch({
             type: types.DETAILS_HISTORY,
             payload: {
-                [oldArea.area]: null,
+                [oldPath.shortPath]: null,
             },
         });
     }

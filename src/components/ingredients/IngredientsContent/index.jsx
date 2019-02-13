@@ -35,12 +35,7 @@ class IngredientsContent extends Component {
 
     componentDidMount() {
         const parameters = qs.parse(this.props.location.search);
-        if (
-            parameters &&
-            parameters.hasOwnProperty("id") &&
-            parameters.id &&
-            parameters.id.length
-        ) {
+        if (parameters && parameters.id && parameters.id.length) {
             if (
                 !this.props.cocktail ||
                 this.props.cocktail.idDrink !== parameters.id
@@ -58,39 +53,25 @@ class IngredientsContent extends Component {
         let pathname = locations.ingredients;
         let search = "";
         const parameters = qs.parse(this.props.location.search);
-        if (
-            parameters &&
-            parameters.hasOwnProperty("id") &&
-            parameters.id &&
-            parameters.id.length
-        ) {
-            if (
-                parameters.hasOwnProperty("area") &&
-                parameters.area &&
-                parameters.area.length
-            ) {
-                switch (parameters.area) {
-                    case "favorites":
-                        pathname = `${locations.favoritesCocktail}/${
-                            parameters.id
-                        }`;
-                        break;
-                    case "random":
-                        pathname = `${locations.randomCocktail}/${
-                            parameters.id
-                        }`;
-                        break;
-                    default:
-                        pathname = `${locations.searchCocktail}/${
-                            parameters.id
-                        }`;
-                }
-                const { query, type, name } = parameters;
-                const newParameters = qs.stringify({ query, type, name });
-                if (newParameters && newParameters.length) {
-                    search = `?${newParameters}`;
-                }
-            }
+
+        if (!parameters || !parameters.id || !parameters.id.trim()) {
+            return { pathname, search };
+        }
+
+        switch (parameters.path || "") {
+            case "favorites":
+                pathname = `${locations.favoritesCocktail}/${parameters.id}`;
+                break;
+            case "random":
+                pathname = `${locations.randomCocktail}/${parameters.id}`;
+                break;
+            default:
+                pathname = `${locations.searchCocktail}/${parameters.id}`;
+        }
+        const { query, type, name } = parameters;
+        const newParameters = qs.stringify({ query, type, name });
+        if (newParameters && newParameters.length) {
+            search = `?${newParameters}`;
         }
         return { pathname, search };
     };
@@ -113,9 +94,8 @@ class IngredientsContent extends Component {
         if (!cocktail) {
             return results;
         }
-        let i = 1;
-        while (cocktail.hasOwnProperty(`strIngredient${i}`)) {
-            const name = cocktail[`strIngredient${i++}`];
+        for (let i = 1; cocktail[`strIngredient${i}`]; i++) {
+            const name = cocktail[`strIngredient${i}`];
             if (name && name.length) {
                 results.push(name);
             }

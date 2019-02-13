@@ -15,15 +15,13 @@
         "react-transition-group": "^2.4.0",
         "react-virtualized": "^9.20.1",
         "redux": "^4.0.0",
-        "redux-thunk": "^2.3.0"
+        "redux-thunk": "^2.3.0",
+        "redux-logger": "^3.0.6"
     },
     "scripts": {
         "start": "react-scripts start",
         "build": "react-scripts build",
         "test": "react-scripts test --env=jsdom",
         "eject": "react-scripts eject"
-    },
-    "devDependencies": {
-        "redux-logger": "^3.0.6"
     }
 }

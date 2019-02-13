@@ -7,7 +7,7 @@ import Cocktails from "../../cocktails/Cocktails";
 import CocktailDetails from "../../cocktail/CocktailDetails";
 import { searchTypes } from "../../../constants/search";
 import locations from "../../../constants/locations";
-import { areaFromLocation } from "../../../helpers/areas";
+import { pathDataFromLocation } from "../../../helpers/pathData";
 import { stateToSearchURL } from "../../../actions/search";
 import { clearDetailsHistory } from "../../../actions/details";
 import {
@@ -35,10 +35,10 @@ class SearchContent extends Component {
     };
 
     componentDidUpdate() {
-        const area = areaFromLocation(this.props.location);
-        const lastItem = this.props.lastItems[area.area];
+        const path = pathDataFromLocation(this.props.location);
+        const lastItem = this.props.lastItems[path.shortPath];
         let scrollId = null;
-        if (lastItem && area.query === lastItem.query && lastItem.id) {
+        if (lastItem && path.query === lastItem.query && lastItem.id) {
             scrollId = lastItem.id;
         }
         if (scrollId !== this.state.scrollId) {

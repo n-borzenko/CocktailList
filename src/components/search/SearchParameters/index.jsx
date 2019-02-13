@@ -7,7 +7,7 @@ import ButtonGroup from "../../common/ButtonGroup";
 import SearchField from "../../common/SearchField";
 import FiltersParameters from "../FiltersParameters";
 import { createSearchTitle } from "../../../helpers/title";
-import { areaFromLocation } from "../../../helpers/areas";
+import { pathDataFromLocation } from "../../../helpers/pathData";
 
 import {
     searchByQuery,
@@ -39,9 +39,12 @@ class SearchParameters extends Component {
     }
 
     checkUpdateForSearch = prevProps => {
-        const newArea = areaFromLocation(this.props.location);
-        const oldArea = areaFromLocation(prevProps.location);
-        return newArea.area !== oldArea.area || newArea.query !== oldArea.query;
+        const newPath = pathDataFromLocation(this.props.location);
+        const oldPath = pathDataFromLocation(prevProps.location);
+        return (
+            newPath.shortPath !== oldPath.shortPath ||
+            newPath.query !== oldPath.query
+        );
     };
 
     changeMode = index => {

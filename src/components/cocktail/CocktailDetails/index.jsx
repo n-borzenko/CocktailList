@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import CocktailData from "../CocktailData";
 import { loadCocktailDetails } from "../../../actions/details";
 import { createCocktailTitle } from "../../../helpers/title";
-import { areaFromLocation } from "../../../helpers/areas";
+import { pathDataFromLocation } from "../../../helpers/pathData";
 import {
     addToFavorites,
     removeFromFavorites,
@@ -85,14 +85,14 @@ class CocktailDetails extends Component {
     };
 
     createIngredientsBackParameters = () => {
-        const area = areaFromLocation(this.props.location);
-        const areaIndex = area.area.indexOf("/", 1);
-        const areaName =
-            areaIndex > 0
-                ? area.area.substring(1, areaIndex)
-                : area.area.substring(1);
-        const result = `area=${areaName}&id=${this.state.id}`;
-        return area.query ? result + `&${area.query}` : result;
+        const path = pathDataFromLocation(this.props.location);
+        const pathIndex = path.shortPath.indexOf("/", 1);
+        const pathName =
+            pathIndex > 0
+                ? path.shortPath.substring(1, pathIndex)
+                : path.shortPath.substring(1);
+        const result = `path=${pathName}&id=${this.state.id}`;
+        return path.query ? result + `&${path.query}` : result;
     };
 
     render() {

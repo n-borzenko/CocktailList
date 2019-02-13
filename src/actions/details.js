@@ -1,21 +1,21 @@
 import axios from "axios";
 
 import types from "../constants/details";
-import { areaFromLocation } from "../helpers/areas";
+import { pathDataFromLocation } from "../helpers/pathData";
 import { searchTypes } from "../constants/search";
 import { cocktailRequest, ingredientRequest } from "../api";
 import { showError } from "./notifications";
 import locations, { historyLocations } from "../constants/locations";
 
 const addToHistory = (id, location, dispatch) => {
-    const { area, query } = areaFromLocation(location);
-    if (!historyLocations.has(area)) {
+    const { shortPath, query } = pathDataFromLocation(location);
+    if (!historyLocations.has(shortPath)) {
         return;
     }
     dispatch({
         type: types.DETAILS_HISTORY,
         payload: {
-            [area]: {
+            [shortPath]: {
                 id,
                 query,
             },
@@ -34,10 +34,7 @@ const findCocktailInSearch = (id, search) => {
 };
 
 const findCocktailInValues = (id, list) => {
-    if (list.values.hasOwnProperty(id) && list.values[id] !== null) {
-        return list.values[id];
-    }
-    return null;
+    return list.values[id] ? list.values[id] : null;
 };
 
 export const loadCocktailDetails = id => async (dispatch, getState) => {
@@ -113,14 +110,14 @@ export const loadIngredientDetails = id => async (dispatch, getState) => {
 };
 
 export const clearDetailsHistory = () => (dispatch, getState) => {
-    const area = areaFromLocation(getState().router.location);
-    if (!historyLocations.has(area.area)) {
+    const path = pathDataFromLocation(getState().router.location);
+    if (!historyLocations.has(path.shortPath)) {
         return;
     }
     dispatch({
         type: types.DETAILS_HISTORY,
         payload: {
-            [area.area]: null,
+            [path.shortPath]: null,
         },
     });
 };
