@@ -1,9 +1,10 @@
 .random-content {
-    height: 100%;
     width: 100%;
-    position: absolute;
+    height: 100%;
+    padding: 16px 0;
+    overflow: auto;
     flex: 1 0 auto;
-    overflow: scroll;
+    position: absolute;
 }
 
 .random-content__details {

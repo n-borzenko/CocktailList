@@ -2,11 +2,9 @@ import { replace } from "connected-react-router";
 import qs from "qs";
 
 import types from "../constants/random";
-import { randomRequest, cocktailRequest } from "../api";
+import { randomCocktailRequest, cocktailRequest } from "../api";
 import { showError } from "./notifications";
 import locations from "../constants/locations";
-
-const FAVORITES_LIMIT = 1;
 
 export const loadRandomCocktail = () => async (dispatch, getState) => {
     dispatch({
@@ -14,24 +12,14 @@ export const loadRandomCocktail = () => async (dispatch, getState) => {
     });
 
     try {
-        let payload = null;
-        let counter = 0;
-        while (!payload) {
-            const result = await randomRequest();
-            const favorites = getState().favorites.ids;
-            const cocktail = result.data.drinks[0];
-            if (
-                counter++ > FAVORITES_LIMIT ||
-                !favorites.includes(cocktail.id)
-            ) {
-                payload = {
-                    id: cocktail.idDrink,
-                    values: {
-                        [cocktail.idDrink]: cocktail,
-                    },
-                };
-            }
-        }
+        const result = await randomCocktailRequest();
+        const cocktail = result.data.drinks[0];
+        const payload = {
+            id: cocktail.idDrink,
+            values: {
+                [cocktail.idDrink]: cocktail,
+            },
+        };
         dispatch({ type: types.RANDOM_RECEIVED, payload });
 
         if (getState().router.location.pathname === locations.random) {

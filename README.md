@@ -2,7 +2,7 @@
 
 This project is a website providing cocktails recipes.
 
-You can visit it using [this link](http://cocktaillist.nborzenko.ru/).
+You can visit it using [this link](http://nborzenko.ru/).
 
 It was created using [Create React App](https://facebook.github.io/create-react-app/).
 

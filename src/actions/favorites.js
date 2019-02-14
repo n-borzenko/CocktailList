@@ -86,39 +86,42 @@ export const updateOutdatedValues = () => async (dispatch, getState) => {
     const oldIds = getState().favorites.ids;
     const requests = oldIds.map(id => cocktailRequest(id));
 
-    if (requests.length) {
-        try {
-            const results = (await Promise.all(requests)).map(
-                result => result.data.drinks[0]
-            );
-            // must be filtered because favorites may change during query execution
-            // only values that have changes are updated
-            const { ids, values } = getState().favorites;
-            const newValues = results.filter(value => {
-                const id = value.idDrink;
-                const wasModified =
-                    values[id] && values[id].dateModified
-                        ? new Date(values[id].dateModified).getTime()
-                        : 0;
-                const isModified = value.dateModified
-                    ? new Date(value.dateModified).getTime()
-                    : Number.MAX_SAFE_INTEGER;
-                return ids.includes(id) && isModified > wasModified;
+    if (!requests.length) {
+        dispatch(showMessage("Favorites have already been updated"));
+        return;
+    }
+
+    try {
+        const results = (await Promise.all(requests)).map(
+            result => result.data.drinks[0]
+        );
+        // must be filtered because favorites may change during query execution
+        // only values that have changes are updated
+        const { ids, values } = getState().favorites;
+        const newValues = results.filter(value => {
+            const id = value.idDrink;
+            const wasModified =
+                values[id] && values[id].dateModified
+                    ? new Date(values[id].dateModified).getTime()
+                    : 0;
+            const isModified = value.dateModified
+                ? new Date(value.dateModified).getTime()
+                : Number.MAX_SAFE_INTEGER;
+            return ids.includes(id) && isModified > wasModified;
+        });
+        if (newValues.length) {
+            dispatch({
+                type: types.FAVORITES_UPDATE,
+                payload: {
+                    values: newValues,
+                },
             });
-            if (newValues.length) {
-                dispatch({
-                    type: types.FAVORITES_UPDATE,
-                    payload: {
-                        values: newValues,
-                    },
-                });
-                dispatch(showMessage("Favorites successfully updated"));
-                return;
-            }
-        } catch (error) {
-            dispatch(showError());
+            dispatch(showMessage("Favorites successfully updated"));
             return;
         }
+    } catch (error) {
+        dispatch(showError());
+        return;
     }
     dispatch(showMessage("Favorites have already been updated"));
 };

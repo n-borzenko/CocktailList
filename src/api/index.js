@@ -75,7 +75,7 @@ export const ingredientRequest = async id => {
     }
 };
 
-export const randomRequest = async () => {
+export const randomCocktailRequest = async () => {
     const config = { ...api.configs.random };
     try {
         const result = await loader.request(config);

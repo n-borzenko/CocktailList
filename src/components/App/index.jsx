@@ -17,6 +17,7 @@ import NotFound from "../common/NotFound";
 import locations from "../../constants/locations";
 import { POPUP_ID } from "../../constants/views";
 import { actualizeFavorites } from "../../actions/favorites";
+import getScrollBarWidth from "../../helpers/scrollBar";
 
 import "./App.css";
 
@@ -25,6 +26,7 @@ class App extends Component {
     state = {
         width: 0,
         height: 0,
+        scrollBarWidth: getScrollBarWidth(),
     };
 
     componentDidMount() {
@@ -62,22 +64,28 @@ class App extends Component {
     };
 
     renderSearchContent = () => (
-        <SearchContent width={this.state.width} height={this.state.height} />
+        <SearchContent
+            width={this.state.width - 1}
+            height={this.state.height}
+            scrollBarWidth={this.state.scrollBarWidth}
+        />
     );
 
     renderFavoritesContent = () => {
         return (
             <FavoritesContent
-                width={this.state.width}
+                width={this.state.width - 1}
                 height={this.state.height}
+                scrollBarWidth={this.state.scrollBarWidth}
             />
         );
     };
 
     renderIngredientsContent = () => (
         <IngredientsContent
-            width={this.state.width}
+            width={this.state.width - 1}
             height={this.state.height}
+            scrollBarWidth={this.state.scrollBarWidth}
         />
     );
 

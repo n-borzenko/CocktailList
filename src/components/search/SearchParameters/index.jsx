@@ -67,6 +67,7 @@ class SearchParameters extends Component {
                 onSearch={this.updateQuery}
                 placeholder="Cocktail name"
                 value={this.props.request.query}
+                name="cocktail-name"
             />
         );
     };

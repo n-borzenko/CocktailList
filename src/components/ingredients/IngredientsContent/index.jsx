@@ -22,6 +22,7 @@ class IngredientsContent extends Component {
     static propTypes = {
         width: PropTypes.number.isRequired,
         height: PropTypes.number.isRequired,
+        scrollBarWidth: PropTypes.number.isRequired,
     };
 
     static defaultProps = {
@@ -105,15 +106,17 @@ class IngredientsContent extends Component {
 
     renderIngredientsDetails = () => {
         return (
-            <IngredientDetails
-                getBackURL={this.getBackURL}
-                results={
-                    this.state.useCocktail
-                        ? this.createResultsFromCocktail()
-                        : this.props.ingredients
-                }
-                locationCreator={this.locationCreator}
-            />
+            <div className="ingredients-content ingredients-content_details">
+                <IngredientDetails
+                    getBackURL={this.getBackURL}
+                    results={
+                        this.state.useCocktail
+                            ? this.createResultsFromCocktail()
+                            : this.props.ingredients
+                    }
+                    locationCreator={this.locationCreator}
+                />
+            </div>
         );
     };
 
@@ -123,31 +126,32 @@ class IngredientsContent extends Component {
                 ? this.props.lastItem.id
                 : null;
         return (
-            <Ingredients
-                width={this.props.width}
-                height={this.props.height - PADDING_HEIGHT * 2}
-                values={this.props.ingredients}
-                linkCreator={id => this.linkCreator(id)}
-                from={id}
-                clearScroll={this.props.clearDetailsHistory}
-            />
+            <div className="ingredients-content">
+                <Ingredients
+                    width={this.props.width}
+                    height={this.props.height - PADDING_HEIGHT * 2}
+                    values={this.props.ingredients}
+                    linkCreator={id => this.linkCreator(id)}
+                    from={id}
+                    clearScroll={this.props.clearDetailsHistory}
+                    scrollBarWidth={this.props.scrollBarWidth}
+                />
+            </div>
         );
     };
 
     render() {
         return (
-            <div className="ingredients-content">
-                <Switch location={this.props.location}>
-                    <Route
-                        path={locations.ingredientsDetails}
-                        render={this.renderIngredientsDetails}
-                    />
-                    <Route
-                        path={locations.ingredients}
-                        render={this.renderIngredients}
-                    />
-                </Switch>
-            </div>
+            <Switch location={this.props.location}>
+                <Route
+                    path={locations.ingredientsDetails}
+                    render={this.renderIngredientsDetails}
+                />
+                <Route
+                    path={locations.ingredients}
+                    render={this.renderIngredients}
+                />
+            </Switch>
         );
     }
 }

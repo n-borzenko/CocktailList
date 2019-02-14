@@ -18,6 +18,7 @@ class Ingredients extends Component {
         height: PropTypes.number.isRequired,
         from: PropTypes.string,
         clearScroll: PropTypes.func.isRequired,
+        scrollBarWidth: PropTypes.number.isRequired,
     };
 
     static defaultProps = {
@@ -31,7 +32,7 @@ class Ingredients extends Component {
 
     static getDerivedStateFromProps(props) {
         const columnsCount = Math.floor(
-            props.width / (CELL_WIDTH + 2 * MARGIN)
+            (props.width - props.scrollBarWidth) / (CELL_WIDTH + 2 * MARGIN)
         );
         const rowHeight = CELL_HEIGHT + 2 * MARGIN;
         return {
@@ -71,7 +72,7 @@ class Ingredients extends Component {
         }
     };
 
-    cellRenderer = ({
+    renderCell = ({
         columnIndex,
         key,
         rowIndex,
@@ -113,12 +114,15 @@ class Ingredients extends Component {
         return (
             <Grid
                 className="ingredients"
-                cellRenderer={this.cellRenderer}
+                cellRenderer={this.renderCell}
                 columnCount={this.state.columnsCount}
                 rowCount={Math.ceil(
                     this.props.values.length / this.state.columnsCount
                 )}
-                columnWidth={this.props.width / this.state.columnsCount}
+                columnWidth={
+                    (this.props.width - this.props.scrollBarWidth) /
+                    this.state.columnsCount
+                }
                 rowHeight={this.state.rowHeight}
                 height={this.props.height}
                 width={this.props.width}

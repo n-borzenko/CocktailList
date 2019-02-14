@@ -43,7 +43,8 @@ class Picture extends Component {
             if (this.unmounted) {
                 return;
             }
-            if (counter++ < 1 && props.additionalSource) {
+            counter += 1;
+            if (counter < 1 && props.additionalSource) {
                 image.src = props.additionalSource;
             }
         };

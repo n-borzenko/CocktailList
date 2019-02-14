@@ -12,6 +12,7 @@ class SearchField extends Component {
         onSearch: PropTypes.func.isRequired,
         placeholder: PropTypes.string,
         value: PropTypes.string,
+        name: PropTypes.string,
     };
 
     constructor(props) {
@@ -50,6 +51,7 @@ class SearchField extends Component {
                         onChange={this.valueChanged}
                         placeholder={this.props.placeholder}
                         value={this.state.value || ""}
+                        name={this.props.name}
                     />
                 </div>
                 <div className="search-field__action">

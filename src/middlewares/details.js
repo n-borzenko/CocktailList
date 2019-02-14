@@ -2,7 +2,7 @@ import types from "../constants/details";
 import { historyLocations } from "../constants/locations";
 import { pathDataFromLocation } from "../helpers/pathData";
 
-// details history is used to scroll the list of cocktails or ingredients
+// details history helps to scroll the list of cocktails or ingredients
 export const clearDetailsHistory = ({
     getState,
     dispatch,

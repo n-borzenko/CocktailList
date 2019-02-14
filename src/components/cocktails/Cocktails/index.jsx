@@ -30,6 +30,7 @@ class Cocktails extends Component {
         }).isRequired,
         toggleFavorite: PropTypes.func.isRequired,
         clearScroll: PropTypes.func.isRequired,
+        scrollBarWidth: PropTypes.number.isRequired,
     };
 
     static defaultProps = {
@@ -44,7 +45,7 @@ class Cocktails extends Component {
 
     static getDerivedStateFromProps(props) {
         const columnsCount = Math.floor(
-            props.width / (CELL_WIDTH + 2 * MARGIN)
+            (props.width - props.scrollBarWidth) / (CELL_WIDTH + 2 * MARGIN)
         );
         const rowHeight =
             props.size === Cocktails.sizes.large
@@ -97,7 +98,7 @@ class Cocktails extends Component {
         }
     };
 
-    cellRenderer = ({
+    renderCell = ({
         columnIndex,
         key,
         rowIndex,
@@ -149,12 +150,15 @@ class Cocktails extends Component {
         return (
             <Grid
                 className="cocktails"
-                cellRenderer={this.cellRenderer}
+                cellRenderer={this.renderCell}
                 columnCount={this.state.columnsCount}
                 rowCount={Math.ceil(
                     this.props.values.length / this.state.columnsCount
                 )}
-                columnWidth={this.props.width / this.state.columnsCount}
+                columnWidth={
+                    (this.props.width - this.props.scrollBarWidth) /
+                    this.state.columnsCount
+                }
                 rowHeight={this.state.rowHeight}
                 height={this.props.height}
                 width={this.props.width}

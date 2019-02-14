@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
@@ -26,6 +26,7 @@ class FavoritesContent extends Component {
     static propTypes = {
         width: PropTypes.number.isRequired,
         height: PropTypes.number.isRequired,
+        scrollBarWidth: PropTypes.number.isRequired,
     };
 
     static defaultProps = {
@@ -115,11 +116,13 @@ class FavoritesContent extends Component {
 
     renderCocktailDetails = () => {
         return (
-            <CocktailDetails
-                getBackURL={this.getBackURL}
-                results={this.state.currentResults}
-                locationCreator={this.locationCreator}
-            />
+            <div className="favorites-content favorites-content_details">
+                <CocktailDetails
+                    getBackURL={this.getBackURL}
+                    results={this.state.currentResults}
+                    locationCreator={this.locationCreator}
+                />
+            </div>
         );
     };
 
@@ -129,7 +132,7 @@ class FavoritesContent extends Component {
                 ? this.props.lastItem.id
                 : null;
         return (
-            <Fragment>
+            <div className="favorites-content">
                 <div className="favorites-content__buttons">
                     <div className="favorites-content__button">
                         <Button onClick={this.props.updateOutdatedValues}>
@@ -154,25 +157,24 @@ class FavoritesContent extends Component {
                     favorites={this.props.favorites}
                     toggleFavorite={this.toggleFavorite}
                     clearScroll={this.props.clearDetailsHistory}
+                    scrollBarWidth={this.props.scrollBarWidth}
                 />
-            </Fragment>
+            </div>
         );
     };
 
     render() {
         return (
-            <div className="favorites-content">
-                <Switch location={this.props.location}>
-                    <Route
-                        path={locations.favoritesCocktail}
-                        render={this.renderCocktailDetails}
-                    />
-                    <Route
-                        path={locations.favorites}
-                        render={this.renderCocktails}
-                    />
-                </Switch>
-            </div>
+            <Switch location={this.props.location}>
+                <Route
+                    path={locations.favoritesCocktail}
+                    render={this.renderCocktailDetails}
+                />
+                <Route
+                    path={locations.favorites}
+                    render={this.renderCocktails}
+                />
+            </Switch>
         );
     }
 }

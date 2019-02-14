@@ -47,28 +47,27 @@ class RandomBoard extends Component {
     }
 
     requestUpdates = id => {
-        if (this.props.location.search && id) {
-            if (!this.props.random.values[id]) {
-                this.props.loadRandomCocktailDetails(id);
-            }
-        } else {
-            this.props.loadRandomCocktail();
-            this.setState({
-                value: null,
-            });
-        }
         createRandomTitle();
+        if (!this.props.location.search || !id) {
+            this.props.loadRandomCocktail();
+            this.setState({ value: null });
+            return;
+        }
+        if (!this.props.random.values[id]) {
+            this.props.loadRandomCocktailDetails(id);
+        }
     };
 
     checkUpdates = id => {
-        if (id && this.props.random.id === id && this.props.random.values[id]) {
+        if (
+            id &&
+            this.props.random.id === id &&
+            this.props.random.values[id] &&
+            this.state.value !== this.props.random.values[id]
+        ) {
             const value = this.props.random.values[id];
-            if (this.state.value !== value) {
-                this.setState({
-                    value,
-                });
-                createRandomTitle(value.strDrink);
-            }
+            this.setState({ value });
+            createRandomTitle(value.strDrink);
         }
     };
 

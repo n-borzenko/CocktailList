@@ -44,19 +44,21 @@ export const loadCocktailDetails = id => async (dispatch, getState) => {
             cocktail: null,
         },
     });
-    const state = getState();
-    addToHistory(id, state.router.location, dispatch);
 
+    const state = getState();
     const location = state.router.location.pathname;
     let cocktail = null;
     if (location.startsWith(locations.search)) {
         cocktail = findCocktailInSearch(id, state.search);
-    } else if (location.startsWith(locations.favorites)) {
+    }
+    if (location.startsWith(locations.favorites)) {
         cocktail = findCocktailInValues(id, state.favorites);
-    } else if (location.startsWith(locations.random)) {
+    }
+    if (location.startsWith(locations.random)) {
         cocktail = findCocktailInValues(id, state.random);
     }
 
+    addToHistory(id, state.router.location, dispatch);
     if (cocktail) {
         dispatch({
             type: types.DETAILS_RECEIVED,

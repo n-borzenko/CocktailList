@@ -12,6 +12,7 @@ class Input extends Component {
         onChange: PropTypes.func.isRequired,
         placeholder: PropTypes.string,
         value: PropTypes.string,
+        name: PropTypes.string,
     };
 
     containerRef = React.createRef();
@@ -62,6 +63,7 @@ class Input extends Component {
             >
                 <input
                     value={this.props.value || ""}
+                    name={this.props.name}
                     onChange={this.onChange}
                     className="input__field"
                     placeholder={this.props.placeholder}

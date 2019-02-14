@@ -23,6 +23,7 @@ class SearchContent extends Component {
     static propTypes = {
         width: PropTypes.number.isRequired,
         height: PropTypes.number.isRequired,
+        scrollBarWidth: PropTypes.number.isRequired,
     };
 
     static defaultProps = {
@@ -77,48 +78,48 @@ class SearchContent extends Component {
 
     renderCocktailDetails = () => {
         return (
-            <CocktailDetails
-                getBackURL={this.getBackURL}
-                results={this.props.results}
-                locationCreator={this.locationCreator}
-            />
+            <div className="search-content search-content_details">
+                <CocktailDetails
+                    getBackURL={this.getBackURL}
+                    results={this.props.results}
+                    locationCreator={this.locationCreator}
+                />
+            </div>
         );
     };
 
     renderCocktails = () => {
         return (
-            <Cocktails
-                width={this.props.width}
-                height={this.props.height - PADDING_HEIGHT * 2}
-                values={this.props.results}
-                size={
-                    this.props.request.type === searchTypes.filter
-                        ? Cocktails.sizes.small
-                        : Cocktails.sizes.large
-                }
-                linkCreator={id => this.linkCreator(id)}
-                from={this.state.scrollId}
-                favorites={this.props.favorites}
-                toggleFavorite={this.toggleFavorite}
-                clearScroll={this.props.clearDetailsHistory}
-            />
+            <div className="search-content">
+                <Cocktails
+                    width={this.props.width}
+                    height={this.props.height - PADDING_HEIGHT * 2}
+                    values={this.props.results}
+                    size={
+                        this.props.request.type === searchTypes.filter
+                            ? Cocktails.sizes.small
+                            : Cocktails.sizes.large
+                    }
+                    linkCreator={id => this.linkCreator(id)}
+                    from={this.state.scrollId}
+                    favorites={this.props.favorites}
+                    toggleFavorite={this.toggleFavorite}
+                    clearScroll={this.props.clearDetailsHistory}
+                    scrollBarWidth={this.props.scrollBarWidth}
+                />
+            </div>
         );
     };
 
     render() {
         return (
-            <div className="search-content">
-                <Switch location={this.props.location}>
-                    <Route
-                        path={locations.searchCocktail}
-                        render={this.renderCocktailDetails}
-                    />
-                    <Route
-                        path={locations.search}
-                        render={this.renderCocktails}
-                    />
-                </Switch>
-            </div>
+            <Switch location={this.props.location}>
+                <Route
+                    path={locations.searchCocktail}
+                    render={this.renderCocktailDetails}
+                />
+                <Route path={locations.search} render={this.renderCocktails} />
+            </Switch>
         );
     }
 }

@@ -7,16 +7,15 @@ const performRequests = async (filters, dispatch) => {
 
     try {
         const lists = await Promise.all(requests);
-        let payload = {};
-
-        lists.forEach((list, index) => {
+        let payload = lists.reduce((payload, list, index) => {
             const filter = filters[index];
             const string = filterStrings[filter];
             payload[filter] = list.data.drinks
                 .map(item => item[string])
                 .filter(item => item !== null)
                 .sort((item1, item2) => item1.localeCompare(item2));
-        });
+            return payload;
+        }, {});
 
         dispatch({
             type: types.FILTERS_RECEIVED,
