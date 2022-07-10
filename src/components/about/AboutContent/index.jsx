@@ -108,10 +108,9 @@ class AboutContent extends Component {
                     <span className="about-content__nowrap">
                         <a
                             className="about-content__link"
-                            href="mailto:n-borzenko93@yandex.ru
-"
+                            href="mailto:n.borzenko93@gmail.com"
                         >
-                            n-borzenko93@yandex.ru
+                            n.borzenko93@gmail.com
                         </a>
                     </span>
                     .
@@ -122,7 +121,7 @@ class AboutContent extends Component {
                         className="about-content__link"
                         href="https://github.com/n-borzenko"
                     >
-                        github profile
+                        Github profile
                     </a>
                     .
                 </p>
